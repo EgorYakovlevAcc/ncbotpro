@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@CrossOrigin("https://nctelegrambotpro.herokuapp.com/")
+@CrossOrigin()
 public class MainController {
     @Autowired
     private UserService userService;
@@ -26,17 +26,10 @@ public class MainController {
     @Autowired
     private AnswerService answerService;
 
-    @GetMapping("/users")
+    @GetMapping("all/users")
     @ResponseBody
     public List<User> getShowUsers(Model model) {
        return userService.findAll();
     }
-
-    @GetMapping(value = {"/index", "/"})
-    public String getIndex(Model model) {
-        System.out.println("getIndex");
-        return "index";
-    }
-
 
 }

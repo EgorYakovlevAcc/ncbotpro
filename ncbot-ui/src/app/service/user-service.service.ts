@@ -10,6 +10,6 @@ export class UserServiceService {
   constructor(private httpClient: HttpClient) { }
 
   getAllUsers(): Observable<any> {
-    return this.httpClient.get("/users");
+    return this.httpClient.get("all/users");
   }
 }
