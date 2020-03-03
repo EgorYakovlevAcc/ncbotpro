@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@CrossOrigin
+@CrossOrigin("https://nctelegrambotpro.herokuapp.com/")
 public class MainController {
     @Autowired
     private UserService userService;

@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class QuestionServiceService {
-  host = "http://localhost:8080/questions/";
+  host = "/questions/";
   question: Question;
 
   constructor(private httpClient: HttpClient) {

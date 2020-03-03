@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/questions")
-@CrossOrigin
+@CrossOrigin("https://nctelegrambotpro.herokuapp.com/")
 public class QuestionController {
     private static final Logger LOGGER = LoggerFactory.getLogger(QuestionController.class);
     @Autowired
