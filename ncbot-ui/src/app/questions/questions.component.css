@@ -1,0 +1,7 @@
+td {
+  background-color: white;
+}
+
+td.marked {
+  background-color: aliceblue;
+}

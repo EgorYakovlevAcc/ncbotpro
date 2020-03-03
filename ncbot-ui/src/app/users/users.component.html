@@ -1,0 +1,28 @@
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>
+      №
+    </th>
+    <th>
+      first name
+    </th>
+    <th>
+      last name
+    </th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let user of users; let i = index">
+  <tr>
+    <td>
+      {{i}}
+    </td>
+    <td>
+      {{user.firstName}}
+    </td>
+    <td>
+      {{user.lastName}}
+    </td>
+  </tr>
+  </tbody>
+</table>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ncbot/ncbot.iml" filepath="$PROJECT_DIR$/ncbot/ncbot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ncbot-ui/ncbot-ui.iml" filepath="$PROJECT_DIR$/ncbot-ui/ncbot-ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ncbotpro.iml" filepath="$PROJECT_DIR$/.idea/ncbotpro.iml" />
+    </modules>
+  </component>
+</project>
