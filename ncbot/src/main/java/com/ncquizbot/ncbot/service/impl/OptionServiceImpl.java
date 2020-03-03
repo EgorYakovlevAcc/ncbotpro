@@ -5,11 +5,9 @@ import com.ncquizbot.ncbot.model.Question;
 import com.ncquizbot.ncbot.repo.OptionRepository;
 import com.ncquizbot.ncbot.service.OptionService;
 import com.ncquizbot.ncbot.service.QuestionService;
-import com.sun.org.apache.xpath.internal.objects.XBoolean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
 import java.util.List;
 
 @Service

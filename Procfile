@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar ncbot/target/*.jar --p $PORT
+java -Dserver.port=$PORT $JAVA_OPTS -jar ncbot/target/*.jar
