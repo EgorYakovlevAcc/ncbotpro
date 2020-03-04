@@ -1,8 +1,24 @@
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
 
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["polyfills-es5"], {
   /***/
@@ -15462,9 +15478,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         /*#__PURE__*/
         function () {
           function ZoneTask(type, source, callback, options, scheduleFn, cancelFn) {
-            _classCallCheck(this, ZoneTask);
+            _classCallCheck(this, ZoneTask); // tslint:disable-next-line:require-internal-with-underscore
 
-            // tslint:disable-next-line:require-internal-with-underscore
+
             this._zone = null;
             this.runCount = 0; // tslint:disable-next-line:require-internal-with-underscore
 
@@ -19129,5 +19145,5 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     "./src/polyfills.ts");
     /***/
   }
-}, [[1, "runtime"]]]);
+}, [[1, "runtime"]]]); //# sourceMappingURL=polyfills-es5.js.map
 //# sourceMappingURL=polyfills-es5.js.map
