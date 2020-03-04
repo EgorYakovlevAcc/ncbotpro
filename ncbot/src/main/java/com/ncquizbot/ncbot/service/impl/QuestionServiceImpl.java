@@ -50,6 +50,7 @@ public class QuestionServiceImpl implements QuestionService {
     public void createQuestionWithOptionsAndAnswer(QuestionOptionsAnswer questionOptionsAnswer) {
         Question question = new Question();
         System.out.println("EGORKA = " + questionOptionsAnswer.getContent());
+        question.setWeight(questionOptionsAnswer.getWeight());
         question.setContent(questionOptionsAnswer.getContent());
         String contentOfAnswer = questionOptionsAnswer.getAnswer();
         questionRepository.save(question);
