@@ -66,6 +66,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             if (Objects.nonNull(replyKeyboardMarkup)) {
                 sendMessage.setReplyMarkup(replyKeyboardMarkup);
             }
+            sendMessage.enableWebPagePreview();
             return sendMessage;
         }
         return null;

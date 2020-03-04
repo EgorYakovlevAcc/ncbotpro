@@ -26,7 +26,7 @@ public class MainController {
         return userService.findAll();
     }
 
-    @GetMapping(path = {"/", "/value"})
+    @GetMapping(value = {"/", "/index"})
     public String getIndex() {
         return "forward:/index.html";
     }

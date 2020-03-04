@@ -46,8 +46,11 @@ public class OptionServiceImpl implements OptionService {
     @Override
     public void editOptionsByQuestionAndContents(Integer questionId, List<String> contents) {
         Question question = questionService.findQuestionById(questionId);
-        optionRepository.deleteOptionsByQuestion(question);
-        //createOptionsByQuestionAndContents(questionId, contents);
+        List<Option> questionOptionsList = question.getOptions();
+        for (Option option : questionOptionsList) {
+            optionRepository.delete(option);
+        }
+        createOptionsByQuestionAndContents(questionId, contents);
     }
 
     @Override
