@@ -5,4 +5,5 @@ export class Question {
   content:string;
   options:Option[];
   answer:string;
+  weight:number;
 }

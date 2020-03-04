@@ -19,7 +19,8 @@ export class ModalAddQuestionComponent implements OnInit {
     id:0,
     content: '',
     options: [],
-    answer: ''
+    answer: '',
+    weight:0
   };
 
 

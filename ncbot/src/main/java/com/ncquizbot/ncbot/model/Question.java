@@ -24,5 +24,6 @@ public class Question {
     private Answer answer;
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Option> options;
+    private Integer weight;
 
 }

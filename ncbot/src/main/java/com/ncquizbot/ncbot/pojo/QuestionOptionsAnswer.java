@@ -16,4 +16,5 @@ public class QuestionOptionsAnswer {
     private String content;
     private List<Option> options;
     private String answer;
+    private Integer weight;
 }
