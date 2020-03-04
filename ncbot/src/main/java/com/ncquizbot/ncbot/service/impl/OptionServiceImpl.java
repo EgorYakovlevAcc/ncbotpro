@@ -48,6 +48,7 @@ public class OptionServiceImpl implements OptionService {
         Question question = questionService.findQuestionById(questionId);
         List<Option> questionOptionsList = question.getOptions();
         for (Option option : questionOptionsList) {
+            System.out.println("Egorka");
             optionRepository.delete(option);
         }
         createOptionsByQuestionAndContents(questionId, contents);

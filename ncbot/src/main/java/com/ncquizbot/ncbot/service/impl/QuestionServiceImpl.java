@@ -109,6 +109,7 @@ public class QuestionServiceImpl implements QuestionService {
     public void editQuestionWithOptions(QuestionOptionsAnswer questionOptionsAnswer) {
         Question question = questionRepository.findQuestionById(questionOptionsAnswer.getId());
         question.setContent(questionOptionsAnswer.getContent());
+        question.setWeight(questionOptionsAnswer.getWeight());
         question.getAnswer().setContent(questionOptionsAnswer.getAnswer());
         optionService.editOptionsByQuestionAndContents(questionOptionsAnswer.getId(), questionOptionsAnswer.getOptions().stream()
                 .map(option -> option.getContent())
