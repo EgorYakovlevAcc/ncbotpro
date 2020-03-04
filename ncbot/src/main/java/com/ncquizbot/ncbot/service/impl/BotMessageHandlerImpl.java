@@ -74,10 +74,11 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
 
     private void updateUserScore(User user, String userAnswerText) {
         Question lastQuestion = questionService.findQuestionById(user.getCurrentQuestionId());
+        Integer questionWeight = lastQuestion.getWeight();
         Answer answer = lastQuestion.getAnswer();
         String answerText = Objects.isNull(answer) ? "" : answer.getContent();
         if (checkAnswer(userAnswerText, answerText)) {
-            userService.increaseUserScore(user);
+            userService.increaseUserScore(user, questionWeight);
         }
     }
 

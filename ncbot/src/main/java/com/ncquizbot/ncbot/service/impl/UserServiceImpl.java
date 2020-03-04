@@ -102,9 +102,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void increaseUserScore(User user) {
+    public void increaseUserScore(User user, Integer questionWeight) {
         Integer currentScore = user.getScore();
-        user.setScore(currentScore + 1);
+        user.setScore(currentScore + questionWeight);
         userRepository.save(user);
     }
 
@@ -130,7 +130,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-    public void updateUserSessionEndDate(User user){
+    public void updateUserSessionEndDate(User user) {
         user.setEndSessionDate(new Date());
         userRepository.save(user);
     }
