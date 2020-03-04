@@ -3246,4 +3246,3 @@ module.exports = __webpack_require__(/*! C:\Users\yakov\IdeaProjects\ncbotpro\nc
 
 },[[2,"runtime"]]]);
 //# sourceMappingURL=polyfills-es2015.js.map
-//# sourceMappingURL=polyfills-es2015.js.map

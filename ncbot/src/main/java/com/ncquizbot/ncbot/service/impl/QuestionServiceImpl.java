@@ -111,6 +111,7 @@ public class QuestionServiceImpl implements QuestionService {
         question.setContent(questionOptionsAnswer.getContent());
         question.setWeight(questionOptionsAnswer.getWeight());
         question.getAnswer().setContent(questionOptionsAnswer.getAnswer());
+        save(question);
         optionService.editOptionsByQuestionAndContents(questionOptionsAnswer.getId(), questionOptionsAnswer.getOptions().stream()
                 .map(option -> option.getContent())
                 .collect(Collectors.toList()));
