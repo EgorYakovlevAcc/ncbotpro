@@ -19,17 +19,15 @@ import java.util.List;
 public class MainController {
     @Autowired
     private UserService userService;
-    @Autowired
-    private QuestionService questionService;
-    @Autowired
-    private OptionService optionService;
-    @Autowired
-    private AnswerService answerService;
 
     @GetMapping("all/users")
     @ResponseBody
     public List<User> getShowUsers(Model model) {
-       return userService.findAll();
+        return userService.findAll();
     }
 
+    @GetMapping(path = {"/", "/value"})
+    public String getIndex() {
+        return "forward:/index.html";
+    }
 }
