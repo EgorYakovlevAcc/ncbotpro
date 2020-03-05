@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class OptionServiceImpl implements OptionService {
     private static final Logger LOGGER = LoggerFactory.getLogger(OptionServiceImpl.class);
     @Autowired
