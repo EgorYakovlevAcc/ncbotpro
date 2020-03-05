@@ -122,6 +122,7 @@ public class QuestionController {
     @PostMapping(value = "/edit")
     public ResponseEntity postEditQuestion(@RequestBody QuestionOptionsAnswer questionOptionsAnswer) {
         System.out.println(questionOptionsAnswer.getId());
+        LOGGER.info("EGORKA");
         questionService.editQuestionWithOptions(questionOptionsAnswer);
         return ResponseEntity.ok(null);
     }
