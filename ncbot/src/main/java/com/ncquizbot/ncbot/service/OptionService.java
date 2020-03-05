@@ -11,5 +11,6 @@ public interface OptionService {
     void createOptionsByQuestionAndContents(Integer questionId, List<String> contents);
     Integer getCorrectIndexOfOptionByAnswer(String answerStr);
     void editOptionsByQuestionAndContents(Integer questionId, List<String> contents);
+    void delete(Option option);
     com.ncquizbot.ncbot.pojo.Option convertOptionModelToOptionPojo(Option option);
 }

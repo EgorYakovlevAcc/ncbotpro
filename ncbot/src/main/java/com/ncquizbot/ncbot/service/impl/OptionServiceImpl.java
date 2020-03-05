@@ -61,6 +61,11 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
+    public void delete(Option option) {
+        optionRepository.delete(option);
+    }
+
+    @Override
     public com.ncquizbot.ncbot.pojo.Option convertOptionModelToOptionPojo(Option option) {
         com.ncquizbot.ncbot.pojo.Option optionPojo = new com.ncquizbot.ncbot.pojo.Option();
         optionPojo.setContent(option.getContent());

@@ -111,6 +111,9 @@ public class QuestionServiceImpl implements QuestionService {
         question.setContent(questionOptionsAnswer.getContent());
         question.setWeight(questionOptionsAnswer.getWeight());
         question.getAnswer().setContent(questionOptionsAnswer.getAnswer());
+        for (com.ncquizbot.ncbot.model.Option option: question.getOptions()) {
+            optionService.delete(option);
+        }
         save(question);
         optionService.editOptionsByQuestionAndContents(questionOptionsAnswer.getId(), questionOptionsAnswer.getOptions().stream()
                 .map(option -> option.getContent())
