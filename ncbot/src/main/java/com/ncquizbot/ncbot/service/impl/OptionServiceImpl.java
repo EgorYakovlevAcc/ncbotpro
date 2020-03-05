@@ -5,6 +5,8 @@ import com.ncquizbot.ncbot.model.Question;
 import com.ncquizbot.ncbot.repo.OptionRepository;
 import com.ncquizbot.ncbot.service.OptionService;
 import com.ncquizbot.ncbot.service.QuestionService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,7 @@ import java.util.List;
 @Service
 @Transactional
 public class OptionServiceImpl implements OptionService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(OptionServiceImpl.class);
     @Autowired
     private OptionRepository optionRepository;
     @Autowired
@@ -50,7 +53,7 @@ public class OptionServiceImpl implements OptionService {
         Question question = questionService.findQuestionById(questionId);
         List<Option> questionOptionsList = question.getOptions();
         for (Option option : questionOptionsList) {
-            System.out.println("Egorka");
+            LOGGER.info("EGORKA");
             optionRepository.delete(option);
         }
         createOptionsByQuestionAndContents(questionId, contents);
