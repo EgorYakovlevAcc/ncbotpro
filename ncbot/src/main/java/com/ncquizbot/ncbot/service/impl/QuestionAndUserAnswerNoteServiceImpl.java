@@ -7,10 +7,12 @@ import com.ncquizbot.ncbot.repo.QuestionAndUserAnswerNoteRepository;
 import com.ncquizbot.ncbot.service.QuestionAndUserAnswerNoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class QuestionAndUserAnswerNoteServiceImpl implements QuestionAndUserAnswerNoteService {
     @Autowired
     private QuestionAndUserAnswerNoteRepository quanRepository;
