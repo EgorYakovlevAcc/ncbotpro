@@ -50,13 +50,6 @@ public class OptionServiceImpl implements OptionService {
 
     @Override
     public void editOptionsByQuestionAndContents(Integer questionId, List<String> contents) {
-        LOGGER.info("EGORKA-POMIDORKA");
-        Question question = questionService.findQuestionById(questionId);
-        List<Option> questionOptionsList = question.getOptions();
-        for (Option option : questionOptionsList) {
-            LOGGER.info("EGORKA");
-            optionRepository.delete(option);
-        }
         createOptionsByQuestionAndContents(questionId, contents);
     }
 
