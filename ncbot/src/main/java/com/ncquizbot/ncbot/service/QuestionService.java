@@ -14,9 +14,11 @@ public interface QuestionService {
     void delete(Question question);
     void createQuestionWithOptionsAndAnswer(QuestionOptionsAnswer questionOptionsAnswer);
     Question getNextQuestion(Integer currentQuestionId);
+    Question getNextQuestionByWeight(Integer weight);
     Question findFirstQuestion();
     void deleteQuestionById(Integer id);
     QuestionOptionsAnswer convertQuestionToQuestionWithOptions(Question question);
     Integer getCorrectIndexOfOptionByAnswer(Question question, Answer answer);
     void editQuestionWithOptions(QuestionOptionsAnswer questionOptionsAnswer);
+    List<Question> findQuestionsByWeight(Integer weight);
 }

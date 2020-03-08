@@ -23,4 +23,5 @@ public interface UserService {
     Question getNextQuestionForUser(User user);
     void updateLastUserSessionDate(User user);
     void updateUserSessionEndDate(User user);
+    void increaseUserQuestionNumber(User user);
 }

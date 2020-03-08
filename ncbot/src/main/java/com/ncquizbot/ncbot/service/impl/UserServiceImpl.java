@@ -57,9 +57,7 @@ public class UserServiceImpl implements UserService {
     public User createAndSaveUserByTelegramMessageIfCurrentDoesNotExist(Message message) {
         org.telegram.telegrambots.api.objects.User telegramUser = message.getFrom();
         User u = userRepository.findUserByTelegramId(telegramUser.getId());
-        System.out.println("ROGE ROGE ROGE " + u);
         if (Objects.isNull(u)) {
-            System.out.println("efefsfsefesf");
             User user = new User();
             user.setActiveNow(true);
             user.setTelegramId(telegramUser.getId());
@@ -68,6 +66,7 @@ public class UserServiceImpl implements UserService {
             Chat chat = message.getChat();
             user.setChatId(chat.getId());
             user.setCurrentQuestionId(-1);
+            user.setQuestionNumber(1);
             user.setScore(0);
             userRepository.save(user);
             return user;
@@ -89,8 +88,9 @@ public class UserServiceImpl implements UserService {
 
     public Question getNextQuestionForUser(User user) {
         Integer questionId = user.getCurrentQuestionId();
+        Question currentQuestion = questionService.findQuestionById(questionId);
         if (Objects.nonNull(questionId)) {
-            return questionService.getNextQuestion(questionId);
+            return questionService.getNextQuestionByWeight(currentQuestion.getWeight());
         }
         return null;
     }
@@ -113,7 +113,6 @@ public class UserServiceImpl implements UserService {
         Question question = getNextQuestionForUser(user);
         if (Objects.nonNull(question)) {
             user.setCurrentQuestionId(question.getId());
-            System.out.println("EGORKA = " + question.getId());
             userRepository.save(user);
         }
     }
@@ -132,6 +131,12 @@ public class UserServiceImpl implements UserService {
 
     public void updateUserSessionEndDate(User user) {
         user.setEndSessionDate(new Date());
+        userRepository.save(user);
+    }
+
+    @Override
+    public void increaseUserQuestionNumber(User user) {
+        user.setQuestionNumber(user.getQuestionNumber() + 1);
         userRepository.save(user);
     }
 }

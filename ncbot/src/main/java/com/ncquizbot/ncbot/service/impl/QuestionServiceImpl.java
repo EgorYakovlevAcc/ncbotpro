@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -76,6 +77,18 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    public Question getNextQuestionByWeight(Integer weight) {
+        List<Question> questionsByWeight = questionRepository.findQuestionsByWeight(weight + 1);
+        if (questionsByWeight.isEmpty()){
+            return null;
+        }
+        Random random = new Random();
+        int sizeOfQuestionsList = questionsByWeight.size();
+        int indexOfQuestion = random.nextInt(sizeOfQuestionsList);
+        return questionsByWeight.get(indexOfQuestion);
+    }
+
+    @Override
     public Question findFirstQuestion() {
         return questionRepository.findAll().stream()
                 .findFirst()
@@ -118,6 +131,11 @@ public class QuestionServiceImpl implements QuestionService {
         optionService.editOptionsByQuestionAndContents(questionOptionsAnswer.getId(), questionOptionsAnswer.getOptions().stream()
                 .map(option -> option.getContent())
                 .collect(Collectors.toList()));
+    }
+
+    @Override
+    public List<Question> findQuestionsByWeight(Integer weight) {
+        return questionRepository.findQuestionsByWeight(weight);
     }
 
 }

@@ -30,6 +30,7 @@ public class User {
     private Date lastSessionDate;
     @Column(name = "end_session")
     private Date endSessionDate;
+    private Integer questionNumber;
     @OneToMany
     private List<QuestionAndUserAnswerNote> questionAndUserAnswerNoteList;
 
