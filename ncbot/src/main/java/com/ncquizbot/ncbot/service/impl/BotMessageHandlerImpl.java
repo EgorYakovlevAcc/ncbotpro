@@ -95,12 +95,10 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     private Question getQuestionForUser(User user) {
         Question currentQuestion = null;
         if (user.getCurrentQuestionId() == -1) {
-            currentQuestion = getFirstQuestionForUser(user);
+            return getFirstQuestionForUser(user);
         }
-        if (!userService.checkIsThisQuestionLast(user)) {
             userService.setNextQuestionToUser(user);
             currentQuestion = questionService.findQuestionById(user.getCurrentQuestionId());
-        }
         return currentQuestion;
     }
 
