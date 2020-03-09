@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
             Chat chat = message.getChat();
             user.setChatId(chat.getId());
             user.setCurrentQuestionId(-1);
-            user.setQuestionNumber(1);
+            user.setQuestionNumber(0);
             user.setScore(0);
             userRepository.save(user);
             return user;

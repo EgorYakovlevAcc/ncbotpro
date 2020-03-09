@@ -61,50 +61,6 @@ public class QuestionController {
         questionService.createQuestionWithOptionsAndAnswer(questionOptionsAnswer);
         return ResponseEntity.ok(null);
     }
-//    @PostMapping(value = "/add", params = {"action"})
-//    public String postAddQuestion(@RequestParam(value = "answer_index", required = false) Integer answerIndex, @RequestParam("action") String action, ModelMap model, @ModelAttribute("questionAndOptions") QuestionAndOptions questionAndOptions) {
-//        if (Objects.isNull(questionAndOptions.getOptions())) {
-//            List<String> options = new ArrayList<>();
-//            questionAndOptions.setOptions(options);
-//        }
-//        if (action.equals("createQuestion")) {
-//            questionAndOptions.getOptions().removeAll(questionAndOptions.getOptions().stream()
-//                    .filter(StringUtils::isEmpty)
-//                    .collect(Collectors.toList()));
-//            questionService.createQuestionWithOptionsAndAnswer(questionAndOptions, answerIndex);
-//            return "redirect:/questions/all";
-//        }
-//        if (action.equals("addOption")) {
-//            System.out.println("Egor");
-//            List<String> options = new ArrayList<>();
-//            options.addAll(questionAndOptions.getOptions());
-//            options.add("");
-//            questionAndOptions.setOptions(options);
-//            model.addAttribute("questionAndOption", questionAndOptions);
-//            model.addAttribute("buttonValue", "editQuestion");
-//            model.addAttribute("buttonName", "edit question");
-//            System.out.println(questionAndOptions.getOptions());
-//            return "add_question";
-//        } else {
-//            model.addAttribute("questionAndOption", questionAndOptions);
-//            return "add_question";
-//        }
-//
-//    }
-
-//    @PostMapping(value = "/add", params = {"removeOption"})
-//    public String revomeOptionToQuestion(Model model, @RequestParam("removeOption") Integer optionId, final QuestionAndOptions questionAndOptions, HttpServletRequest request) {
-//        LOGGER.info("QuestionController: revomeOptionToQuestion [START]");
-//        List<String> options = questionAndOptions.getOptions();
-//        options.remove(options.get(optionId));
-//        System.out.println("EGORKA-POMIDORKA");
-//        System.out.println(optionId);
-//        System.out.println(options);
-//        questionAndOptions.setOptions(options);
-//        model.addAttribute("questionAndOption", questionAndOptions);
-//        LOGGER.info("QuestionController: revomeOptionToQuestion [FINISH]");
-//        return "add_question";
-//    }
 
     @GetMapping(value = "/edit")
     @ResponseBody
