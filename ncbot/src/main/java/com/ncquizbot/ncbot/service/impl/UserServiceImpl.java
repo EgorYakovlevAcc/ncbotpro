@@ -87,12 +87,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public Question getNextQuestionForUser(User user) {
-        Integer questionId = user.getCurrentQuestionId();
-        Question currentQuestion = questionService.findQuestionById(questionId);
-        if (Objects.nonNull(questionId)) {
-            return questionService.getNextQuestionByWeight(currentQuestion.getWeight());
-        }
-        return null;
+        return questionService.getNextQuestionByWeight(user.getQuestionNumber());
     }
 
     @Override
