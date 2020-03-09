@@ -15,7 +15,6 @@ public interface UserService {
     void delete(User user);
     User createAndSaveUserByTelegramMessageIfCurrentDoesNotExist(Message message);
     boolean checkIsThisUserExists(User user);
-    boolean checkIsThisQuestionLast(User user);
     void increaseUserScore(User user, Integer questionWeight);
     void setNextQuestionToUser(User user);
     void turnOffUserActivityStatus(User user);

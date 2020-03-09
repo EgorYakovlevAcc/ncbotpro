@@ -81,11 +81,6 @@ public class UserServiceImpl implements UserService {
         return Objects.nonNull(userRepository.findUserByTelegramId(user.getTelegramId()));
     }
 
-    @Override
-    public boolean checkIsThisQuestionLast(User user) {
-        return Objects.isNull(getNextQuestionForUser(user)) ? true : false;
-    }
-
     public Question getNextQuestionForUser(User user) {
         return questionService.getNextQuestionByWeight(user.getQuestionNumber());
     }
@@ -108,6 +103,7 @@ public class UserServiceImpl implements UserService {
         Question question = getNextQuestionForUser(user);
         if (Objects.nonNull(question)) {
             user.setCurrentQuestionId(question.getId());
+            user.setQuestionNumber(question.getWeight());
             userRepository.save(user);
         }
     }
