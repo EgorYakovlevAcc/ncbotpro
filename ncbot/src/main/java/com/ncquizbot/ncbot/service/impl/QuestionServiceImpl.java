@@ -109,6 +109,7 @@ public class QuestionServiceImpl implements QuestionService {
         questionOptionsAnswer.setId(question.getId());
         questionOptionsAnswer.setContent(question.getContent());
         questionOptionsAnswer.setAnswer(question.getAnswer().getContent());
+        questionOptionsAnswer.setWeight(question.getWeight());
         return questionOptionsAnswer;
     }
 
