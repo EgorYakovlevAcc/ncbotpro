@@ -18,7 +18,6 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional
 public class QuestionServiceImpl implements QuestionService {
     @Autowired
     private QuestionRepository questionRepository;
