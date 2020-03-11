@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,6 +49,7 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
+    @Transactional
     public void editOptionsByQuestionAndContents(Integer questionId, List<Option> previousOptions, List<com.ncquizbot.ncbot.pojo.Option> options) {
         for (com.ncquizbot.ncbot.model.Option option: previousOptions) {
             optionRepository.delete(option);
