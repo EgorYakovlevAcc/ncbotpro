@@ -17,7 +17,7 @@ import org.telegram.telegrambots.exceptions.TelegramApiException;
 
 @Component
 public class Bot extends TelegramLongPollingBot {
-    private boolean isBotActive;
+    private boolean isBotActive = true;
     private static final Logger LOGGER = LoggerFactory.getLogger(Bot.class);
     private final static String TURN_OFF_BOT_MESSAGE = "Sorry, I'm turned off. Please, try again later!";
     @Autowired
