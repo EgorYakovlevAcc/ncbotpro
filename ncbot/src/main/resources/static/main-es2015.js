@@ -238,13 +238,8 @@ class MainpageComponent {
         });
     }
     onClickTurnBtn() {
-        if (this.bot.isActive) {
-            this.bot.isActive = false;
-        }
-        else {
-            this.bot.isActive = true;
-        }
-        this.botService.setBotTurn(this.bot).subscribe(result => {
+        this.botService.setBotTurn(this.bot).subscribe((result) => {
+            this.bot = result;
             location.reload();
         });
     }

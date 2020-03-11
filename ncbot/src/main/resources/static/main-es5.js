@@ -407,13 +407,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onClickTurnBtn",
         value: function onClickTurnBtn() {
-          if (this.bot.isActive) {
-            this.bot.isActive = false;
-          } else {
-            this.bot.isActive = true;
-          }
+          var _this2 = this;
 
           this.botService.setBotTurn(this.bot).subscribe(function (result) {
+            _this2.bot = result;
             location.reload();
           });
         }
@@ -1578,10 +1575,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(QuestionsComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this2 = this;
+          var _this3 = this;
 
           this.questionService.getAllQuestions().subscribe(function (result) {
-            _this2.questions = result;
+            _this3.questions = result;
           });
         }
       }, {
@@ -2081,10 +2078,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(UsersComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this3 = this;
+          var _this4 = this;
 
           this.userService.getAllUsers().subscribe(function (result) {
-            _this3.users = result;
+            _this4.users = result;
           });
         }
       }]);

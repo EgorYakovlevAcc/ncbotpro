@@ -16,7 +16,7 @@ public class BotController {
     @PostMapping(value = {"/turn"})
     @ResponseBody
     public ResponseEntity postBotTurn(@RequestBody BotState botState) {
-        bot.setIsBotActive(botState.isActive());
+        bot.setIsBotActive(!botState.isActive());
         return ResponseEntity.ok(null);
     }
 
