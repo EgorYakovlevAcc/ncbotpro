@@ -54,8 +54,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             }
             Question nextQuestion = getQuestionForUser(user);
 //            userService.setQuestionToUser(user, nextQuestion);
-
-            if (user.getQuestionNumber() > 5 || Objects.nonNull(nextQuestion)) {
+            if (user.getQuestionNumber() > 5 || Objects.isNull(nextQuestion)) {
                 ouputMessageText = getGoodByeMessage(user);
             } else {
                 if (nextQuestion.getOptions().size() > 1) {
@@ -98,7 +97,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
 //        if (user.getCurrentQuestionId() == -1) {
 //            return getFirstQuestionForUser(user);
 //        }
-           return userService.setNextQuestionToUser(user);
+        return userService.setNextQuestionToUser(user);
     }
 
     private Question getFirstQuestionForUser(User user) {
