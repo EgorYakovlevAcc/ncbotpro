@@ -5,23 +5,35 @@
       №
     </th>
     <th>
+      telegram id
+    </th>
+    <th>
       first name
     </th>
     <th>
       last name
     </th>
+    <th>
+      score
+    </th>
   </tr>
   </thead>
   <tbody *ngFor="let user of users; let i = index">
-  <tr>
+  <tr [ngStyle]="{'background-color':user.color}">
     <td>
       {{i}}
+    </td>
+    <td>
+      {{user.telegramId}}
     </td>
     <td>
       {{user.firstName}}
     </td>
     <td>
       {{user.lastName}}
+    </td>
+    <td>
+      {{user.score}}
     </td>
   </tr>
   </tbody>

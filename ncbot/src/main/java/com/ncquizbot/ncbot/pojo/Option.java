@@ -1,14 +1,20 @@
 package com.ncquizbot.ncbot.pojo;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
-@Getter
 public class Option {
     private String content;
+
+    public Option() {
+    }
+
+    public Option(String content) {
+        this.content = content;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }

@@ -15,8 +15,20 @@ export class UsersComponent implements OnInit {
     this.userService.getAllUsers().subscribe((result:User[]) =>
       {
         this.users = result;
+        this.checkIsUserActiveNow(this.users);
       }
     )
+  }
+
+  checkIsUserActiveNow(users):void {
+   users.forEach(function (value:User) {
+      if (value.activeNow){
+        value.color = "yellow";
+      }
+      else {
+        value.color="white";
+      }
+   })
   }
 
 }

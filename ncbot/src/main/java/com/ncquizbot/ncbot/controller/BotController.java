@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/bot")
+@CrossOrigin()
 public class BotController {
     @Autowired
     private Bot bot;
