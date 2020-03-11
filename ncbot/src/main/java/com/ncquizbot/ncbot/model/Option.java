@@ -25,6 +25,10 @@ public class Option {
     public Option() {
     }
 
+    public Option(String content) {
+        this.content = content;
+    }
+
     public Integer getId() {
         return id;
     }
