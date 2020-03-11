@@ -50,7 +50,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             String ouputMessageText = "";
             User user = userService.createAndSaveUserByTelegramMessageIfCurrentDoesNotExist(message);
             userService.updateLastUserSessionDate(user);
-            if (user.getQuestionNumber() > 0) {
+            if (user.getQuestionNumber() > 1) {
                 updateUserScore(user, currentMessageText);
             }
             Question nextQuestion = getQuestionForUser(user);
@@ -95,9 +95,9 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
 
     private Question getQuestionForUser(User user) {
         Question currentQuestion = null;
-        if (user.getCurrentQuestionId() == -1) {
-            return getFirstQuestionForUser(user);
-        }
+//        if (user.getCurrentQuestionId() == -1) {
+//            return getFirstQuestionForUser(user);
+//        }
             userService.setNextQuestionToUser(user);
             currentQuestion = questionService.findQuestionById(user.getCurrentQuestionId());
         return currentQuestion;
