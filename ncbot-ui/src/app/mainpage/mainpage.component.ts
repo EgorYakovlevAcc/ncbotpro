@@ -9,7 +9,7 @@ import {Bot} from "../model/bot/bot";
 })
 export class MainpageComponent implements OnInit {
   bot:Bot = {
-    isActive:true
+    active:true
   };
   constructor(private botService:BotService) { }
 
@@ -28,7 +28,7 @@ export class MainpageComponent implements OnInit {
   }
 
   checkBotActivity():string{
-    if (this.bot.isActive == true) {
+    if (this.bot.active == true) {
       return "on";
     }
     return "false";

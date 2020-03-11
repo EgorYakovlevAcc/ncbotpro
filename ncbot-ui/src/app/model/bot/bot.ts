@@ -1,3 +1,3 @@
 export class Bot {
-  isActive:boolean;
+  active:boolean;
 }

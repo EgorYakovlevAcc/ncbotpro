@@ -13402,7 +13402,7 @@ class NodeInjectorFactory {
      * @param {?} isViewProvider
      * @param {?} injectImplementation
      */
-    constructor(factory, 
+    constructor(factory,
     /**
      * Set to `true` if the token is declared in `viewProviders` (or if it is component).
      */
@@ -25474,12 +25474,12 @@ function resolveToken(token, record, records, parent, notFoundValue, flags) {
                     const childRecord = options & 2 /* CheckSelf */ ? records.get(depRecord.token) : undefined;
                     deps.push(tryResolveToken(
                     // Current Token to resolve
-                    depRecord.token, 
+                    depRecord.token,
                     // A record which describes how to resolve the token.
                     // If undefined, this means we don't have such a record
-                    childRecord, 
+                    childRecord,
                     // Other records we know about.
-                    records, 
+                    records,
                     // If we don't know how to resolve dependency and we should not check parent for it,
                     // than pass in Null injector.
                     !childRecord && !(options & 4 /* CheckParent */) ? Injector.NULL : parent, options & 1 /* Optional */ ? null : Injector.THROW_IF_NOT_FOUND, InjectFlags.Default));
@@ -28813,7 +28813,7 @@ function warnAboutUnknownElement(tView, lView, element, tNode, hasDirectives) {
         // as a custom element. Note that unknown elements with a dash in their name won't be instances
         // of HTMLUnknownElement in browsers that support web components.
         /** @type {?} */
-        const isUnknown = 
+        const isUnknown =
         // Note that we can't check for `typeof HTMLUnknownElement === 'function'`,
         // because while most browsers return 'function', IE returns 'object'.
         (typeof HTMLUnknownElement !== 'undefined' && HTMLUnknownElement &&
@@ -54470,8 +54470,8 @@ class ReactiveErrors {
       It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true
       when you set up this control in your component class, the disabled attribute will actually be set in the DOM for
       you. We recommend using this approach to avoid 'changed after checked' errors.
-       
-      Example: 
+
+      Example:
       form = new FormGroup({
         first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),
         last: new FormControl('Drew', Validators.required)
@@ -54484,11 +54484,11 @@ class ReactiveErrors {
      */
     static ngModelWarning(directiveName) {
         console.warn(`
-    It looks like you're using ngModel on the same form field as ${directiveName}. 
-    Support for using the ngModel input property and ngModelChange event with 
-    reactive form directives has been deprecated in Angular v6 and will be removed 
+    It looks like you're using ngModel on the same form field as ${directiveName}.
+    Support for using the ngModel input property and ngModelChange event with
+    reactive form directives has been deprecated in Angular v6 and will be removed
     in Angular v7.
-    
+
     For more information on this, see our API docs here:
     https://angular.io/api/forms/${directiveName === 'formControl' ? 'FormControlDirective'
             : 'FormControlName'}#use-with-ngmodel
@@ -64057,11 +64057,11 @@ class NavigationStart extends RouterEvent {
      */
     constructor(
     /** @docsNotRequired */
-    id, 
+    id,
     /** @docsNotRequired */
-    url, 
+    url,
     /** @docsNotRequired */
-    navigationTrigger = 'imperative', 
+    navigationTrigger = 'imperative',
     /** @docsNotRequired */
     restoredState = null) {
         super(id, url);
@@ -64088,7 +64088,7 @@ class NavigationEnd extends RouterEvent {
      */
     constructor(
     /** @docsNotRequired */
-    id, 
+    id,
     /** @docsNotRequired */
     url, urlAfterRedirects) {
         super(id, url);
@@ -64119,7 +64119,7 @@ class NavigationCancel extends RouterEvent {
      */
     constructor(
     /** @docsNotRequired */
-    id, 
+    id,
     /** @docsNotRequired */
     url, reason) {
         super(id, url);
@@ -64145,7 +64145,7 @@ class NavigationError extends RouterEvent {
      */
     constructor(
     /** @docsNotRequired */
-    id, 
+    id,
     /** @docsNotRequired */
     url, error) {
         super(id, url);
@@ -64174,7 +64174,7 @@ class RoutesRecognized extends RouterEvent {
      */
     constructor(
     /** @docsNotRequired */
-    id, 
+    id,
     /** @docsNotRequired */
     url, urlAfterRedirects, state) {
         super(id, url);
@@ -64204,7 +64204,7 @@ class GuardsCheckStart extends RouterEvent {
      */
     constructor(
     /** @docsNotRequired */
-    id, 
+    id,
     /** @docsNotRequired */
     url, urlAfterRedirects, state) {
         super(id, url);
@@ -64234,7 +64234,7 @@ class GuardsCheckEnd extends RouterEvent {
      */
     constructor(
     /** @docsNotRequired */
-    id, 
+    id,
     /** @docsNotRequired */
     url, urlAfterRedirects, state, shouldActivate) {
         super(id, url);
@@ -64267,7 +64267,7 @@ class ResolveStart extends RouterEvent {
      */
     constructor(
     /** @docsNotRequired */
-    id, 
+    id,
     /** @docsNotRequired */
     url, urlAfterRedirects, state) {
         super(id, url);
@@ -64297,7 +64297,7 @@ class ResolveEnd extends RouterEvent {
      */
     constructor(
     /** @docsNotRequired */
-    id, 
+    id,
     /** @docsNotRequired */
     url, urlAfterRedirects, state) {
         super(id, url);
@@ -69963,13 +69963,13 @@ class Router {
          * @param {?} t
          * @return {?}
          */
-        t => t.id !== 0)), 
+        t => t.id !== 0)),
         // Extract URL
         Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((/**
          * @param {?} t
          * @return {?}
          */
-        t => ((/** @type {?} */ (Object.assign(Object.assign({}, t), { extractedUrl: this.urlHandlingStrategy.extract(t.rawUrl) })))))), 
+        t => ((/** @type {?} */ (Object.assign(Object.assign({}, t), { extractedUrl: this.urlHandlingStrategy.extract(t.rawUrl) })))))),
         // Using switchMap so we cancel executing navigations when a new one comes in
         Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])((/**
          * @param {?} t
@@ -70021,16 +70021,16 @@ class Router {
                             return rxjs__WEBPACK_IMPORTED_MODULE_2__["EMPTY"];
                         }
                         return [t];
-                    })), 
+                    })),
                     // This delay is required to match old behavior that forced navigation to
                     // always be async
                     Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])((/**
                      * @param {?} t
                      * @return {?}
                      */
-                    t => Promise.resolve(t))), 
+                    t => Promise.resolve(t))),
                     // ApplyRedirects
-                    applyRedirects$1(this.ngModule.injector, this.configLoader, this.urlSerializer, this.config), 
+                    applyRedirects$1(this.ngModule.injector, this.configLoader, this.urlSerializer, this.config),
                     // Update the currentNavigation
                     Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((/**
                      * @param {?} t
@@ -70038,13 +70038,13 @@ class Router {
                      */
                     t => {
                         this.currentNavigation = Object.assign(Object.assign({}, (/** @type {?} */ (this.currentNavigation))), { finalUrl: t.urlAfterRedirects });
-                    })), 
+                    })),
                     // Recognize
                     recognize$1(this.rootComponentType, this.config, (/**
                      * @param {?} url
                      * @return {?}
                      */
-                    (url) => this.serializeUrl(url)), this.paramsInheritanceStrategy, this.relativeLinkResolution), 
+                    (url) => this.serializeUrl(url)), this.paramsInheritanceStrategy, this.relativeLinkResolution),
                     // Update URL if in `eager` update mode
                     Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((/**
                      * @param {?} t
@@ -70057,7 +70057,7 @@ class Router {
                             }
                             this.browserUrlTree = t.urlAfterRedirects;
                         }
-                    })), 
+                    })),
                     // Fire RoutesRecognized
                     Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((/**
                      * @param {?} t
@@ -70096,7 +70096,7 @@ class Router {
                         return rxjs__WEBPACK_IMPORTED_MODULE_2__["EMPTY"];
                     }
                 }
-            })), 
+            })),
             // Before Preactivation
             switchTap((/**
              * @param {?} t
@@ -70111,7 +70111,7 @@ class Router {
                     skipLocationChange: !!skipLocationChange,
                     replaceUrl: !!replaceUrl,
                 });
-            })), 
+            })),
             // --- GUARDS ---
             Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((/**
              * @param {?} t
@@ -70162,7 +70162,7 @@ class Router {
                     return false;
                 }
                 return true;
-            })), 
+            })),
             // --- RESOLVE ---
             switchTap((/**
              * @param {?} t
@@ -70190,7 +70190,7 @@ class Router {
                     })));
                 }
                 return undefined;
-            })), 
+            })),
             // --- AFTER PREACTIVATION ---
             switchTap((/**
              * @param {?} t
@@ -70213,7 +70213,7 @@ class Router {
                 /** @type {?} */
                 const targetRouterState = createRouterState(this.routeReuseStrategy, (/** @type {?} */ (t.targetSnapshot)), t.currentRouterState);
                 return (Object.assign(Object.assign({}, t), { targetRouterState }));
-            })), 
+            })),
             /* Once here, we are about to activate syncronously. The assumption is this will
                succeed, and user code may read from the Router service. Therefore before
                activation, we need to update router properties storing the current URL and the
@@ -71348,7 +71348,7 @@ class RouterLinkActive {
             /** @type {?} */
             const hasActiveLinks = this.hasActiveLinks();
             if (this.isActive !== hasActiveLinks) {
-                ((/** @type {?} */ (this))).isActive = hasActiveLinks;
+                ((/** @type {?} */ (this))).active = hasActiveLinks;
                 this.classes.forEach((/**
                  * @param {?} c
                  * @return {?}
@@ -76124,7 +76124,7 @@ function ngbAutoClose(zone, document, type, close, closed$, insideElements, igno
                 }
             };
             const escapes$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["fromEvent"])(document, 'keydown')
-                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["takeUntil"])(closed$), 
+                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["takeUntil"])(closed$),
             // tslint:disable-next-line:deprecation
             Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["filter"])(e => e.which === Key.Escape), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(e => e.preventDefault()));
             // we have to pre-calculate 'shouldCloseOnClick' on 'mousedown',
@@ -76167,9 +76167,9 @@ const ngbFocusTrap = (zone, element, stopFocusTrap$, refocusOnClick = false) => 
         const lastFocusedElement$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["fromEvent"])(element, 'focusin').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["takeUntil"])(stopFocusTrap$), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(e => e.target));
         // 'tab' / 'shift+tab' stream
         Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["fromEvent"])(element, 'keydown')
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["takeUntil"])(stopFocusTrap$), 
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["takeUntil"])(stopFocusTrap$),
         // tslint:disable:deprecation
-        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["filter"])(e => e.which === Key.Tab), 
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["filter"])(e => e.which === Key.Tab),
         // tslint:enable:deprecation
         Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["withLatestFrom"])(lastFocusedElement$))
             .subscribe(([tabEvent, focusedElement]) => {
@@ -78707,7 +78707,7 @@ let NgbModalWindow = class NgbModalWindow {
         const { nativeElement } = this._elRef;
         this._zone.runOutsideAngular(() => {
             Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["fromEvent"])(nativeElement, 'keydown')
-                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["takeUntil"])(this._closed$), 
+                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["takeUntil"])(this._closed$),
             // tslint:disable-next-line:deprecation
             Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["filter"])(e => e.which === Key.Escape && this.keyboard))
                 .subscribe(event => requestAnimationFrame(() => {

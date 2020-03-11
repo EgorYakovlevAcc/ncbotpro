@@ -229,7 +229,7 @@ class MainpageComponent {
     constructor(botService) {
         this.botService = botService;
         this.bot = {
-            isActive: true
+            active: true
         };
     }
     ngOnInit() {
@@ -245,7 +245,7 @@ class MainpageComponent {
         });
     }
     checkBotActivity() {
-        if (this.bot.isActive == true) {
+        if (this.bot.active == true) {
             return "on";
         }
         return "false";

@@ -391,7 +391,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.botService = botService;
         this.bot = {
-          isActive: true
+          active: true
         };
       }
 
@@ -418,7 +418,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "checkBotActivity",
         value: function checkBotActivity() {
-          if (this.bot.isActive == true) {
+          if (this.bot.active == true) {
             return "on";
           }
 
