@@ -402,6 +402,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           this.botService.isBotActive().subscribe(function (result) {
             _this.bot = result;
+            alert(result);
           });
         }
       }, {
@@ -413,6 +414,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             _this2.bot = result;
             location.reload();
           });
+        }
+      }, {
+        key: "checkBotActivity",
+        value: function checkBotActivity() {
+          if (this.bot.isActive == true) {
+            return "on";
+          }
+
+          return "false";
         }
       }]);
 
@@ -428,7 +438,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       selectors: [["app-mainpage"]],
       decls: 13,
       vars: 1,
-      consts: [[1, "container"], [1, "row"], [1, "col"], ["src", "./src/qr_link_to_telegram_bot.png"], [1, "col", "container-fluid"], [1, "btn", "btn-primary", 3, "click"]],
+      consts: [[1, "container"], [1, "row"], [1, "col"], ["src", "./src/qr_link_to_telegram_bot.png"], [1, "col", "container-fluid", 2, "text-align", "center"], [1, "btn", "btn-primary", 3, "click"]],
       template: function MainpageComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -481,7 +491,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (rf & 2) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](12);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.bot.isActive ? "on" : "off");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.checkBotActivity());
         }
       },
       styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21haW5wYWdlL21haW5wYWdlLmNvbXBvbmVudC5jc3MifQ== */"]

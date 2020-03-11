@@ -16,6 +16,7 @@ export class MainpageComponent implements OnInit {
   ngOnInit(): void {
     this.botService.isBotActive().subscribe((result:Bot) =>{
       this.bot = result;
+      alert(result);
     })
   }
 
@@ -24,6 +25,13 @@ export class MainpageComponent implements OnInit {
       this.bot = result;
       location.reload();
     });
+  }
+
+  checkBotActivity():string{
+    if (this.bot.isActive == true) {
+      return "on";
+    }
+    return "false";
   }
 
 }

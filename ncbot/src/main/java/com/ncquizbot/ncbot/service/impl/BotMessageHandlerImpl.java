@@ -89,7 +89,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     private String getGoodByeMessage(User user) {
         userService.turnOffUserActivityStatus(user);
         userService.updateUserSessionEndDate(user);
-        userService.delete(user);
+//        userService.delete(user);
         return "Thank you it was last question. Your score is " + user.getScore();
     }
 
