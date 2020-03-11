@@ -11,10 +11,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "options")
-@Getter
-@Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Option {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,4 +21,31 @@ public class Option {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Question question;
     private String content;
+
+    public Option() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }

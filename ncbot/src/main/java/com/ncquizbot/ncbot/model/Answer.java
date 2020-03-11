@@ -11,10 +11,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "answers")
-@Getter
-@Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,4 +20,31 @@ public class Answer {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="question_id")
     private Question question;
+
+    public Answer() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
 }

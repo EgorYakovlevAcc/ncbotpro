@@ -10,9 +10,6 @@ import java.util.List;
 
 @Entity
 @Table(name="questions")
-@Setter
-@Getter
-@NoArgsConstructor
 @AllArgsConstructor
 public class Question {
     @Id
@@ -26,4 +23,46 @@ public class Question {
     private List<Option> options;
     private Integer weight;
 
+    public Question() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Answer getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
+    }
+
+    public List<Option> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<Option> options) {
+        this.options = options;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
 }

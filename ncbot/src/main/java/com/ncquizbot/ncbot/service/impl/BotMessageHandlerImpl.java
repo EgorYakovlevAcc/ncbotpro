@@ -1,6 +1,5 @@
 package com.ncquizbot.ncbot.service.impl;
 
-import com.google.inject.internal.cglib.core.$ClassNameReader;
 import com.ncquizbot.ncbot.bot.Bot;
 import com.ncquizbot.ncbot.model.Answer;
 import com.ncquizbot.ncbot.model.Option;
