@@ -10,7 +10,7 @@ public interface OptionService {
     List<Option> findOptionByQuestion(Question question);
     void createOptionsByQuestionAndContents(Integer questionId, List<String> contents);
     Integer getCorrectIndexOfOptionByAnswer(String answerStr);
-    void editOptionsByQuestionAndContents(Integer questionId, List<com.ncquizbot.ncbot.model.Option> previousOptions, List<Option> options);
+    void editOptionsByQuestionAndContents(Integer questionId, List<Option> previousOptions, List<com.ncquizbot.ncbot.pojo.Option> options);
     void delete(Option option);
     com.ncquizbot.ncbot.pojo.Option convertOptionModelToOptionPojo(Option option);
 }

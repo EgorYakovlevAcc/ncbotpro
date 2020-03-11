@@ -127,7 +127,7 @@ public class QuestionServiceImpl implements QuestionService {
         question.setWeight(questionOptionsAnswer.getWeight());
         question.getAnswer().setContent(questionOptionsAnswer.getAnswer());
         save(question);
-        optionService.editOptionsByQuestionAndContents(questionOptionsAnswer.getId(), questionOptionsAnswer.getOptions());
+        optionService.editOptionsByQuestionAndContents(questionOptionsAnswer.getId(),  question.getOptions(), questionOptionsAnswer.getOptions());
     }
 
     @Override

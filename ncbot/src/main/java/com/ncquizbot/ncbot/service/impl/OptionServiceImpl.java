@@ -48,7 +48,7 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
-    public void editOptionsByQuestionAndContents(Integer questionId, List<com.ncquizbot.ncbot.model.Option> previousOptions, List<Option> options) {
+    public void editOptionsByQuestionAndContents(Integer questionId, List<Option> previousOptions, List<com.ncquizbot.ncbot.pojo.Option> options) {
         for (com.ncquizbot.ncbot.model.Option option: previousOptions) {
             optionRepository.delete(option);
         }
