@@ -89,9 +89,11 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public Question findFirstQuestion() {
-        return questionRepository.findAll().stream()
-                .findFirst()
-                .orElse(null);
+        List<Question> questions =  questionRepository.findQuestionsByWeight(1);
+        Random random = new Random();
+        int questionIndex = random.nextInt(questions.size());
+        return questions.get(questionIndex);
+
     }
 
     @Override

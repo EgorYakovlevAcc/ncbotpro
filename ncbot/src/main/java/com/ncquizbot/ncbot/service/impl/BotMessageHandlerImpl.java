@@ -50,11 +50,11 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             String ouputMessageText = "";
             User user = userService.createAndSaveUserByTelegramMessageIfCurrentDoesNotExist(message);
             userService.updateLastUserSessionDate(user);
-            if (user.getQuestionNumber() != 1) {
+            if (user.getQuestionNumber() > 0) {
                 updateUserScore(user, currentMessageText);
             }
             Question nextQuestion = getQuestionForUser(user);
-            userService.setNextQuestionToUser(user);
+            userService.setQuestionToUser(user, nextQuestion);
             if (user.getQuestionNumber() > 4) {
                 ouputMessageText = getGoodByeMessage(user);
             } else {
@@ -104,7 +104,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     }
 
     private Question getFirstQuestionForUser(User user) {
-        return questionService.findQuestionById(questionService.findFirstQuestion().getId());
+        return questionService.findFirstQuestion();
     }
 
     private ReplyKeyboardMarkup getQuestionWithMultipleOptions(List<Option> options) {

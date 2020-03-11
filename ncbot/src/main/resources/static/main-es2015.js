@@ -235,7 +235,6 @@ class MainpageComponent {
     ngOnInit() {
         this.botService.isBotActive().subscribe((result) => {
             this.bot = result;
-            alert(result);
         });
     }
     onClickTurnBtn() {
@@ -248,7 +247,7 @@ class MainpageComponent {
         if (this.bot.active == true) {
             return "on";
         }
-        return "false";
+        return "off";
     }
 }
 MainpageComponent.ɵfac = function MainpageComponent_Factory(t) { return new (t || MainpageComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_service_bot_service__WEBPACK_IMPORTED_MODULE_1__["BotService"])); };

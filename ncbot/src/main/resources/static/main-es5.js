@@ -402,7 +402,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           this.botService.isBotActive().subscribe(function (result) {
             _this.bot = result;
-            alert(result);
           });
         }
       }, {
@@ -422,7 +421,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             return "on";
           }
 
-          return "false";
+          return "off";
         }
       }]);
 
