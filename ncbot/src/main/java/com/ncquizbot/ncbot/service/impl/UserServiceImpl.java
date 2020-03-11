@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public Question getNextQuestionForUser(User user) {
-        return questionService.getNextQuestionByWeight(user.getQuestionNumber() + 1);
+        return questionService.getNextQuestionByWeight(user.getQuestionNumber());
     }
 
     @Override
