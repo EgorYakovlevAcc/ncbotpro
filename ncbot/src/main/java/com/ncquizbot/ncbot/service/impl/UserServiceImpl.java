@@ -99,13 +99,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void setNextQuestionToUser(User user) {
+    public Question setNextQuestionToUser(User user) {
         Question question = getNextQuestionForUser(user);
         if (Objects.nonNull(question)) {
             user.setCurrentQuestionId(question.getId());
             user.setQuestionNumber(question.getWeight());
             userRepository.save(user);
         }
+        return question;
     }
 
     @Override

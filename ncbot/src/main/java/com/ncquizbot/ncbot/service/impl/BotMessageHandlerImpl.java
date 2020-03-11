@@ -98,9 +98,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
 //        if (user.getCurrentQuestionId() == -1) {
 //            return getFirstQuestionForUser(user);
 //        }
-            userService.setNextQuestionToUser(user);
-            currentQuestion = questionService.findQuestionById(user.getCurrentQuestionId());
-        return currentQuestion;
+           return userService.setNextQuestionToUser(user);
     }
 
     private Question getFirstQuestionForUser(User user) {
