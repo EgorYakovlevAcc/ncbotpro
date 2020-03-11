@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OptionServiceImpl implements OptionService {
@@ -47,8 +48,13 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
-    public void editOptionsByQuestionAndContents(Integer questionId, List<String> contents) {
-        createOptionsByQuestionAndContents(questionId, contents);
+    public void editOptionsByQuestionAndContents(Integer questionId, List<com.ncquizbot.ncbot.model.Option> previousOptions, List<Option> options) {
+        for (com.ncquizbot.ncbot.model.Option option: previousOptions) {
+            optionRepository.delete(option);
+        }
+        createOptionsByQuestionAndContents(questionId, options.stream()
+                .map(x -> x.getContent())
+                .collect(Collectors.toList()));
     }
 
     @Override
