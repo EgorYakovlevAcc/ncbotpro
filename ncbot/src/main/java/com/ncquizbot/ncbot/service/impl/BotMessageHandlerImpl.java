@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
+import org.telegram.telegrambots.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardMarkup;
@@ -65,6 +66,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             SendMessage sendMessage = new SendMessage();
             sendMessage.setText(ouputMessageText)
                     .setChatId(message.getChatId());
+            SendPhoto m = new SendPhoto();
             if (Objects.nonNull(replyKeyboardMarkup)) {
                 sendMessage.setReplyMarkup(replyKeyboardMarkup);
             }

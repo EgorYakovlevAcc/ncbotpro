@@ -21,7 +21,7 @@ public class TimerConfigurationImpl implements TimerConfiguration {
         userService.findAll().stream().forEach(user -> {
             Date currentDate = new Date();
             Date date = user.getLastSessionDate();
-            if (Objects.nonNull(date)){
+            if (Objects.nonNull(date) && user.isActiveNow()){
                 if (checkIsTimeCameOut(currentDate, date, TIME_GAP)) {
                     userService.delete(user);
                 }
