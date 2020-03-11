@@ -49,12 +49,13 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             String ouputMessageText = "";
             User user = userService.createAndSaveUserByTelegramMessageIfCurrentDoesNotExist(message);
             userService.updateLastUserSessionDate(user);
-            if (user.getQuestionNumber() > 1) {
+            if (user.getQuestionNumber() > 0) {
                 updateUserScore(user, currentMessageText);
             }
             Question nextQuestion = getQuestionForUser(user);
-            userService.setQuestionToUser(user, nextQuestion);
-            if (user.getQuestionNumber() > 5) {
+//            userService.setQuestionToUser(user, nextQuestion);
+
+            if (user.getQuestionNumber() > 5 || Objects.nonNull(nextQuestion)) {
                 ouputMessageText = getGoodByeMessage(user);
             } else {
                 if (nextQuestion.getOptions().size() > 1) {
