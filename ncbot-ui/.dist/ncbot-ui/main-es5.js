@@ -376,32 +376,59 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _service_bot_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ../service/bot.service */
+    "./src/app/service/bot.service.ts");
 
     var MainpageComponent =
     /*#__PURE__*/
     function () {
-      function MainpageComponent() {
+      function MainpageComponent(botService) {
         _classCallCheck(this, MainpageComponent);
+
+        this.botService = botService;
       }
 
       _createClass(MainpageComponent, [{
         key: "ngOnInit",
-        value: function ngOnInit() {}
+        value: function ngOnInit() {
+          var _this = this;
+
+          this.botService.isBotActive().subscribe(function (result) {
+            _this.bot = result;
+          });
+        }
+      }, {
+        key: "onClickTurnBtn",
+        value: function onClickTurnBtn() {
+          if (this.bot.isActive) {
+            this.bot.isActive = false;
+          } else {
+            this.bot.isActive = true;
+          }
+
+          this.botService.setBotTurn(this.bot).subscribe(function (result) {
+            location.reload();
+          });
+        }
       }]);
 
       return MainpageComponent;
     }();
 
     MainpageComponent.ɵfac = function MainpageComponent_Factory(t) {
-      return new (t || MainpageComponent)();
+      return new (t || MainpageComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_service_bot_service__WEBPACK_IMPORTED_MODULE_1__["BotService"]));
     };
 
     MainpageComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
       type: MainpageComponent,
       selectors: [["app-mainpage"]],
-      decls: 9,
-      vars: 0,
-      consts: [[1, "container"], [1, "row"], [1, "col"], ["src", "./src/qr_link_to_telegram_bot.png"]],
+      decls: 13,
+      vars: 1,
+      consts: [[1, "container"], [1, "row"], [1, "col"], ["src", "./src/qr_link_to_telegram_bot.png"], [1, "col", "container-fluid"], [1, "btn", "btn-primary", 3, "click"]],
       template: function MainpageComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -430,7 +457,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "div", 1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 4);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "button", 5);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function MainpageComponent_Template_button_click_11_listener($event) {
+            return ctx.onClickTurnBtn();
+          });
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12);
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+
+        if (rf & 2) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](12);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.bot.isActive ? "on" : "off");
         }
       },
       styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21haW5wYWdlL21haW5wYWdlLmNvbXBvbmVudC5jc3MifQ== */"]
@@ -446,7 +497,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           styleUrls: ['./mainpage.component.css']
         }]
       }], function () {
-        return [];
+        return [{
+          type: _service_bot_service__WEBPACK_IMPORTED_MODULE_1__["BotService"]
+        }];
       }, null);
     })();
     /***/
@@ -1522,10 +1575,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(QuestionsComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this = this;
+          var _this2 = this;
 
           this.questionService.getAllQuestions().subscribe(function (result) {
-            _this.questions = result;
+            _this2.questions = result;
           });
         }
       }, {
@@ -1654,6 +1707,90 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           type: _service_question_service_service__WEBPACK_IMPORTED_MODULE_2__["QuestionServiceService"]
         }, {
           type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbModal"]
+        }];
+      }, null);
+    })();
+    /***/
+
+  },
+
+  /***/
+  "./src/app/service/bot.service.ts":
+  /*!****************************************!*\
+    !*** ./src/app/service/bot.service.ts ***!
+    \****************************************/
+
+  /*! exports provided: BotService */
+
+  /***/
+  function srcAppServiceBotServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "BotService", function () {
+      return BotService;
+    });
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+
+    var BotService =
+    /*#__PURE__*/
+    function () {
+      function BotService(httpClient) {
+        _classCallCheck(this, BotService);
+
+        this.httpClient = httpClient;
+      }
+
+      _createClass(BotService, [{
+        key: "isBotActive",
+        value: function isBotActive() {
+          return this.httpClient.get("/bot/get/turn");
+        }
+      }, {
+        key: "setBotTurn",
+        value: function setBotTurn(bot) {
+          var url = "/bot/turn";
+          this.httpClient.post(url, bot);
+        }
+      }]);
+
+      return BotService;
+    }();
+
+    BotService.ɵfac = function BotService_Factory(t) {
+      return new (t || BotService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]));
+    };
+
+    BotService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
+      token: BotService,
+      factory: BotService.ɵfac,
+      providedIn: 'root'
+    });
+    /*@__PURE__*/
+
+    (function () {
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](BotService, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
+        args: [{
+          providedIn: 'root'
+        }]
+      }], function () {
+        return [{
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]
         }];
       }, null);
     })();
@@ -1941,10 +2078,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(UsersComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this2 = this;
+          var _this3 = this;
 
           this.userService.getAllUsers().subscribe(function (result) {
-            _this2.users = result;
+            _this3.users = result;
           });
         }
       }]);

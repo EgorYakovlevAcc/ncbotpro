@@ -9,8 +9,10 @@ import org.telegram.telegrambots.ApiContextInitializer;
 @EnableScheduling
 public class NcbotApplication {
 
-    public static void main(String[] args) {
+    static {
         ApiContextInitializer.init();
+    }
+    public static void main(String[] args) {
         SpringApplication.run(NcbotApplication.class, args);
     }
 

@@ -221,16 +221,33 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MainpageComponent", function() { return MainpageComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _service_bot_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../service/bot.service */ "./src/app/service/bot.service.ts");
+
 
 
 class MainpageComponent {
-    constructor() {
+    constructor(botService) {
+        this.botService = botService;
     }
     ngOnInit() {
+        this.botService.isBotActive().subscribe((result) => {
+            this.bot = result;
+        });
+    }
+    onClickTurnBtn() {
+        if (this.bot.isActive) {
+            this.bot.isActive = false;
+        }
+        else {
+            this.bot.isActive = true;
+        }
+        this.botService.setBotTurn(this.bot).subscribe(result => {
+            location.reload();
+        });
     }
 }
-MainpageComponent.ɵfac = function MainpageComponent_Factory(t) { return new (t || MainpageComponent)(); };
-MainpageComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: MainpageComponent, selectors: [["app-mainpage"]], decls: 9, vars: 0, consts: [[1, "container"], [1, "row"], [1, "col"], ["src", "./src/qr_link_to_telegram_bot.png"]], template: function MainpageComponent_Template(rf, ctx) { if (rf & 1) {
+MainpageComponent.ɵfac = function MainpageComponent_Factory(t) { return new (t || MainpageComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_service_bot_service__WEBPACK_IMPORTED_MODULE_1__["BotService"])); };
+MainpageComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: MainpageComponent, selectors: [["app-mainpage"]], decls: 13, vars: 1, consts: [[1, "container"], [1, "row"], [1, "col"], ["src", "./src/qr_link_to_telegram_bot.png"], [1, "col", "container-fluid"], [1, "btn", "btn-primary", 3, "click"]], template: function MainpageComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
@@ -244,7 +261,18 @@ MainpageComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefine
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, " for configuration, please sign in or sign up as nc edu center user ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "button", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function MainpageComponent_Template_button_click_11_listener($event) { return ctx.onClickTurnBtn(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.bot.isActive ? "on" : "off");
     } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21haW5wYWdlL21haW5wYWdlLmNvbXBvbmVudC5jc3MifQ== */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](MainpageComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
@@ -253,7 +281,7 @@ MainpageComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefine
                 templateUrl: './mainpage.component.html',
                 styleUrls: ['./mainpage.component.css']
             }]
-    }], function () { return []; }, null); })();
+    }], function () { return [{ type: _service_bot_service__WEBPACK_IMPORTED_MODULE_1__["BotService"] }]; }, null); })();
 
 
 /***/ }),
@@ -815,6 +843,45 @@ QuestionsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefin
                 styleUrls: ['./questions.component.css']
             }]
     }], function () { return [{ type: _service_question_service_service__WEBPACK_IMPORTED_MODULE_2__["QuestionServiceService"] }, { type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbModal"] }]; }, null); })();
+
+
+/***/ }),
+
+/***/ "./src/app/service/bot.service.ts":
+/*!****************************************!*\
+  !*** ./src/app/service/bot.service.ts ***!
+  \****************************************/
+/*! exports provided: BotService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BotService", function() { return BotService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+
+
+
+class BotService {
+    constructor(httpClient) {
+        this.httpClient = httpClient;
+    }
+    isBotActive() {
+        return this.httpClient.get("/bot/get/turn");
+    }
+    setBotTurn(bot) {
+        let url = "/bot/turn";
+        this.httpClient.post(url, bot);
+    }
+}
+BotService.ɵfac = function BotService_Factory(t) { return new (t || BotService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
+BotService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: BotService, factory: BotService.ɵfac, providedIn: 'root' });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](BotService, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }]; }, null); })();
 
 
 /***/ }),

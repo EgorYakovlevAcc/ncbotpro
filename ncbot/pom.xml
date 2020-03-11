@@ -75,7 +75,7 @@
                             <outputDirectory>${project.build.directory}/classes/resources/</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${project.parent.basedir}/ncbot-ui/dist/frakton/</directory>
+                                    <directory>${project.parent.basedir}/ncbot-ui/dist/ncbot-ui/</directory>
                                 </resource>
                             </resources>
                         </configuration>

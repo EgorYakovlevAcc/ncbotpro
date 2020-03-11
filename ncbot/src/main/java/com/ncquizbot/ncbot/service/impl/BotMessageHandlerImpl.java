@@ -76,6 +76,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     }
 
     private void updateUserScore(User user, String userAnswerText) {
+        LOGGER.info("Egorka!!! = {}", user.getCurrentQuestionId());
         Question lastQuestion = questionService.findQuestionById(user.getCurrentQuestionId());
         Integer questionWeight = lastQuestion.getWeight();
         Answer answer = lastQuestion.getAnswer();
