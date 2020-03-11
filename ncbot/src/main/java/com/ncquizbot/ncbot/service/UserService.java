@@ -25,4 +25,6 @@ public interface UserService {
     void increaseUserQuestionNumber(User user);
 
     void setQuestionToUser(User user, Question nextQuestion);
+
+    void setActiveStatusTrue(User user);
 }

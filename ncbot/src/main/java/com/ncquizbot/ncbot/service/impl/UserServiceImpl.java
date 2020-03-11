@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
         User u = userRepository.findUserByTelegramId(telegramUser.getId());
         if (Objects.isNull(u)) {
             User user = new User();
-            user.setActiveNow(true);
+            user.setActiveNow(false);
             user.setTelegramId(telegramUser.getId());
             user.setFirstName(telegramUser.getFirstName());
             user.setLastName(telegramUser.getLastName());
@@ -135,5 +135,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void setQuestionToUser(User user, Question nextQuestion) {
         user.setCurrentQuestionId(nextQuestion.getId());
+    }
+
+    @Override
+    public void setActiveStatusTrue(User user) {
+        user.setActiveNow(true);
+        userRepository.save(user);
     }
 }

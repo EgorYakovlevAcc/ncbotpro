@@ -49,29 +49,44 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             String currentMessageText = message.getText();
             String ouputMessageText = "";
             User user = userService.createAndSaveUserByTelegramMessageIfCurrentDoesNotExist(message);
-            userService.updateLastUserSessionDate(user);
-            if (user.getQuestionNumber() > 0) {
-                updateUserScore(user, currentMessageText);
+            if (message.getText().equals("/go")) {
+                userService.setActiveStatusTrue(user);
             }
-            Question nextQuestion = getQuestionForUser(user);
-//            userService.setQuestionToUser(user, nextQuestion);
-            if (user.getQuestionNumber() > 5 || Objects.isNull(nextQuestion)) {
-                ouputMessageText = getGoodByeMessage(user);
-            } else {
-                if (nextQuestion.getOptions().size() > 1) {
-                    replyKeyboardMarkup = getQuestionWithMultipleOptions(nextQuestion.getOptions());
+            if (user.isActiveNow()) {
+                userService.updateLastUserSessionDate(user);
+                if (user.getQuestionNumber() > 0) {
+                    updateUserScore(user, currentMessageText);
                 }
-                ouputMessageText = nextQuestion.getContent();
+                Question nextQuestion = getQuestionForUser(user);
+//            userService.setQuestionToUser(user, nextQuestion);
+                if (user.getQuestionNumber() > 5 || Objects.isNull(nextQuestion)) {
+                    ouputMessageText = getGoodByeMessage(user);
+                } else {
+                    if (nextQuestion.getOptions().size() > 1) {
+                        replyKeyboardMarkup = getQuestionWithMultipleOptions(nextQuestion.getOptions());
+                    }
+                    ouputMessageText = nextQuestion.getContent();
+                }
             }
-            SendMessage sendMessage = new SendMessage();
-            sendMessage.setText(ouputMessageText)
-                    .setChatId(message.getChatId());
-            SendPhoto m = new SendPhoto();
-            if (Objects.nonNull(replyKeyboardMarkup)) {
-                sendMessage.setReplyMarkup(replyKeyboardMarkup);
+            else {
+                ouputMessageText = "Привет! \n" +
+                        "Давай знакомиться\n" +
+                        "Я – телеграм бот компании Netcracker. \n" +
+                        "И сегодня у тебя есть шанс проверить свои знания и логику, а также получить призы от нас. \n" +
+                        "После прохождения всех заданий обязательно подходи к стенду Netcracker за призом. \n" +
+                        "Обращаем внимание, что приятные подарочки получат самые быстрые из вас!\n" +
+                        "Обменять полученные баллы на призы можно у стенда Netcracker на Найти ИТ уже сейчас. \n" +
+                        "Если ты хочешь начать карьеру в IT-сфере, то подавай заявку до 31 марта на бесплатное обучение у нас: http://msk.edu-netcracker.com. \n" +
+                        "Учебный Центр Netcracker проводит курсы по таким направлениям как Enterprise Development, Business Analysis, Technical Sales, Devops и т.д.";
             }
-            sendMessage.enableWebPagePreview();
-            return sendMessage;
+                SendMessage sendMessage = new SendMessage();
+                sendMessage.setText(ouputMessageText)
+                        .setChatId(message.getChatId());
+                if (Objects.nonNull(replyKeyboardMarkup)) {
+                    sendMessage.setReplyMarkup(replyKeyboardMarkup);
+                }
+                sendMessage.enableWebPagePreview();
+                return sendMessage;
         }
         return null;
     }
