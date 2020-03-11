@@ -121,6 +121,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    @Transactional
     public void editQuestionWithOptions(QuestionOptionsAnswer questionOptionsAnswer) {
         Question question = questionRepository.findQuestionById(questionOptionsAnswer.getId());
         question.setContent(questionOptionsAnswer.getContent());
