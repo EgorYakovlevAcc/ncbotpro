@@ -55,7 +55,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             }
             Question nextQuestion = getQuestionForUser(user);
             userService.setQuestionToUser(user, nextQuestion);
-            if (user.getQuestionNumber() > 4) {
+            if (user.getQuestionNumber() > 5) {
                 ouputMessageText = getGoodByeMessage(user);
             } else {
                 if (nextQuestion.getOptions().size() > 1) {
