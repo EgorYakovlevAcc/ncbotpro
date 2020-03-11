@@ -16,6 +16,6 @@ export class BotService {
 
   setBotTurn(bot:Bot):any {
     let url:string = "/bot/turn";
-    this.httpClient.post(url, bot);
+    return this.httpClient.post(url, bot);
   }
 }

@@ -228,6 +228,9 @@ __webpack_require__.r(__webpack_exports__);
 class MainpageComponent {
     constructor(botService) {
         this.botService = botService;
+        this.bot = {
+            isActive: true
+        };
     }
     ngOnInit() {
         this.botService.isBotActive().subscribe((result) => {
@@ -871,7 +874,7 @@ class BotService {
     }
     setBotTurn(bot) {
         let url = "/bot/turn";
-        this.httpClient.post(url, bot);
+        return this.httpClient.post(url, bot);
     }
 }
 BotService.ɵfac = function BotService_Factory(t) { return new (t || BotService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };

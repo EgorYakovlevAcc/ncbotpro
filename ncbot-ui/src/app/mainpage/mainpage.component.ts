@@ -8,7 +8,9 @@ import {Bot} from "../model/bot/bot";
   styleUrls: ['./mainpage.component.css']
 })
 export class MainpageComponent implements OnInit {
-  bot:Bot;
+  bot:Bot = {
+    isActive:true
+  };
   constructor(private botService:BotService) { }
 
   ngOnInit(): void {

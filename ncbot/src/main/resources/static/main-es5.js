@@ -390,6 +390,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, MainpageComponent);
 
         this.botService = botService;
+        this.bot = {
+          isActive: true
+        };
       }
 
       _createClass(MainpageComponent, [{
@@ -1764,7 +1767,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "setBotTurn",
         value: function setBotTurn(bot) {
           var url = "/bot/turn";
-          this.httpClient.post(url, bot);
+          return this.httpClient.post(url, bot);
         }
       }]);
 
