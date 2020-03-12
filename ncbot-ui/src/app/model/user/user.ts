@@ -1,5 +1,6 @@
 export class User {
   id:number;
+  username:string;
   telegramId:string;
   firstName:string;
   lastName:string;

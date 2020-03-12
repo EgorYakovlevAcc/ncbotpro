@@ -127,8 +127,8 @@ public class QuestionServiceImpl implements QuestionService {
         question.setContent(questionOptionsAnswer.getContent());
         question.setWeight(questionOptionsAnswer.getWeight());
         question.getAnswer().setContent(questionOptionsAnswer.getAnswer());
-        List<com.ncquizbot.ncbot.model.Option> options = questionOptionsAnswer.getOptions().stream().map(x -> (new com.ncquizbot.ncbot.model.Option(x.getContent()))).collect(Collectors.toList());
-        question.setOptions(options);
+//        List<com.ncquizbot.ncbot.model.Option> options = questionOptionsAnswer.getOptions().stream().map(x -> (new com.ncquizbot.ncbot.model.Option(x.getContent()))).collect(Collectors.toList());
+//        question.setOptions(options);
         save(question);
 //        optionService.editOptionsByQuestionAndContents(questionOptionsAnswer.getId(),  question.getOptions(), questionOptionsAnswer.getOptions());
     }

@@ -66,6 +66,7 @@ public class UserServiceImpl implements UserService {
             Chat chat = message.getChat();
             user.setChatId(chat.getId());
             user.setCurrentQuestionId(-1);
+            user.setUsername(telegramUser.getUserName());
             user.setQuestionNumber(0);
             user.setGameOver(false);
             user.setScore(0);

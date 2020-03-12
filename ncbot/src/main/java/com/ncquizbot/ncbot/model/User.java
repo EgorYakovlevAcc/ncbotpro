@@ -23,6 +23,7 @@ public class User {
     private Long chatId;
     private String firstName;
     private String lastName;
+    private String username;
     private Integer currentQuestionId;
     private Integer score;
     private boolean isActiveNow;
