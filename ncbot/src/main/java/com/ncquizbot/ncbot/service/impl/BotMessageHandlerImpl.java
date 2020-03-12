@@ -78,6 +78,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                 KeyboardRow keyboardRow = new KeyboardRow();
                 KeyboardButton keyboardButton = new KeyboardButton();
                 keyboardButton.setText("go");
+                keyboardRow.add(keyboardButton);
                 keyboardRowList.add(keyboardRow);
                 replyKeyboardMarkup.setKeyboard(keyboardRowList);
             }
