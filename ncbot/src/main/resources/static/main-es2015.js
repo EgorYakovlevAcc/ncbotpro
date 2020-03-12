@@ -1073,7 +1073,6 @@ class UsersComponent {
     }
     givePresentToUser(id) {
         this.userService.givePresentToUser(id).subscribe((result) => {
-            alert("Present is given");
             result.color = "red";
             location.reload();
         });
