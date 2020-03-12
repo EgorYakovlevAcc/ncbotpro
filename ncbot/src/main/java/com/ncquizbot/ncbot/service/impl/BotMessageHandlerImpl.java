@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.telegram.telegrambots.api.methods.ParseMode;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.api.objects.Message;
@@ -67,7 +68,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                 }
             } else if (!user.isGameOver()) {
                 ouputMessageText = "Привет! \n" +
-                        "Давай знакомиться \\xF0\\x9F\\x98\\x83\n" +
+                        "Давай знакомиться xF0x9Fx98x83\n" +
                         "Я – телеграм бот компании Netcracker. \n" +
                         "И сегодня у тебя есть шанс проверить свои знания и логику, а также получить призы от нас. \n" +
                         "После прохождения всех заданий обязательно подходи к стенду Netcracker за призом. \n" +
@@ -90,6 +91,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                     sendMessage.setReplyMarkup(replyKeyboardMarkup);
                 }
                 sendMessage.enableWebPagePreview();
+                sendMessage.setParseMode(ParseMode.HTML);
                 return sendMessage;
             }
         }
