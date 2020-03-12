@@ -68,11 +68,11 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                 }
             } else if (!user.isGameOver()) {
                 ouputMessageText = "Привет! \n" +
-                        "Давай знакомиться xF0x9Fx98x83\n" +
+                        "Давай знакомиться" + Character.toChars(0x1F600) + "\n" +
                         "Я – телеграм бот компании Netcracker. \n" +
                         "И сегодня у тебя есть шанс проверить свои знания и логику, а также получить призы от нас. \n" +
                         "После прохождения всех заданий обязательно подходи к стенду Netcracker за призом. \n" +
-                        "Обращаем внимание, что приятные подарочки получат самые быстрые из вас! \\xF0\\x9F\\x98\\x89";
+                        "Обращаем внимание, что приятные подарочки получат самые быстрые из вас!" + Character.toChars(0x1F609);
                 replyKeyboardMarkup = new ReplyKeyboardMarkup();
                 replyKeyboardMarkup.setOneTimeKeyboard(true);
                 List<KeyboardRow> keyboardRowList = new ArrayList<>();
