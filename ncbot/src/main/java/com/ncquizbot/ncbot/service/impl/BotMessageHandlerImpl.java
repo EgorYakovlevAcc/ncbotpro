@@ -84,7 +84,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                 replyKeyboardMarkup.setKeyboard(keyboardRowList);
                 return getSendMessageForBot(ouputMessageText, message, replyKeyboardMarkup).setParseMode(ParseMode.HTML);
             }
-            return getSendMessageForBot(ouputMessageText, message, replyKeyboardMarkup);
+            return getSendMessageForBot(ouputMessageText, message, replyKeyboardMarkup).setParseMode(null);
         }
         return null;
     }
