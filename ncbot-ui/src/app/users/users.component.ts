@@ -33,8 +33,7 @@ export class UsersComponent implements OnInit {
   }
 
   givePresentToUser(id): void {
-    this.userService.givePresentToUser(id).subscribe((result:User) => {
-      result.color="red";
+    this.userService.givePresentToUser(id).subscribe(result => {
       location.reload();
     })
   }

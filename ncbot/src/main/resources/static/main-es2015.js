@@ -1072,8 +1072,7 @@ class UsersComponent {
         });
     }
     givePresentToUser(id) {
-        this.userService.givePresentToUser(id).subscribe((result) => {
-            result.color = "red";
+        this.userService.givePresentToUser(id).subscribe(result => {
             location.reload();
         });
     }

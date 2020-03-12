@@ -2180,7 +2180,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "givePresentToUser",
         value: function givePresentToUser(id) {
           this.userService.givePresentToUser(id).subscribe(function (result) {
-            result.color = "red";
             location.reload();
           });
         }
