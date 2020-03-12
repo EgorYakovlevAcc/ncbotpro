@@ -12,4 +12,14 @@ export class UserServiceService {
   getAllUsers(): Observable<any> {
     return this.httpClient.get("all/users");
   }
+
+  givePresentToUser(id): Observable<any> {
+    let url = "user/" + id + "/present";
+    return this.httpClient.post(url, null);
+  }
+
+  isPresenGivenToUser(id): any {
+    let url = "user/" + id + "/present";
+    return this.httpClient.get(url);
+  }
 }

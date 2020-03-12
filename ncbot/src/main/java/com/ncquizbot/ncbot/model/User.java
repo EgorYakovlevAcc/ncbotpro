@@ -12,6 +12,9 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,114 +32,9 @@ public class User {
     private Date endSessionDate;
     private Integer questionNumber;
     private boolean isGameOver;
+    private boolean isPresentGiven;
     @OneToMany
     private List<QuestionAndUserAnswerNote> questionAndUserAnswerNoteList;
-    public User() {
-    }
-
-    public boolean isGameOver() {
-        return isGameOver;
-    }
-
-    public void setGameOver(boolean gameOver) {
-        isGameOver = gameOver;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getTelegramId() {
-        return telegramId;
-    }
-
-    public void setTelegramId(Integer telegramId) {
-        this.telegramId = telegramId;
-    }
-
-    public Long getChatId() {
-        return chatId;
-    }
-
-    public void setChatId(Long chatId) {
-        this.chatId = chatId;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Integer getCurrentQuestionId() {
-        return currentQuestionId;
-    }
-
-    public void setCurrentQuestionId(Integer currentQuestionId) {
-        this.currentQuestionId = currentQuestionId;
-    }
-
-    public Integer getScore() {
-        return score;
-    }
-
-    public void setScore(Integer score) {
-        this.score = score;
-    }
-
-    public boolean isActiveNow() {
-        return isActiveNow;
-    }
-
-    public void setActiveNow(boolean activeNow) {
-        isActiveNow = activeNow;
-    }
-
-    public Date getLastSessionDate() {
-        return lastSessionDate;
-    }
-
-    public void setLastSessionDate(Date lastSessionDate) {
-        this.lastSessionDate = lastSessionDate;
-    }
-
-    public Date getEndSessionDate() {
-        return endSessionDate;
-    }
-
-    public void setEndSessionDate(Date endSessionDate) {
-        this.endSessionDate = endSessionDate;
-    }
-
-    public Integer getQuestionNumber() {
-        return questionNumber;
-    }
-
-    public void setQuestionNumber(Integer questionNumber) {
-        this.questionNumber = questionNumber;
-    }
-
-    public List<QuestionAndUserAnswerNote> getQuestionAndUserAnswerNoteList() {
-        return questionAndUserAnswerNoteList;
-    }
-
-    public void setQuestionAndUserAnswerNoteList(List<QuestionAndUserAnswerNote> questionAndUserAnswerNoteList) {
-        this.questionAndUserAnswerNoteList = questionAndUserAnswerNoteList;
-    }
 
     @Override
     public String toString() {

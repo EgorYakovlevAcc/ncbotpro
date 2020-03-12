@@ -5,10 +5,7 @@ import com.ncquizbot.ncbot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @CrossOrigin()
@@ -21,5 +18,17 @@ public class UserController {
         User user = userService.findUserById(id);
         userService.delete(user);
         return ResponseEntity.ok(null);
+    }
+    @PostMapping("/{id}/present")
+    public User postPresentToUser(@PathVariable("id") Integer id){
+        User user = userService.findUserById(id);
+        user.setPresentGiven(true);
+        userService.save(user);
+        return user;
+    }
+    @GetMapping("/{id}/present")
+    public User getPresentToUser(@PathVariable("id") Integer id){
+        User user = userService.findUserById(id);
+        return user;
     }
 }

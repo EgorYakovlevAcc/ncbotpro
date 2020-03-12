@@ -6,4 +6,6 @@ export class User {
   score:number;
   activeNow:boolean;
   color:string;
+  presentGiven:boolean;
+  status:string;
 }

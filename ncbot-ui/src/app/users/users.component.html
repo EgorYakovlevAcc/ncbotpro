@@ -16,6 +16,9 @@
     <th>
       score
     </th>
+    <th>
+      is present given
+    </th>
   </tr>
   </thead>
   <tbody *ngFor="let user of users; let i = index">
@@ -34,6 +37,9 @@
     </td>
     <td>
       {{user.score}}
+    </td>
+    <td>
+      <button (click)="givePresentToUser(user.id)" [disabled]="user.presentGiven">give present</button>
     </td>
   </tr>
   </tbody>

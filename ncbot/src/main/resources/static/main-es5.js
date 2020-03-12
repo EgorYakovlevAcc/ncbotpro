@@ -1958,6 +1958,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function getAllUsers() {
           return this.httpClient.get("all/users");
         }
+      }, {
+        key: "givePresentToUser",
+        value: function givePresentToUser(id) {
+          var url = "user/" + id + "/present";
+          return this.httpClient.post(url, null);
+        }
+      }, {
+        key: "isPresenGivenToUser",
+        value: function isPresenGivenToUser(id) {
+          var url = "user/" + id + "/present";
+          return this.httpClient.get(url);
+        }
       }]);
 
       return UserServiceService;
@@ -2034,8 +2046,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       };
     };
 
-    function UsersComponent_tbody_13_Template(rf, ctx) {
+    function UsersComponent_tbody_15_Template(rf, ctx) {
       if (rf & 1) {
+        var _r24 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "tbody");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "tr", 2);
@@ -2070,6 +2084,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "td");
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "button", 3);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function UsersComponent_tbody_15_Template_button_click_13_listener($event) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r24);
+
+          var user_r21 = ctx.$implicit;
+
+          var ctx_r23 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+
+          return ctx_r23.givePresentToUser(user_r21.id);
+        });
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](14, "give present");
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -2081,7 +2115,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngStyle", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](6, _c0, user_r21.color));
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngStyle", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](7, _c0, user_r21.color));
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
@@ -2102,6 +2136,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", user_r21.score, " ");
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", user_r21.presentGiven);
       }
     }
 
@@ -2136,6 +2174,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
           });
         }
+      }, {
+        key: "checkIsPresentGivenToUser",
+        value: function checkIsPresentGivenToUser(users) {
+          users.forEach(function (value) {});
+        }
+      }, {
+        key: "givePresentToUser",
+        value: function givePresentToUser(id) {
+          this.userService.givePresentToUser(id).subscribe(function (result) {
+            result.status = "disable";
+            location.reload();
+          });
+        }
       }]);
 
       return UsersComponent;
@@ -2148,9 +2199,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     UsersComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
       type: UsersComponent,
       selectors: [["app-users"]],
-      decls: 14,
+      decls: 16,
       vars: 1,
-      consts: [[1, "table", "table-bordered"], [4, "ngFor", "ngForOf"], [3, "ngStyle"]],
+      consts: [[1, "table", "table-bordered"], [4, "ngFor", "ngForOf"], [3, "ngStyle"], [3, "disabled", "click"]],
       template: function UsersComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "table", 0);
@@ -2189,17 +2240,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "th");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](14, " is present given ");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](13, UsersComponent_tbody_13_Template, 12, 8, "tbody", 1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](15, UsersComponent_tbody_15_Template, 15, 9, "tbody", 1);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
 
         if (rf & 2) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](13);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](15);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.users);
         }
@@ -2325,7 +2382,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /***/
   function _(module, exports, __webpack_require__) {
     module.exports = __webpack_require__(
-    /*! C:\Users\egia0419\IdeaProjects\ncbotpro\ncbot-ui\src\main.ts */
+    /*! C:\Users\yakov\IdeaProjects\ncbotpro\ncbot-ui\src\main.ts */
     "./src/main.ts");
     /***/
   }
