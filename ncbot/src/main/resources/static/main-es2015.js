@@ -1049,7 +1049,7 @@ function UsersComponent_tbody_15_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", user_r21.score, " ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", user_r21.status);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", user_r21.presentGiven);
 } }
 class UsersComponent {
     constructor(userService) {
@@ -1073,7 +1073,7 @@ class UsersComponent {
     }
     givePresentToUser(id) {
         this.userService.givePresentToUser(id).subscribe((result) => {
-            result.status = true;
+            alert("Present is given");
             result.color = "red";
             location.reload();
         });

@@ -2139,7 +2139,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", user_r21.status);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", user_r21.presentGiven);
       }
     }
 
@@ -2180,7 +2180,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "givePresentToUser",
         value: function givePresentToUser(id) {
           this.userService.givePresentToUser(id).subscribe(function (result) {
-            result.status = true;
+            alert("Present is given");
             result.color = "red";
             location.reload();
           });

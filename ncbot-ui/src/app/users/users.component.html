@@ -39,7 +39,7 @@
       {{user.score}}
     </td>
     <td>
-      <button class="badge-info" (click)="givePresentToUser(user.id)" [disabled]="user.status">give present</button>
+      <button class="badge-info" (click)="givePresentToUser(user.id)" [disabled]="user.presentGiven">give present</button>
     </td>
   </tr>
   </tbody>

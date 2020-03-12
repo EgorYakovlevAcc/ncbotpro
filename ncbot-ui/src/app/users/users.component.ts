@@ -34,7 +34,7 @@ export class UsersComponent implements OnInit {
 
   givePresentToUser(id): void {
     this.userService.givePresentToUser(id).subscribe((result:User) => {
-      result.status = true;
+      alert("Present is given");
       result.color="red";
       location.reload();
     })
