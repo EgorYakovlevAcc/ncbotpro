@@ -28,10 +28,18 @@ public class User {
     @Column(name = "end_session")
     private Date endSessionDate;
     private Integer questionNumber;
+    private boolean isGameOver;
     @OneToMany
     private List<QuestionAndUserAnswerNote> questionAndUserAnswerNoteList;
-
     public User() {
+    }
+
+    public boolean isGameOver() {
+        return isGameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        isGameOver = gameOver;
     }
 
     public Integer getId() {
