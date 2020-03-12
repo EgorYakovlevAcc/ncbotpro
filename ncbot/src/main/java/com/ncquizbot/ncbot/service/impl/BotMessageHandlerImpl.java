@@ -82,18 +82,9 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                 keyboardRow.add(keyboardButton);
                 keyboardRowList.add(keyboardRow);
                 replyKeyboardMarkup.setKeyboard(keyboardRowList);
+                return getSendMessageForBot(ouputMessageText, message, replyKeyboardMarkup).setParseMode(ParseMode.HTML);
             }
-            if (Objects.nonNull(ouputMessageText)) {
-                SendMessage sendMessage = new SendMessage();
-                sendMessage.setText(ouputMessageText)
-                        .setChatId(message.getChatId());
-                if (Objects.nonNull(replyKeyboardMarkup)) {
-                    sendMessage.setReplyMarkup(replyKeyboardMarkup);
-                }
-                sendMessage.setParseMode(ParseMode.HTML);
-                sendMessage.enableWebPagePreview();
-                return sendMessage;
-            }
+            return getSendMessageForBot(ouputMessageText, message, replyKeyboardMarkup);
         }
         return null;
     }
@@ -108,39 +99,53 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         }
     }
 
-    private String getGoodByeMessage(User user) {
-        userService.turnOffUserActivityStatus(user);
-        userService.updateUserSessionEndDate(user);
-        userService.setGameOverForUser(user);
+    private SendMessage getSendMessageForBot(String ouputMessageText, Message message, ReplyKeyboardMarkup replyKeyboardMarkup) {
+        SendMessage sendMessage = null;
+        if (Objects.nonNull(ouputMessageText)) {
+            sendMessage = new SendMessage();
+            sendMessage.setText(ouputMessageText)
+                    .setChatId(message.getChatId());
+            if (Objects.nonNull(replyKeyboardMarkup)) {
+                sendMessage.setReplyMarkup(replyKeyboardMarkup);
+            }
+            sendMessage.setParseMode(ParseMode.HTML);
+            sendMessage.enableWebPagePreview();
+        }
+        return sendMessage;
+    }
+        private String getGoodByeMessage (User user){
+            userService.turnOffUserActivityStatus(user);
+            userService.updateUserSessionEndDate(user);
+            userService.setGameOverForUser(user);
 //        userService.delete(user);
-        return "Thank you it was last question. Your score is " + user.getScore() + "\nОбменять полученные баллы на призы можно у стенда Netcracker на Найти ИТ уже сейчас. \n" +
-                "Если ты хочешь начать карьеру в IT-сфере, то подавай заявку до 31 марта на бесплатное обучение у нас: http://msk.edu-netcracker.com. \n" +
-                "Учебный Центр Netcracker проводит курсы по таким направлениям как Enterprise Development, Business Analysis, Technical Sales, Devops и т.д.";
-    }
-
-    private Question getQuestionForUser(User user) {
-        return userService.setNextQuestionToUser(user);
-    }
-
-    private ReplyKeyboardMarkup getQuestionWithMultipleOptions(List<Option> options) {
-        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-        replyKeyboardMarkup.setOneTimeKeyboard(true);
-        List<KeyboardRow> keyboardRowList = new ArrayList<>();
-        KeyboardRow keyboardRow = new KeyboardRow();
-        for (Option option : options) {
-            keyboardRow.add(option.getContent());
+            return "Thank you it was last question. Your score is " + user.getScore() + "\nОбменять полученные баллы на призы можно у стенда Netcracker на Найти ИТ уже сейчас. \n" +
+                    "Если ты хочешь начать карьеру в IT-сфере, то подавай заявку до 31 марта на бесплатное обучение у нас: http://msk.edu-netcracker.com. \n" +
+                    "Учебный Центр Netcracker проводит курсы по таким направлениям как Enterprise Development, Business Analysis, Technical Sales, Devops и т.д.";
         }
-        keyboardRowList.add(keyboardRow);
-        replyKeyboardMarkup.setKeyboard(keyboardRowList);
-        return replyKeyboardMarkup;
-    }
 
-    private boolean checkAnswer(String userAnswer, String answer) {
-        userAnswer = userAnswer.toLowerCase();
-        answer = answer.toLowerCase();
-        if (userAnswer.equals(answer)) {
-            return true;
+        private Question getQuestionForUser (User user){
+            return userService.setNextQuestionToUser(user);
         }
-        return false;
+
+        private ReplyKeyboardMarkup getQuestionWithMultipleOptions (List < Option > options) {
+            ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+            replyKeyboardMarkup.setOneTimeKeyboard(true);
+            List<KeyboardRow> keyboardRowList = new ArrayList<>();
+            KeyboardRow keyboardRow = new KeyboardRow();
+            for (Option option : options) {
+                keyboardRow.add(option.getContent());
+            }
+            keyboardRowList.add(keyboardRow);
+            replyKeyboardMarkup.setKeyboard(keyboardRowList);
+            return replyKeyboardMarkup;
+        }
+
+        private boolean checkAnswer (String userAnswer, String answer){
+            userAnswer = userAnswer.toLowerCase();
+            answer = answer.toLowerCase();
+            if (userAnswer.equals(answer)) {
+                return true;
+            }
+            return false;
+        }
     }
-}
