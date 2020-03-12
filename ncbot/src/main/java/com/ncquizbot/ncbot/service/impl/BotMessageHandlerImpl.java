@@ -19,6 +19,7 @@ import org.telegram.telegrambots.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardRow;
 
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             String currentMessageText = message.getText();
             String ouputMessageText = "";
             User user = userService.createAndSaveUserByTelegramMessageIfCurrentDoesNotExist(message);
-            if (message.getText().equals("/go")) {
+            if (message.getText().equals("go")) {
                 userService.setActiveStatusTrue(user);
             }
             if (user.isActiveNow()) {
@@ -75,7 +76,8 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                 replyKeyboardMarkup.setOneTimeKeyboard(true);
                 List<KeyboardRow> keyboardRowList = new ArrayList<>();
                 KeyboardRow keyboardRow = new KeyboardRow();
-                keyboardRow.add("/go");
+                KeyboardButton keyboardButton = new KeyboardButton();
+                keyboardButton.setText("go");
                 keyboardRowList.add(keyboardRow);
                 replyKeyboardMarkup.setKeyboard(keyboardRowList);
             }

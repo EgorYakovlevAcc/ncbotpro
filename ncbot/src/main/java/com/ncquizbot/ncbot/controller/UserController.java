@@ -19,15 +19,15 @@ public class UserController {
         userService.delete(user);
         return ResponseEntity.ok(null);
     }
-    @PostMapping("/{id}/present")
-    public User postPresentToUser(@PathVariable("id") Integer id){
+
+    @GetMapping("/{id}/present")
+    public ResponseEntity getPresentToUser(@PathVariable("id") Integer id){
         User user = userService.findUserById(id);
         user.setPresentGiven(true);
-        userService.save(user);
-        return user;
+        return ResponseEntity.ok(null);
     }
-    @GetMapping("/{id}/present")
-    public User getPresentToUser(@PathVariable("id") Integer id){
+    @GetMapping("/{id}/present/check")
+    public User getCheckPresentToUser(@PathVariable("id") Integer id){
         User user = userService.findUserById(id);
         return user;
     }

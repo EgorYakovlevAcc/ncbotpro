@@ -969,10 +969,10 @@ class UserServiceService {
     }
     givePresentToUser(id) {
         let url = "user/" + id + "/present";
-        return this.httpClient.post(url, null);
+        return this.httpClient.get(url);
     }
     isPresenGivenToUser(id) {
-        let url = "user/" + id + "/present";
+        let url = "user/" + id + "/present/check";
         return this.httpClient.get(url);
     }
 }

@@ -1962,12 +1962,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "givePresentToUser",
         value: function givePresentToUser(id) {
           var url = "user/" + id + "/present";
-          return this.httpClient.post(url, null);
+          return this.httpClient.get(url);
         }
       }, {
         key: "isPresenGivenToUser",
         value: function isPresenGivenToUser(id) {
-          var url = "user/" + id + "/present";
+          var url = "user/" + id + "/present/check";
           return this.httpClient.get(url);
         }
       }]);
