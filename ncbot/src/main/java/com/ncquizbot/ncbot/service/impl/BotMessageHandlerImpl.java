@@ -91,7 +91,6 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                     sendMessage.setReplyMarkup(replyKeyboardMarkup);
                 }
                 sendMessage.enableWebPagePreview();
-                sendMessage.setParseMode(ParseMode.HTML);
                 return sendMessage;
             }
         }
