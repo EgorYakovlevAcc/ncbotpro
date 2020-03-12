@@ -26,21 +26,15 @@ export class UsersComponent implements OnInit {
       if (value.activeNow) {
         value.color = "yellow";
       }
-    })
-  }
-
-  checkIsPresentGivenToUser(users) : void {
-    users.forEach(function (value:User) {
       if (value.presentGiven) {
         value.color = "red";
       }
-    })
+    });
   }
 
   givePresentToUser(id): void {
     this.userService.givePresentToUser(id).subscribe((result:User) => {
-      alert("Egor");
-      result.status = "disable";
+      result.status = true;
       result.color="red";
       location.reload();
     })

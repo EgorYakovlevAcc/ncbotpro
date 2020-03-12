@@ -24,6 +24,7 @@ public class UserController {
     public ResponseEntity getPresentToUser(@PathVariable("id") Integer id){
         User user = userService.findUserById(id);
         user.setPresentGiven(true);
+        userService.save(user);
         return ResponseEntity.ok(null);
     }
     @GetMapping("/{id}/present/check")

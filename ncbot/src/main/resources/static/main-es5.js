@@ -2139,7 +2139,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", user_r21.presentGiven);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", user_r21.status);
       }
     }
 
@@ -2170,12 +2170,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             if (value.activeNow) {
               value.color = "yellow";
             }
-          });
-        }
-      }, {
-        key: "checkIsPresentGivenToUser",
-        value: function checkIsPresentGivenToUser(users) {
-          users.forEach(function (value) {
+
             if (value.presentGiven) {
               value.color = "red";
             }
@@ -2185,8 +2180,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "givePresentToUser",
         value: function givePresentToUser(id) {
           this.userService.givePresentToUser(id).subscribe(function (result) {
-            alert("Egor");
-            result.status = "disable";
+            result.status = true;
             result.color = "red";
             location.reload();
           });
@@ -2205,7 +2199,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       selectors: [["app-users"]],
       decls: 16,
       vars: 1,
-      consts: [[1, "table", "table-bordered"], [4, "ngFor", "ngForOf"], [3, "ngStyle"], [3, "disabled", "click"]],
+      consts: [[1, "table", "table-bordered"], [4, "ngFor", "ngForOf"], [3, "ngStyle"], [1, "badge-info", 3, "disabled", "click"]],
       template: function UsersComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "table", 0);

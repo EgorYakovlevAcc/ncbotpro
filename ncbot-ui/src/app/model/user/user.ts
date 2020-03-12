@@ -7,5 +7,5 @@ export class User {
   activeNow:boolean;
   color:string;
   presentGiven:boolean;
-  status:string;
+  status:boolean;
 }
