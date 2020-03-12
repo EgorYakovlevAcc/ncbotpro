@@ -2169,21 +2169,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           users.forEach(function (value) {
             if (value.activeNow) {
               value.color = "yellow";
-            } else {
-              value.color = "white";
             }
           });
         }
       }, {
         key: "checkIsPresentGivenToUser",
         value: function checkIsPresentGivenToUser(users) {
-          users.forEach(function (value) {});
+          users.forEach(function (value) {
+            if (value.presentGiven) {
+              value.color = "red";
+            }
+          });
         }
       }, {
         key: "givePresentToUser",
         value: function givePresentToUser(id) {
           this.userService.givePresentToUser(id).subscribe(function (result) {
+            alert("Egor");
             result.status = "disable";
+            result.color = "red";
             location.reload();
           });
         }

@@ -1066,18 +1066,20 @@ class UsersComponent {
             if (value.activeNow) {
                 value.color = "yellow";
             }
-            else {
-                value.color = "white";
-            }
         });
     }
     checkIsPresentGivenToUser(users) {
         users.forEach(function (value) {
+            if (value.presentGiven) {
+                value.color = "red";
+            }
         });
     }
     givePresentToUser(id) {
         this.userService.givePresentToUser(id).subscribe((result) => {
+            alert("Egor");
             result.status = "disable";
+            result.color = "red";
             location.reload();
         });
     }
