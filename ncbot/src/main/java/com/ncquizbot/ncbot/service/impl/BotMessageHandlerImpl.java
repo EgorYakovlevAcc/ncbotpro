@@ -105,6 +105,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     private String getGoodByeMessage(User user) {
         userService.turnOffUserActivityStatus(user);
         userService.updateUserSessionEndDate(user);
+        userService.setGameOverForUser(user);
 //        userService.delete(user);
         return "Thank you it was last question. Your score is " + user.getScore() + "\nОбменять полученные баллы на призы можно у стенда Netcracker на Найти ИТ уже сейчас. \n" +
                 "Если ты хочешь начать карьеру в IT-сфере, то подавай заявку до 31 марта на бесплатное обучение у нас: http://msk.edu-netcracker.com. \n" +

@@ -27,4 +27,6 @@ public interface UserService {
     void setQuestionToUser(User user, Question nextQuestion);
 
     void setActiveStatusTrue(User user);
+
+    void setGameOverForUser(User user);
 }

@@ -67,6 +67,7 @@ public class UserServiceImpl implements UserService {
             user.setChatId(chat.getId());
             user.setCurrentQuestionId(-1);
             user.setQuestionNumber(0);
+            user.setGameOver(false);
             user.setScore(0);
             userRepository.save(user);
             return user;
@@ -140,6 +141,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void setActiveStatusTrue(User user) {
         user.setActiveNow(true);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void setGameOverForUser(User user) {
+        user.setGameOver(true);
         userRepository.save(user);
     }
 }
