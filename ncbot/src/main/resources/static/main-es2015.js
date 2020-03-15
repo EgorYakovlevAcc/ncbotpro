@@ -160,7 +160,7 @@ const appRoutes = [
     },
     {
         path: 'sendmessage',
-        component: _message_form_message_form_component__WEBPACK_IMPORTED_MODULE_14__["MessageFormComponent"],
+        component: _message_form_message_form_component__WEBPACK_IMPORTED_MODULE_14__["MessageFormComponent"]
     },
     {
         path: '**',

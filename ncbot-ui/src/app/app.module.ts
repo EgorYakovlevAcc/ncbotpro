@@ -35,7 +35,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'sendmessage',
-    component: MessageFormComponent,
+    component: MessageFormComponent
   },
   {
     path: '**',
