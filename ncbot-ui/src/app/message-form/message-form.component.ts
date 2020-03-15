@@ -13,7 +13,7 @@ export class MessageFormComponent implements OnInit {
     text: ''
   };
 
-  constructor(private route:Router, private mainService: MainService) {
+  constructor(private mainService: MainService) {
   }
 
   ngOnInit(): void {
