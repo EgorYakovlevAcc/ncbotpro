@@ -13,6 +13,7 @@ import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { QuestionComponent } from './question/question.component';
 import { ModalAddQuestionComponent } from './modal-add-question/modal-add-question.component';
+import { MessageFormComponent } from './message-form/message-form.component';
 
 const appRoutes: Routes = [
   {
@@ -33,6 +34,10 @@ const appRoutes: Routes = [
     component: QuestionComponent
   },
   {
+    path: 'sendmessage',
+    component: MessageFormComponent,
+  },
+  {
     path: '**',
     component: NotFoundComponent
   }
@@ -47,7 +52,8 @@ const appRoutes: Routes = [
     NotFoundComponent,
     MainpageComponent,
     QuestionComponent,
-    ModalAddQuestionComponent
+    ModalAddQuestionComponent,
+    MessageFormComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,11 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <form>
+        <label for="message__form">input message for users</label>
+        <textarea id="message__form" [(ngModel)]="messageToUsers.text"></textarea>
+        <button class="btn-primary" (click)="sendMessageToUsers()">send message</button>
+      </form>
+    </div>
+  </div>
+</div>

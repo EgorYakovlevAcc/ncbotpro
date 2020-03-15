@@ -3,15 +3,14 @@ package com.ncquizbot.ncbot.controller;
 import com.ncquizbot.ncbot.bot.Bot;
 import com.ncquizbot.ncbot.model.User;
 import com.ncquizbot.ncbot.pojo.BotState;
+import com.ncquizbot.ncbot.pojo.MessageToUsers;
+import com.ncquizbot.ncbot.service.GlobalTelegramMessageSender;
 import com.ncquizbot.ncbot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,6 +21,8 @@ public class MainController {
     private UserService userService;
     @Autowired
     private Bot bot;
+    @Autowired
+    private GlobalTelegramMessageSender globalTelegramMessageSender;
 
     @GetMapping("all/users")
     @ResponseBody
@@ -34,4 +35,9 @@ public class MainController {
         return "forward:/index.html";
     }
 
+    @PostMapping(value = "/sendmessage")
+    public ResponseEntity postSendMessage(@RequestBody MessageToUsers messageToUsers){
+        globalTelegramMessageSender.sendGlobalMessage(messageToUsers.getText());
+        return ResponseEntity.ok(null);
+    }
 }

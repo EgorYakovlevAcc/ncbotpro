@@ -292,6 +292,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _modal_add_question_modal_add_question_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
     /*! ./modal-add-question/modal-add-question.component */
     "./src/app/modal-add-question/modal-add-question.component.ts");
+    /* harmony import */
+
+
+    var _message_form_message_form_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+    /*! ./message-form/message-form.component */
+    "./src/app/message-form/message-form.component.ts");
 
     var appRoutes = [{
       path: 'questions',
@@ -306,6 +312,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       path: 'questions/add',
       component: _question_question_component__WEBPACK_IMPORTED_MODULE_12__["QuestionComponent"]
+    }, {
+      path: 'sendmessage',
+      component: _message_form_message_form_component__WEBPACK_IMPORTED_MODULE_14__["MessageFormComponent"]
     }, {
       path: '**',
       component: _not_found_not_found_component__WEBPACK_IMPORTED_MODULE_8__["NotFoundComponent"]
@@ -329,7 +338,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     (function () {
       (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsetNgModuleScope"](AppModule, {
-        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"], _navigation_navigation_component__WEBPACK_IMPORTED_MODULE_4__["NavigationComponent"], _questions_questions_component__WEBPACK_IMPORTED_MODULE_6__["QuestionsComponent"], _users_users_component__WEBPACK_IMPORTED_MODULE_7__["UsersComponent"], _not_found_not_found_component__WEBPACK_IMPORTED_MODULE_8__["NotFoundComponent"], _mainpage_mainpage_component__WEBPACK_IMPORTED_MODULE_9__["MainpageComponent"], _question_question_component__WEBPACK_IMPORTED_MODULE_12__["QuestionComponent"], _modal_add_question_modal_add_question_component__WEBPACK_IMPORTED_MODULE_13__["ModalAddQuestionComponent"]],
+        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"], _navigation_navigation_component__WEBPACK_IMPORTED_MODULE_4__["NavigationComponent"], _questions_questions_component__WEBPACK_IMPORTED_MODULE_6__["QuestionsComponent"], _users_users_component__WEBPACK_IMPORTED_MODULE_7__["UsersComponent"], _not_found_not_found_component__WEBPACK_IMPORTED_MODULE_8__["NotFoundComponent"], _mainpage_mainpage_component__WEBPACK_IMPORTED_MODULE_9__["MainpageComponent"], _question_question_component__WEBPACK_IMPORTED_MODULE_12__["QuestionComponent"], _modal_add_question_modal_add_question_component__WEBPACK_IMPORTED_MODULE_13__["ModalAddQuestionComponent"], _message_form_message_form_component__WEBPACK_IMPORTED_MODULE_14__["MessageFormComponent"]],
         imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpClientModule"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"]]
       });
     })();
@@ -340,7 +349,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](AppModule, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"],
         args: [{
-          declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"], _navigation_navigation_component__WEBPACK_IMPORTED_MODULE_4__["NavigationComponent"], _questions_questions_component__WEBPACK_IMPORTED_MODULE_6__["QuestionsComponent"], _users_users_component__WEBPACK_IMPORTED_MODULE_7__["UsersComponent"], _not_found_not_found_component__WEBPACK_IMPORTED_MODULE_8__["NotFoundComponent"], _mainpage_mainpage_component__WEBPACK_IMPORTED_MODULE_9__["MainpageComponent"], _question_question_component__WEBPACK_IMPORTED_MODULE_12__["QuestionComponent"], _modal_add_question_modal_add_question_component__WEBPACK_IMPORTED_MODULE_13__["ModalAddQuestionComponent"]],
+          declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"], _navigation_navigation_component__WEBPACK_IMPORTED_MODULE_4__["NavigationComponent"], _questions_questions_component__WEBPACK_IMPORTED_MODULE_6__["QuestionsComponent"], _users_users_component__WEBPACK_IMPORTED_MODULE_7__["UsersComponent"], _not_found_not_found_component__WEBPACK_IMPORTED_MODULE_8__["NotFoundComponent"], _mainpage_mainpage_component__WEBPACK_IMPORTED_MODULE_9__["MainpageComponent"], _question_question_component__WEBPACK_IMPORTED_MODULE_12__["QuestionComponent"], _modal_add_question_modal_add_question_component__WEBPACK_IMPORTED_MODULE_13__["ModalAddQuestionComponent"], _message_form_message_form_component__WEBPACK_IMPORTED_MODULE_14__["MessageFormComponent"]],
           imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpClientModule"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forRoot(appRoutes)],
           providers: [],
           bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
@@ -508,6 +517,164 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }], function () {
         return [{
           type: _service_bot_service__WEBPACK_IMPORTED_MODULE_1__["BotService"]
+        }];
+      }, null);
+    })();
+    /***/
+
+  },
+
+  /***/
+  "./src/app/message-form/message-form.component.ts":
+  /*!********************************************************!*\
+    !*** ./src/app/message-form/message-form.component.ts ***!
+    \********************************************************/
+
+  /*! exports provided: MessageFormComponent */
+
+  /***/
+  function srcAppMessageFormMessageFormComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "MessageFormComponent", function () {
+      return MessageFormComponent;
+    });
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _service_main_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ../service/main.service */
+    "./src/app/service/main.service.ts");
+    /* harmony import */
+
+
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/forms */
+    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+
+    var MessageFormComponent =
+    /*#__PURE__*/
+    function () {
+      function MessageFormComponent(route, mainService) {
+        _classCallCheck(this, MessageFormComponent);
+
+        this.route = route;
+        this.mainService = mainService;
+        this.messageToUsers = {
+          text: ''
+        };
+      }
+
+      _createClass(MessageFormComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {}
+      }, {
+        key: "sendMessageToUsers",
+        value: function sendMessageToUsers() {
+          this.mainService.sendMessageToUsers(this.messageToUsers).subscribe(function (result) {
+            window.location.href = "/";
+          }, function (error) {
+            alert("Error during sending the message");
+          });
+        }
+      }]);
+
+      return MessageFormComponent;
+    }();
+
+    MessageFormComponent.ɵfac = function MessageFormComponent_Factory(t) {
+      return new (t || MessageFormComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_service_main_service__WEBPACK_IMPORTED_MODULE_2__["MainService"]));
+    };
+
+    MessageFormComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
+      type: MessageFormComponent,
+      selectors: [["app-message-form"]],
+      decls: 9,
+      vars: 1,
+      consts: [[1, "container-fluid"], [1, "row"], [1, "col"], ["for", "message__form"], ["id", "message__form", 3, "ngModel", "ngModelChange"], [1, "btn-primary", 3, "click"]],
+      template: function MessageFormComponent_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "form");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "label", 3);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, "input message for users");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "textarea", 4);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function MessageFormComponent_Template_textarea_ngModelChange_6_listener($event) {
+            return ctx.messageToUsers.text = $event;
+          });
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "button", 5);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function MessageFormComponent_Template_button_click_7_listener($event) {
+            return ctx.sendMessageToUsers();
+          });
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "send message");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+
+        if (rf & 2) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.messageToUsers.text);
+        }
+      },
+      directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgForm"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgModel"]],
+      styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21lc3NhZ2UtZm9ybS9tZXNzYWdlLWZvcm0uY29tcG9uZW50LmNzcyJ9 */"]
+    });
+    /*@__PURE__*/
+
+    (function () {
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](MessageFormComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+          selector: 'app-message-form',
+          templateUrl: './message-form.component.html',
+          styleUrls: ['./message-form.component.css']
+        }]
+      }], function () {
+        return [{
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]
+        }, {
+          type: _service_main_service__WEBPACK_IMPORTED_MODULE_2__["MainService"]
         }];
       }, null);
     })();
@@ -1793,6 +1960,85 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     (function () {
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](BotService, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
+        args: [{
+          providedIn: 'root'
+        }]
+      }], function () {
+        return [{
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]
+        }];
+      }, null);
+    })();
+    /***/
+
+  },
+
+  /***/
+  "./src/app/service/main.service.ts":
+  /*!*****************************************!*\
+    !*** ./src/app/service/main.service.ts ***!
+    \*****************************************/
+
+  /*! exports provided: MainService */
+
+  /***/
+  function srcAppServiceMainServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "MainService", function () {
+      return MainService;
+    });
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+
+    var MainService =
+    /*#__PURE__*/
+    function () {
+      function MainService(httpClient) {
+        _classCallCheck(this, MainService);
+
+        this.httpClient = httpClient;
+      }
+
+      _createClass(MainService, [{
+        key: "sendMessageToUsers",
+        value: function sendMessageToUsers(messageToUser) {
+          var url = "/sendmessage";
+          return this.httpClient.post(url, messageToUser);
+        }
+      }]);
+
+      return MainService;
+    }();
+
+    MainService.ɵfac = function MainService_Factory(t) {
+      return new (t || MainService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]));
+    };
+
+    MainService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
+      token: MainService,
+      factory: MainService.ɵfac,
+      providedIn: 'root'
+    });
+    /*@__PURE__*/
+
+    (function () {
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](MainService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
           providedIn: 'root'
