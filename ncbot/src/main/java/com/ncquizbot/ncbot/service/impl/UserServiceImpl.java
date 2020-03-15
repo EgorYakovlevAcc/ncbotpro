@@ -78,11 +78,6 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public boolean checkIsThisUserExists(User user) {
-        return Objects.nonNull(userRepository.findUserByTelegramId(user.getTelegramId()));
-    }
-
     public Question getNextQuestionForUser(User user) {
         return questionService.getNextQuestionByWeight(user.getQuestionNumber());
     }
@@ -117,26 +112,9 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-    @Override
-    public void setCurrentQuestionToUser(User user, Question question) {
-        user.setCurrentQuestionId(question.getId());
-        userRepository.save(user);
-    }
-
     public void updateUserSessionEndDate(User user) {
         user.setEndSessionDate(new Date());
         userRepository.save(user);
-    }
-
-    @Override
-    public void increaseUserQuestionNumber(User user) {
-        user.setQuestionNumber(user.getQuestionNumber() + 1);
-        userRepository.save(user);
-    }
-
-    @Override
-    public void setQuestionToUser(User user, Question nextQuestion) {
-        user.setCurrentQuestionId(nextQuestion.getId());
     }
 
     @Override
@@ -159,5 +137,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findUsersByIsPresentGiven(boolean isPresentGiven) {
         return userRepository.findUsersByIsPresentGiven(isPresentGiven);
+    }
+
+    @Override
+    public void givePresentToUser(User user) {
+        user.setPresentGiven(true);
+        userRepository.save(user);
     }
 }

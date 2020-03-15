@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.api.methods.BotApiMethod;
+import org.telegram.telegrambots.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -21,17 +23,15 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         LOGGER.info("UPDATE = {}", update);
-        SendMessage answer = null;
         if (getIsBotActive()) {
-            answer = botMessageHandler.handleMessage(update);
+            PartialBotApiMethod answer = botMessageHandler.handleMessage(update);
             try {
                 execute(answer); // Call method to send the message
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
-        }
-        else {
-            answer = new SendMessage();
+        } else {
+            SendMessage answer = new SendMessage();
             answer.setChatId(update.getMessage().getChatId());
             answer.setText(TURN_OFF_BOT_MESSAGE);
             try {
@@ -41,6 +41,7 @@ public class Bot extends TelegramLongPollingBot {
             }
         }
     }
+
     @Override
     public String getBotUsername() {
         return "netcracker_quiz_bot";
@@ -51,11 +52,11 @@ public class Bot extends TelegramLongPollingBot {
         return "827026140:AAECQOwWUsWYkygsr89VNo0DeHWhWr_Lml4";
     }
 
-    public boolean getIsBotActive(){
+    public boolean getIsBotActive() {
         return this.isBotActive;
     }
 
-    public void setIsBotActive(boolean isBotActive){
+    public void setIsBotActive(boolean isBotActive) {
         this.isBotActive = isBotActive;
     }
 }

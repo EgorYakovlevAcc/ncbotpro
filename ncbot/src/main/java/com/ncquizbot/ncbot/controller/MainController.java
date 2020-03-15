@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @CrossOrigin()
@@ -39,5 +40,18 @@ public class MainController {
     public ResponseEntity postSendMessage(@RequestBody MessageToUsers messageToUsers){
         globalTelegramMessageSender.sendGlobalMessage(messageToUsers.getText());
         return ResponseEntity.ok(null);
+    }
+
+    @GetMapping(value = "/qrcode/get/present")
+    public ResponseEntity getQrCodeGeneration(@RequestParam("chatId") Long chatId){
+        User user = userService.findUserByChatId(chatId);
+        if (Objects.isNull(user)){
+            return ResponseEntity.ok("NO SUCH USER IN SYSTEM!");
+        }
+        if (!user.isPresentGiven()) {
+            userService.givePresentToUser(user);
+            return ResponseEntity.ok("PRESENT IS GIVEN TO USER!");
+        }
+        return ResponseEntity.ok("PRESENT HAS BEEN GIVEN TO USER!");
     }
 }
