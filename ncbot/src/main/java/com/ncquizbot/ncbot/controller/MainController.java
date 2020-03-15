@@ -49,8 +49,13 @@ public class MainController {
             return ResponseEntity.ok("NO SUCH USER IN SYSTEM!");
         }
         if (!user.isPresentGiven()) {
-            userService.givePresentToUser(user);
-            return ResponseEntity.ok("PRESENT IS GIVEN TO USER!");
+            if (user.isGameOver()) {
+                userService.givePresentToUser(user);
+                return ResponseEntity.ok("PRESENT IS GIVEN TO USER!");
+            }
+            else {
+                return ResponseEntity.ok("USER DOES NOT FINISH HIS GAME!");
+            }
         }
         return ResponseEntity.ok("PRESENT HAS BEEN GIVEN TO USER!");
     }
