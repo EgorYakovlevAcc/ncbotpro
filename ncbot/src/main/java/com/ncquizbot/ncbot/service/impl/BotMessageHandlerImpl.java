@@ -31,6 +31,17 @@ import java.util.Objects;
 @Transactional
 public class BotMessageHandlerImpl implements BotMessageHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(Bot.class);
+    private static final String HELLO_MESSAGE = "Привет! \n" +
+            "Давай знакомиться &#128512; \n" +
+            "Я – телеграм бот компании Netcracker. \n" +
+            "И сегодня у тебя есть шанс проверить свои знания и логику, а также получить призы от нас. \n" +
+            "После прохождения всех заданий обязательно подходи к стенду Netcracker за призом. \n" +
+            "Обращаем внимание, что приятные подарочки получат самые быстрые из вас! &#128521;";
+    public static final String GOODBYE_MESSAGE = "\nОбменять полученные баллы на призы можно у стенда Netcracker на Найти ИТ уже сейчас. \n" +
+            "Если ты хочешь начать карьеру в IT-сфере, то подавай заявку до 31 марта на бесплатное обучение у нас: http://msk.edu-netcracker.com. \n" +
+            "Учебный Центр Netcracker проводит курсы по таким направлениям как Enterprise Development, Business Analysis, Technical Sales, Devops и т.д.";
+    public static final String USER_SCORE = "Thank you it was last question. Your score is ";
+    public static final String FINISH_GAME = "You have finished your game! We will happy to meet you at another time";
     @Autowired
     private UserService userService;
     @Autowired
@@ -67,12 +78,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                     ouputMessageText = nextQuestion.getContent();
                 }
             } else if (!user.isGameOver()) {
-                ouputMessageText = "Привет! \n" +
-                        "Давай знакомиться &#128512; \n" +
-                        "Я – телеграм бот компании Netcracker. \n" +
-                        "И сегодня у тебя есть шанс проверить свои знания и логику, а также получить призы от нас. \n" +
-                        "После прохождения всех заданий обязательно подходи к стенду Netcracker за призом. \n" +
-                        "Обращаем внимание, что приятные подарочки получат самые быстрые из вас! &#128521;";
+                ouputMessageText = HELLO_MESSAGE;
                 replyKeyboardMarkup = new ReplyKeyboardMarkup();
                 replyKeyboardMarkup.setOneTimeKeyboard(true);
                 List<KeyboardRow> keyboardRowList = new ArrayList<>();
@@ -83,6 +89,8 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                 keyboardRowList.add(keyboardRow);
                 replyKeyboardMarkup.setKeyboard(keyboardRowList);
                 return getSendMessageForBot(ouputMessageText, message, replyKeyboardMarkup).setParseMode(ParseMode.HTML);
+            } else {
+                ouputMessageText = FINISH_GAME;
             }
             return getSendMessageForBot(ouputMessageText, message, replyKeyboardMarkup).setParseMode(null);
         }
@@ -105,47 +113,47 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             sendMessage = new SendMessage();
             sendMessage.setText(ouputMessageText)
                     .setChatId(message.getChatId());
-            if (Objects.nonNull(replyKeyboardMarkup)) {
-                sendMessage.setReplyMarkup(replyKeyboardMarkup);
-            }
+            sendMessage.setReplyMarkup(replyKeyboardMarkup);
             sendMessage.setParseMode(ParseMode.HTML);
             sendMessage.enableWebPagePreview();
         }
         return sendMessage;
     }
-        private String getGoodByeMessage (User user){
-            userService.turnOffUserActivityStatus(user);
-            userService.updateUserSessionEndDate(user);
-            userService.setGameOverForUser(user);
-//        userService.delete(user);
-            return "Thank you it was last question. Your score is " + user.getScore() + "\nОбменять полученные баллы на призы можно у стенда Netcracker на Найти ИТ уже сейчас. \n" +
-                    "Если ты хочешь начать карьеру в IT-сфере, то подавай заявку до 31 марта на бесплатное обучение у нас: http://msk.edu-netcracker.com. \n" +
-                    "Учебный Центр Netcracker проводит курсы по таким направлениям как Enterprise Development, Business Analysis, Technical Sales, Devops и т.д.";
-        }
 
-        private Question getQuestionForUser (User user){
-            return userService.setNextQuestionToUser(user);
-        }
-
-        private ReplyKeyboardMarkup getQuestionWithMultipleOptions (List < Option > options) {
-            ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-            replyKeyboardMarkup.setOneTimeKeyboard(true);
-            List<KeyboardRow> keyboardRowList = new ArrayList<>();
-            KeyboardRow keyboardRow = new KeyboardRow();
-            for (Option option : options) {
-                keyboardRow.add(option.getContent());
-            }
-            keyboardRowList.add(keyboardRow);
-            replyKeyboardMarkup.setKeyboard(keyboardRowList);
-            return replyKeyboardMarkup;
-        }
-
-        private boolean checkAnswer (String userAnswer, String answer){
-            userAnswer = userAnswer.toLowerCase();
-            answer = answer.toLowerCase();
-            if (userAnswer.equals(answer)) {
-                return true;
-            }
-            return false;
-        }
+    private String getGoodByeMessage(User user) {
+        userService.turnOffUserActivityStatus(user);
+        userService.updateUserSessionEndDate(user);
+        userService.setGameOverForUser(user);
+        return getGoodbyeMessage(user.getScore());
     }
+
+    private Question getQuestionForUser(User user) {
+        return userService.setNextQuestionToUser(user);
+    }
+
+    private ReplyKeyboardMarkup getQuestionWithMultipleOptions(List<Option> options) {
+        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+        replyKeyboardMarkup.setOneTimeKeyboard(true);
+        List<KeyboardRow> keyboardRowList = new ArrayList<>();
+        KeyboardRow keyboardRow = new KeyboardRow();
+        for (Option option : options) {
+            keyboardRow.add(option.getContent());
+        }
+        keyboardRowList.add(keyboardRow);
+        replyKeyboardMarkup.setKeyboard(keyboardRowList);
+        return replyKeyboardMarkup;
+    }
+
+    private boolean checkAnswer(String userAnswer, String answer) {
+        userAnswer = userAnswer.toLowerCase();
+        answer = answer.toLowerCase();
+        if (userAnswer.equals(answer)) {
+            return true;
+        }
+        return false;
+    }
+
+    private String getGoodbyeMessage(Integer userScore) {
+        return USER_SCORE + userScore + GOODBYE_MESSAGE;
+    }
+}
