@@ -146,7 +146,6 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         QrCodeGenerator qrCodeGenerator = new QrCodeGeneratorImpl();
         qrCodeGenerator.processGeneratingQrCode(user);
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(qrCodeGenerator.getQrCode());
-        byteArrayInputStream.readAllBytes();
         SendPhoto sendPhoto = new SendPhoto();
         sendPhoto.setChatId(user.getChatId())
                 .setNewPhoto("qr code for present", byteArrayInputStream);
