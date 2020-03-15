@@ -29,4 +29,7 @@ public interface UserService {
     void setActiveStatusTrue(User user);
 
     void setGameOverForUser(User user);
+
+    List<User> findUsersByScoreAndIsPresentGiven(Integer score, boolean isPresentGiven);
+    List<User> findUsersByIsPresentGiven(boolean isPresentGiven);
 }

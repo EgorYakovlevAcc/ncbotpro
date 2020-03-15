@@ -150,4 +150,14 @@ public class UserServiceImpl implements UserService {
         user.setGameOver(true);
         userRepository.save(user);
     }
+
+    @Override
+    public List<User> findUsersByScoreAndIsPresentGiven(Integer score, boolean isPresentGiven) {
+        return userRepository.findUsersByScoreAndIsPresentGiven(score, isPresentGiven);
+    }
+
+    @Override
+    public List<User> findUsersByIsPresentGiven(boolean isPresentGiven) {
+        return userRepository.findUsersByIsPresentGiven(isPresentGiven);
+    }
 }
