@@ -26,16 +26,16 @@ public class GlobalTelegramMessageSenderImpl implements GlobalTelegramMessageSen
     @Override
     public void sendGlobalMessage(String text, Integer minScore, Integer maxScore) {
         List<User> users = userService.findUsersByScoreBetweenAndIsPresentGiven(maxScore, minScore, true);
-//        for (User u: users) {
-//            SendMessage sendMessage = new SendMessage();
-//            sendMessage.setChatId(u.getChatId())
-//                    .setText(text);
-//            try {
-//                bot.execute(sendMessage);
-//            } catch (TelegramApiException e) {
-//                LOGGER.info("ERROR: during global sending messages to users!");
-//            }
-//        }
+        for (User u: users) {
+            SendMessage sendMessage = new SendMessage();
+            sendMessage.setChatId(u.getChatId())
+                    .setText(text);
+            try {
+                bot.execute(sendMessage);
+            } catch (TelegramApiException e) {
+                LOGGER.info("ERROR: during global sending messages to users!");
+            }
+        }
         LOGGER.info("EGORKA!!!!!!!!! text = {}, min = {}, max = {}", text, minScore, maxScore);
     }
 }
