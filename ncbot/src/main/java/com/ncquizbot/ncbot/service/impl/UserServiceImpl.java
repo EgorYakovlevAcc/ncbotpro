@@ -146,7 +146,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findUsersByScoreBetweenAndIsPresentGiven(Integer endScore, Integer startScore, boolean isPresentGiven) {
-        return userRepository.findUsersByScoreBetweenAndIsPresentGiven(endScore, startScore, isPresentGiven);
+    public List<User> findUsersByScoreBetweenAndIsPresentGiven(Integer startScore, Integer endScore, boolean isPresentGiven) {
+        return userRepository.findUsersByScoreBetweenAndIsPresentGiven(startScore, endScore, isPresentGiven);
     }
 }

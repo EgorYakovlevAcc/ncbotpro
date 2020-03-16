@@ -25,5 +25,5 @@ public interface UserService {
     List<User> findUsersByScoreAndIsPresentGiven(Integer score, boolean isPresentGiven);
     List<User> findUsersByIsPresentGiven(boolean isPresentGiven);
     void givePresentToUser(User user);
-    List<User> findUsersByScoreBetweenAndIsPresentGiven(Integer endScore, Integer startScore, boolean isPresentGiven);
+    List<User> findUsersByScoreBetweenAndIsPresentGiven(Integer startScore, Integer endScore, boolean isPresentGiven);
 }
