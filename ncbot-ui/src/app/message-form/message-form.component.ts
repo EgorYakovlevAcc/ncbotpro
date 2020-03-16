@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MessageToUsers} from "../model/message-to-users";
 import {MainService} from "../service/main.service";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-message-form',
