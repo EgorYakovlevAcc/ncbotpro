@@ -11,7 +11,7 @@ export class MainService {
   constructor(private httpClient:HttpClient) { }
 
   sendMessageToUsers(messageToUser:MessageToUsers):Observable<any> {
-    let url:string = "/sendmessage";
+    let url:string = "/global/message";
     return this.httpClient.post(url, messageToUser);
   }
 }

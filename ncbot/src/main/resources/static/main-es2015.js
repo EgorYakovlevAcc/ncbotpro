@@ -610,7 +610,7 @@ class NavigationComponent {
     }
 }
 NavigationComponent.ɵfac = function NavigationComponent_Factory(t) { return new (t || NavigationComponent)(); };
-NavigationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: NavigationComponent, selectors: [["app-navigation"]], decls: 19, vars: 0, consts: [[1, "navbar", "navbar-expand-lg", "navbar-light", "bg-light"], ["href", "#", 1, "navbar-brand"], ["type", "button", "data-toggle", "collapse", "data-target", "#navbarNavAltMarkup", "aria-controls", "navbarNavAltMarkup", "aria-expanded", "false", "aria-label", "Toggle navigation", 1, "navbar-toggler"], [1, "navbar-toggler-icon"], ["id", "navbarNavAltMarkup", 1, "collapse", "navbar-collapse"], [1, "navbar-nav"], ["href", "/", 1, "nav-item", "nav-link", "active"], [1, "sr-only"], ["href", "questions", 1, "nav-item", "nav-link"], ["href", "/users", 1, "nav-item", "nav-link"], ["href", "/sendmessage", 1, "nav-item", "nav-link"], ["href", "#", "tabindex", "-1", "aria-disabled", "true", 1, "nav-item", "nav-link", "disabled"]], template: function NavigationComponent_Template(rf, ctx) { if (rf & 1) {
+NavigationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: NavigationComponent, selectors: [["app-navigation"]], decls: 19, vars: 0, consts: [[1, "navbar", "navbar-expand-lg", "navbar-light", "bg-light"], ["href", "#", 1, "navbar-brand"], ["type", "button", "data-toggle", "collapse", "data-target", "#navbarNavAltMarkup", "aria-controls", "navbarNavAltMarkup", "aria-expanded", "false", "aria-label", "Toggle navigation", 1, "navbar-toggler"], [1, "navbar-toggler-icon"], ["id", "navbarNavAltMarkup", 1, "collapse", "navbar-collapse"], [1, "navbar-nav"], ["href", "/", 1, "nav-item", "nav-link", "active"], [1, "sr-only"], ["href", "/questions", 1, "nav-item", "nav-link"], ["href", "/users", 1, "nav-item", "nav-link"], ["href", "/global/message", 1, "nav-item", "nav-link"], ["href", "#", "tabindex", "-1", "aria-disabled", "true", 1, "nav-item", "nav-link", "disabled"]], template: function NavigationComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "nav", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "a", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "NC TELEGRAM BOT");
@@ -993,7 +993,7 @@ class MainService {
         this.httpClient = httpClient;
     }
     sendMessageToUsers(messageToUser) {
-        let url = "/sendmessage";
+        let url = "/global/message";
         return this.httpClient.post(url, messageToUser);
     }
 }
