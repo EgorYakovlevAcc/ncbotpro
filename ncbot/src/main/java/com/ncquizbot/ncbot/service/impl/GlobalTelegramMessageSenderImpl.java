@@ -13,6 +13,7 @@ import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GlobalTelegramMessageSenderImpl implements GlobalTelegramMessageSender {
@@ -26,6 +27,7 @@ public class GlobalTelegramMessageSenderImpl implements GlobalTelegramMessageSen
     @Override
     public void sendGlobalMessage(String text, Integer minScore, Integer maxScore) {
         List<User> users = userService.findUsersByScoreBetweenAndIsPresentGiven(maxScore, minScore, true);
+        LOGGER.info("EGORKA!!! name ={}", users.stream().map(x -> x.getFirstName()).collect(Collectors.toList()));
         for (User u: users) {
             SendMessage sendMessage = new SendMessage();
             sendMessage.setChatId(u.getChatId())
