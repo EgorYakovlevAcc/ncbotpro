@@ -34,7 +34,7 @@ const appRoutes: Routes = [
     component: QuestionComponent
   },
   {
-    path: 'sendmessage',
+    path: 'global/message',
     component: MessageFormComponent
   },
   {

@@ -218,10 +218,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     "./src/app/message-form/message-form.component.ts");
     /* harmony import */
 
-
-    var _angular_router__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
-    /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    var appRoutes = [{
+      path: 'questions',
+      component: _questions_questions_component__WEBPACK_IMPORTED_MODULE_6__["QuestionsComponent"]
+    }, {
+      path: 'users',
+      component: _users_users_component__WEBPACK_IMPORTED_MODULE_7__["UsersComponent"]
+    }, {
+      path: '',
+      component: _mainpage_mainpage_component__WEBPACK_IMPORTED_MODULE_9__["MainpageComponent"],
+      pathMatch: 'full'
+    }, {
+      path: 'questions/add',
+      component: _question_question_component__WEBPACK_IMPORTED_MODULE_12__["QuestionComponent"]
+    }, {
+      path: 'global/message',
+      component: _message_form_message_form_component__WEBPACK_IMPORTED_MODULE_14__["MessageFormComponent"]
+    }, {
+      path: '**',
+      component: _not_found_not_found_component__WEBPACK_IMPORTED_MODULE_8__["NotFoundComponent"]
+    }];
 
     var AppModule = function AppModule() {
       _classCallCheck(this, AppModule);

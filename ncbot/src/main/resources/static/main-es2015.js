@@ -159,7 +159,7 @@ const appRoutes = [
         component: _question_question_component__WEBPACK_IMPORTED_MODULE_12__["QuestionComponent"]
     },
     {
-        path: 'sendmessage',
+        path: 'global/message',
         component: _message_form_message_form_component__WEBPACK_IMPORTED_MODULE_14__["MessageFormComponent"]
     },
     {
