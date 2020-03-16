@@ -36,5 +36,6 @@ public class GlobalTelegramMessageSenderImpl implements GlobalTelegramMessageSen
 //                LOGGER.info("ERROR: during global sending messages to users!");
 //            }
 //        }
+        LOGGER.info("EGORKA!!!!!!!!! text = {}, min = {}, max = {}", text, minScore, maxScore);
     }
 }
