@@ -1,11 +1,18 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col">
-      <form>
         <label for="message__form">input message for users</label>
         <textarea id="message__form" [(ngModel)]="messageToUsers.text"></textarea>
-        <button class="btn-primary" (click)="sendMessageToUsers()">send message</button>
-      </form>
+    </div>
+    <div class="col">
+      score range for message
+      from: <input type="text" [(ngModel)]="messageToUsers.minScore"/>
+      to: <input type="text" [(ngModel)]="messageToUsers.maxScore"/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button class="btn-primary" (click)="sendMessageToUsers()">send message</button>
     </div>
   </div>
 </div>

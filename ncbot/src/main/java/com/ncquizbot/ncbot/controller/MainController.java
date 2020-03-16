@@ -36,9 +36,9 @@ public class MainController {
         return "forward:/index.html";
     }
 
-    @PostMapping(value = "/sendmessage")
+    @PostMapping(value = "/send/global/message")
     public ResponseEntity postSendMessage(@RequestBody MessageToUsers messageToUsers){
-        globalTelegramMessageSender.sendGlobalMessage(messageToUsers.getText());
+        globalTelegramMessageSender.sendGlobalMessage(messageToUsers.getText(), messageToUsers.getMinScore(), messageToUsers.getMaxScore());
         return ResponseEntity.ok(null);
     }
 

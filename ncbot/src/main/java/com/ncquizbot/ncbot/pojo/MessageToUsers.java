@@ -11,4 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class MessageToUsers {
     private String text;
+    private Integer minScore;
+    private Integer maxScore;
 }

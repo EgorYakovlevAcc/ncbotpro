@@ -10,8 +10,8 @@ export class MainService {
 
   constructor(private httpClient:HttpClient) { }
 
-  sendMessageToUsers(messageToUser:MessageToUsers):Observable<any> {
-    let url:string = "/global/message";
-    return this.httpClient.post(url, messageToUser);
+  sendMessageToUsers(messageToUsers:MessageToUsers):Observable<any> {
+    let url:string = "send/global/message";
+    return this.httpClient.post(url, messageToUsers);
   }
 }

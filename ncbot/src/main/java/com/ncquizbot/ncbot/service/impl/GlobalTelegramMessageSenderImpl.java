@@ -24,8 +24,8 @@ public class GlobalTelegramMessageSenderImpl implements GlobalTelegramMessageSen
 
     @Async
     @Override
-    public void sendGlobalMessage(String text) {
-//        List<User> users = userService.findUsersByPresentGiven(true);
+    public void sendGlobalMessage(String text, Integer minScore, Integer maxScore) {
+        List<User> users = userService.findUsersByScoreBetweenAndIsPresentGiven(maxScore, minScore, true);
 //        for (User u: users) {
 //            SendMessage sendMessage = new SendMessage();
 //            sendMessage.setChatId(u.getChatId())

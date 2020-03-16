@@ -10,7 +10,9 @@ import {Router} from "@angular/router";
 })
 export class MessageFormComponent implements OnInit {
   messageToUsers: MessageToUsers = {
-    text: ''
+    text: '',
+    maxScore:0,
+    minScore:0
   };
 
   constructor(private mainService: MainService) {

@@ -144,4 +144,9 @@ public class UserServiceImpl implements UserService {
         user.setPresentGiven(true);
         userRepository.save(user);
     }
+
+    @Override
+    public List<User> findUsersByScoreBetweenAndIsPresentGiven(Integer endScore, Integer startScore, boolean isPresentGiven) {
+        return userRepository.findUsersByScoreBetweenAndIsPresentGiven(endScore, startScore, isPresentGiven);
+    }
 }
