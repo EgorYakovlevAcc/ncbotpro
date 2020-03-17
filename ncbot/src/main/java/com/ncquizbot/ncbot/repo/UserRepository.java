@@ -13,5 +13,4 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     User findUserByTelegramId(Integer telegramId);
     List<User> findUsersByScoreAndIsPresentGiven(Integer score, boolean isPresentGiven);
     List<User> findUsersByIsPresentGiven(boolean isPresentGiven);
-    List<User> findUsersByScoreBetweenAndIsPresentGiven(Integer startScore, Integer endScore, boolean isPresentGiven);
 }

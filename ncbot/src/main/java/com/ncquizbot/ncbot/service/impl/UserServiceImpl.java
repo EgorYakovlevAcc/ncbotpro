@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.api.objects.Chat;
 import org.telegram.telegrambots.api.objects.Message;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -147,6 +150,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findUsersByScoreBetweenAndIsPresentGiven(Integer startScore, Integer endScore, boolean isPresentGiven) {
-        return userRepository.findUsersByScoreBetweenAndIsPresentGiven(startScore, endScore, isPresentGiven);
+        EntityManager em = Persistence.createEntityManagerFactory("entity-manager-factory")
+                .createEntityManager();
+        Query query = em.createQuery("select u from users u where u.score between :minScore and :maxScore");
+        query.setParameter("minScore", startScore);
+        query.setParameter("maxScore", endScore);
+        return (List<User>) query.getResultList();
     }
 }
