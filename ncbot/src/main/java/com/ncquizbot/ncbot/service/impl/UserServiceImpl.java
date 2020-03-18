@@ -151,7 +151,7 @@ public class UserServiceImpl implements UserService {
     public List<User> findUsersByScoreBetweenAndIsPresentGiven(Integer startScore, Integer endScore, boolean isPresentGiven) {
         List<User> users = userRepository.findUsersByIsPresentGiven(true);
         return users.stream()
-                .filter(user -> (user.getScore() > 20) && (user.getScore() < 29))
+                .filter(user -> (user.getScore() > startScore) && (user.getScore() < endScore))
                 .collect(Collectors.toList());
     }
 }
