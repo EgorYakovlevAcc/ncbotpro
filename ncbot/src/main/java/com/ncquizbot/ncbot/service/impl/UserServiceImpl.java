@@ -6,17 +6,16 @@ import com.ncquizbot.ncbot.repo.UserRepository;
 import com.ncquizbot.ncbot.service.QuestionService;
 import com.ncquizbot.ncbot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.api.objects.Chat;
 import org.telegram.telegrambots.api.objects.Message;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -150,11 +149,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findUsersByScoreBetweenAndIsPresentGiven(Integer startScore, Integer endScore, boolean isPresentGiven) {
-        EntityManager em = Persistence.createEntityManagerFactory("entity-manager-factory")
-                .createEntityManager();
-        Query query = em.createQuery("select u from users u where u.score between :minScore and :maxScore");
-        query.setParameter("minScore", startScore);
-        query.setParameter("maxScore", endScore);
-        return (List<User>) query.getResultList();
+        List<User> users = userRepository.findUsersByIsPresentGiven(true);
+        return users.stream()
+                .filter(user -> (user.getScore() > 20) && (user.getScore() < 29))
+                .collect(Collectors.toList());
     }
 }
