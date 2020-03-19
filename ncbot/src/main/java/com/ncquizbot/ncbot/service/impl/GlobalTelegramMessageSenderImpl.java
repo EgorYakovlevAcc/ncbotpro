@@ -26,7 +26,7 @@ public class GlobalTelegramMessageSenderImpl implements GlobalTelegramMessageSen
     @Async
     @Override
     public void sendGlobalMessage(String text, Integer minScore, Integer maxScore) {
-        List<User> users = userService.findUsersByScoreBetweenAndIsPresentGiven(maxScore, minScore, true);
+        List<User> users = userService.findUsersByScoreBetweenAndIsPresentGiven(minScore, maxScore, true);
         LOGGER.info("EGORKA!!! name ={}", users.stream().map(x -> x.getFirstName()).collect(Collectors.toList()));
         for (User u: users) {
             SendMessage sendMessage = new SendMessage();
