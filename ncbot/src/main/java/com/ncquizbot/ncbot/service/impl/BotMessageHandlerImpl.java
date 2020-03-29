@@ -107,13 +107,14 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             } else if (!user.isGameOver()) {
                 ouputMessageText = HelloGoodbyeMessages.HELLO_MESSAGE.text;
                 inlineKeyboardMarkup = new InlineKeyboardMarkup();
-                List<InlineKeyboardButton> keyboardRowList = new ArrayList<>();
-                List<List<InlineKeyboardButton>> keyboardRow = new ArrayList<>();
+                List<InlineKeyboardButton> keyboardRow = new ArrayList<>();
+                List<List<InlineKeyboardButton>> keyboardRowList = new ArrayList<>();
                 InlineKeyboardButton keyboardButton = new InlineKeyboardButton();
                 keyboardButton.setText(COMMAND_GO);
-                keyboardRowList.add(keyboardButton);
-                keyboardRow.add(keyboardRowList);
-                inlineKeyboardMarkup.setKeyboard(keyboardRow);
+                keyboardButton.setCallbackData(COMMAND_GO);
+                keyboardRow.add(keyboardButton);
+                keyboardRowList.add(keyboardRow);
+                inlineKeyboardMarkup.setKeyboard(keyboardRowList);
                 return getSendMessageForBot(ouputMessageText, message, inlineKeyboardMarkup);
             } else {
                 ouputMessageText = HelloGoodbyeMessages.GOODBYE_MESSAGE.text;
