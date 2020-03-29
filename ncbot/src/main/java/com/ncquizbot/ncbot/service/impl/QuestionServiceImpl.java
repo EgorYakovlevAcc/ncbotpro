@@ -18,6 +18,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class QuestionServiceImpl implements QuestionService {
     @Autowired
     private QuestionRepository questionRepository;
@@ -121,7 +122,6 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    @Transactional
     public void editQuestionWithOptions(QuestionOptionsAnswer questionOptionsAnswer) {
         Question question = questionRepository.findQuestionById(questionOptionsAnswer.getId());
         question.setContent(questionOptionsAnswer.getContent());
@@ -139,7 +139,6 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    @Transactional
     public void saveQuestionWithImageContent(Question question, byte[] image) {
         question.setAttachement(image);
         questionRepository.save(question);
