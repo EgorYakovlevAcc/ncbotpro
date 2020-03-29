@@ -9,7 +9,6 @@ import org.telegram.telegrambots.api.methods.PartialBotApiMethod;
 import java.util.List;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 public class MessagesPackage {

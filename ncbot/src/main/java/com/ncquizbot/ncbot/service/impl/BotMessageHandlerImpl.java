@@ -63,7 +63,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     }
 
     private MessagesPackage handleInputMessage(Message message) {
-        MessagesPackage messagesPackage = new MessagesPackage();
+        MessagesPackage messagesPackage = new MessagesPackage(new ArrayList<>());
         if (Objects.nonNull(message) && message.hasText()) {
             messagesPackage.addMessageToPackage((new SendMessage()).setText("EGORKA").setChatId(message.getChatId()));
 //            ReplyKeyboardMarkup replyKeyboardMarkup = null;
@@ -136,7 +136,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
 
     private MessagesPackage getSendMessageForBot(String ouputMessageText, Message message, ReplyKeyboardMarkup replyKeyboardMarkup) {
         SendMessage sendMessage = null;
-        MessagesPackage messagesPackage = new MessagesPackage();
+        MessagesPackage messagesPackage = new MessagesPackage(new ArrayList<>());
         if (Objects.nonNull(ouputMessageText)) {
             sendMessage = new SendMessage();
             sendMessage.setText(ouputMessageText)
