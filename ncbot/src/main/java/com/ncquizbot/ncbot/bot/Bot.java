@@ -71,7 +71,7 @@ public class Bot extends TelegramLongPollingBot {
         InputStream inputStream = new ByteArrayInputStream(image);
         sendPhoto
                 .setChatId(chatId)
-                .setNewPhoto("", inputStream);
+                .setNewPhoto("photo_" + chatId, inputStream);
         try {
             sendPhoto(sendPhoto);
         } catch (TelegramApiException e) {

@@ -172,7 +172,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             SendPhoto sendPhoto = new SendPhoto();
             sendPhoto
                     .setChatId(chatId)
-                    .setNewPhoto("", photoInputStream);
+                    .setNewPhoto("photo_" + chatId, photoInputStream);
             messagesPackage.addMessageToPackage(sendPhoto);
         }
         return messagesPackage.addMessageToPackage(sendMessage);
