@@ -41,20 +41,18 @@ export class QuestionsComponent implements OnInit {
     modalForm.componentInstance.editQuestion = q;
   }
 
-  processFile(questionId:number, inputImage: any) {
+  processFile(questionId: number, inputImage: any) {
     alert("process file");
-    const file:File = inputImage.files[0];
+    const file: File = inputImage.files[0];
     const reader = new FileReader();
-    reader.addEventListener('load', (event:any) => {
-      this.questions.filter(x => x.id == questionId).forEach(x => {
-        x.attachment.pending = true;
-        x.attachment.file = file;
-        this.imageFileService.uploadImage(x.id, x.attachment.file).subscribe(result => {
+    this.questions.filter(x => x.id == questionId).forEach(x => {
+      x.attachment.pending = true;
+      x.attachment.file = file;
+      this.imageFileService.uploadImage(x.id, x.attachment.file).subscribe(result => {
         },
         error => {
           alert("Something go wrong!..")
         });
-      })
     });
     reader.readAsDataURL(file);
   }

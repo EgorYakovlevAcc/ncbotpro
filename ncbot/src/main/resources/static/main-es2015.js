@@ -936,14 +936,12 @@ class QuestionsComponent {
         alert("process file");
         const file = inputImage.files[0];
         const reader = new FileReader();
-        reader.addEventListener('load', (event) => {
-            this.questions.filter(x => x.id == questionId).forEach(x => {
-                x.attachment.pending = true;
-                x.attachment.file = file;
-                this.imageFileService.uploadImage(x.id, x.attachment.file).subscribe(result => {
-                }, error => {
-                    alert("Something go wrong!..");
-                });
+        this.questions.filter(x => x.id == questionId).forEach(x => {
+            x.attachment.pending = true;
+            x.attachment.file = file;
+            this.imageFileService.uploadImage(x.id, x.attachment.file).subscribe(result => {
+            }, error => {
+                alert("Something go wrong!..");
             });
         });
         reader.readAsDataURL(file);

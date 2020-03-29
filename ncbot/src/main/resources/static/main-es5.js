@@ -1695,6 +1695,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var modalForm = this.modalService.open(_modal_add_question_modal_add_question_component__WEBPACK_IMPORTED_MODULE_1__["ModalAddQuestionComponent"]);
           modalForm.componentInstance.editQuestion = q;
         }
+      }, {
+        key: "processFile",
+        value: function processFile(questionId, inputImage) {
+          var _this4 = this;
+
+          alert("process file");
+          var file = inputImage.files[0];
+          var reader = new FileReader();
+          this.questions.filter(function (x) {
+            return x.id == questionId;
+          }).forEach(function (x) {
+            x.attachment.pending = true;
+            x.attachment.file = file;
+
+            _this4.imageFileService.uploadImage(x.id, x.attachment.file).subscribe(function (result) {}, function (error) {
+              alert("Something go wrong!..");
+            });
+          });
+          reader.readAsDataURL(file);
+        }
       }]);
 
       return QuestionsComponent;
