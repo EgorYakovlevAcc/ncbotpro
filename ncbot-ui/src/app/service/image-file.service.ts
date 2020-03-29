@@ -13,7 +13,7 @@ export class ImageFileService {
     alert("UPLOAD IMAGE!");
     const formData = new FormData();
     formData.append("image", file);
-    let url = "/attachment/upload/" + questionId;
+    let url = "questions/attachment/upload/" + questionId;
     return this.httpClient.post(url, formData);
   }
 }
