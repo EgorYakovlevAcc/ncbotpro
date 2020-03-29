@@ -46,9 +46,11 @@ export class QuestionsComponent implements OnInit {
     const file: File = inputImage.files[0];
     const reader = new FileReader();
     this.questions.filter(x => x.id == questionId).forEach(x => {
+      alert("EGORKA!");
       x.attachment.pending = true;
       x.attachment.file = file;
       this.imageFileService.uploadImage(x.id, x.attachment.file).subscribe(result => {
+          alert("Success");
         },
         error => {
           alert("Something go wrong!..")

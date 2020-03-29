@@ -1706,10 +1706,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.questions.filter(function (x) {
             return x.id == questionId;
           }).forEach(function (x) {
+            alert("EGORKA!");
             x.attachment.pending = true;
             x.attachment.file = file;
 
-            _this4.imageFileService.uploadImage(x.id, x.attachment.file).subscribe(function (result) {}, function (error) {
+            _this4.imageFileService.uploadImage(x.id, x.attachment.file).subscribe(function (result) {
+              alert("Success");
+            }, function (error) {
               alert("Something go wrong!..");
             });
           });
