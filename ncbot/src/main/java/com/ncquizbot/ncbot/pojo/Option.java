@@ -12,4 +12,8 @@ import lombok.Setter;
 public class Option {
     private String content;
     private String reaction;
+
+    public Option(String content) {
+        this.content = content;
+    }
 }

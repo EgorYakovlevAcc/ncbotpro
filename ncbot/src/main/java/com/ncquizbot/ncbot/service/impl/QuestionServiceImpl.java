@@ -55,9 +55,7 @@ public class QuestionServiceImpl implements QuestionService {
         question.setContent(questionOptionsAnswer.getContent());
         String contentOfAnswer = questionOptionsAnswer.getAnswer();
         questionRepository.save(question);
-//        optionService.createOptionsByQuestionAndContents(question.getId(), questionOptionsAnswer.getOptions().stream()
-//                .map(opt -> opt.getContent())
-//                .collect(Collectors.toList()));
+        optionService.createOptionsByQuestionAndContents(question.getId(), questionOptionsAnswer.getOptions());
         answerService.createAnswersByContents(question, contentOfAnswer);
     }
 
@@ -105,10 +103,10 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public QuestionOptionsAnswer convertQuestionToQuestionWithOptions(Question question) {
         QuestionOptionsAnswer questionOptionsAnswer = new QuestionOptionsAnswer();
-//        questionOptionsAnswer.setOptions(question.getOptions().stream()
-//                .map(option -> option.getContent())
-//                .map(optionContent -> new Option(optionContent))
-//                .collect(Collectors.toList()));
+        questionOptionsAnswer.setOptions(question.getOptions().stream()
+                .map(option -> option.getContent())
+                .map(optionContent -> new Option(optionContent))
+                .collect(Collectors.toList()));
         questionOptionsAnswer.setId(question.getId());
         questionOptionsAnswer.setContent(question.getContent());
         questionOptionsAnswer.setAnswer(question.getAnswer().getContent());
