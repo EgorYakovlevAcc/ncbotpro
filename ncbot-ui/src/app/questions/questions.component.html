@@ -38,7 +38,8 @@
           {{question.attachment}}
         </div>
         <div *ngIf="question.attachment == null">
-          <input type="file" #inputImage (change)="processFile(question.id, inputImage)"/>
+          <input #inputImage type="file"/>
+          <button (click)="processFile(question.id, inputImage)"></button>
         </div>
       </td>
       <td>
