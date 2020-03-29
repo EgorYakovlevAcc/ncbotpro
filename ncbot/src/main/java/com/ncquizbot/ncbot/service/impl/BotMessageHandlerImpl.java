@@ -24,7 +24,9 @@ import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
+import org.telegram.telegrambots.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardRow;
 
@@ -65,62 +67,58 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     private MessagesPackage handleInputMessage(Message message) {
         MessagesPackage messagesPackage = new MessagesPackage(new ArrayList<>());
         if (Objects.nonNull(message) && message.hasText()) {
-            messagesPackage.addMessageToPackage((new SendMessage()).setText("EGORKA1").setChatId(message.getChatId()));
-            messagesPackage.addMessageToPackage((new SendMessage()).setText("EGORKA2").setChatId(message.getChatId()));
-//            ReplyKeyboardMarkup replyKeyboardMarkup = null;
-//            String currentMessageText = message.getText();
-//            String ouputMessageText = "";
-//            User user = userService.createAndSaveUserByTelegramMessageIfCurrentDoesNotExist(message);
-//            if (message.getText().equals(COMMAND_GO)) {
-//                userService.setActiveStatusTrue(user);
-//            }
-//            if (message.getText().equals(COMMAND_PRESENT)) {
-//                if (user.isGameOver()) {
-//                    if (!user.isPresentGiven()) {
-//                        return messagesPackage.addMessageToPackage(getQrCodeImageForPresent(user));
-//                    }
-//                }
-//            }
-//            if (user.isActiveNow()) {
-//                userService.updateLastUserSessionDate(user);
-//                if (user.getQuestionNumber() > 0) {
-//                    updateUserScore(user, currentMessageText);
-//                }
-//                Question nextQuestion = getQuestionForUser(user);
-//                if (user.getQuestionNumber() > 5 || Objects.isNull(nextQuestion)) {
-//                    ouputMessageText = getGoodByeMessage(user);
-//                    replyKeyboardMarkup = new ReplyKeyboardMarkup();
-//                    replyKeyboardMarkup.setOneTimeKeyboard(true);
-//                    List<KeyboardRow> keyboardRowList = new ArrayList<>();
-//                    KeyboardRow keyboardRow = new KeyboardRow();
-//                    KeyboardButton keyboardButton = new KeyboardButton();
-//                    keyboardButton.setText(COMMAND_PRESENT);
-//                    keyboardRow.add(keyboardButton);
-//                    keyboardRowList.add(keyboardRow);
-//                    replyKeyboardMarkup.setKeyboard(keyboardRowList);
-//                    return getSendMessageForBot(ouputMessageText, message, replyKeyboardMarkup);
-//                } else {
-//                    if (nextQuestion.getOptions().size() > 1) {
-//                        replyKeyboardMarkup = getQuestionWithMultipleOptions(nextQuestion.getOptions());
-//                    }
-//                    ouputMessageText = nextQuestion.getContent();
-//                }
-//            } else if (!user.isGameOver()) {
-//                ouputMessageText = HelloGoodbyeMessages.HELLO_MESSAGE.text;
-//                replyKeyboardMarkup = new ReplyKeyboardMarkup();
-//                replyKeyboardMarkup.setOneTimeKeyboard(true);
-//                List<KeyboardRow> keyboardRowList = new ArrayList<>();
-//                KeyboardRow keyboardRow = new KeyboardRow();
-//                KeyboardButton keyboardButton = new KeyboardButton();
-//                keyboardButton.setText(COMMAND_GO);
-//                keyboardRow.add(keyboardButton);
-//                keyboardRowList.add(keyboardRow);
-//                replyKeyboardMarkup.setKeyboard(keyboardRowList);
-//                return getSendMessageForBot(ouputMessageText, message, replyKeyboardMarkup);
-//            } else {
-//                ouputMessageText = HelloGoodbyeMessages.GOODBYE_MESSAGE.text;
-//            }
-//            return getSendMessageForBot(ouputMessageText, message, replyKeyboardMarkup);
+            InlineKeyboardMarkup inlineKeyboardMarkup = null;
+            String currentMessageText = message.getText();
+            String ouputMessageText = "";
+            User user = userService.createAndSaveUserByTelegramMessageIfCurrentDoesNotExist(message);
+            if (message.getText().equals(COMMAND_GO)) {
+                userService.setActiveStatusTrue(user);
+            }
+            if (message.getText().equals(COMMAND_PRESENT)) {
+                if (user.isGameOver()) {
+                    if (!user.isPresentGiven()) {
+                        return messagesPackage.addMessageToPackage(getQrCodeImageForPresent(user));
+                    }
+                }
+            }
+            if (user.isActiveNow()) {
+                userService.updateLastUserSessionDate(user);
+                if (user.getQuestionNumber() > 0) {
+                    updateUserScore(user, currentMessageText);
+                }
+                Question nextQuestion = getQuestionForUser(user);
+                if (user.getQuestionNumber() > 5 || Objects.isNull(nextQuestion)) {
+                    ouputMessageText = getGoodByeMessage(user);
+                    inlineKeyboardMarkup = new InlineKeyboardMarkup();
+                    List<InlineKeyboardButton> keyboardRowList = new ArrayList<>();
+                    List<List<InlineKeyboardButton>> keyboardRow = new ArrayList<>();
+                    InlineKeyboardButton keyboardButton = new InlineKeyboardButton();
+                    keyboardButton.setText(COMMAND_PRESENT);
+                    keyboardRowList.add(keyboardButton);
+                    keyboardRow.add(keyboardRowList);
+                    inlineKeyboardMarkup.setKeyboard(keyboardRow);
+                    return getSendMessageForBot(ouputMessageText, message, inlineKeyboardMarkup);
+                } else {
+                    if (nextQuestion.getOptions().size() > 1) {
+                        inlineKeyboardMarkup = getQuestionWithMultipleOptions(nextQuestion.getOptions());
+                    }
+                    ouputMessageText = nextQuestion.getContent();
+                }
+            } else if (!user.isGameOver()) {
+                ouputMessageText = HelloGoodbyeMessages.HELLO_MESSAGE.text;
+                inlineKeyboardMarkup = new InlineKeyboardMarkup();
+                List<InlineKeyboardButton> keyboardRowList = new ArrayList<>();
+                List<List<InlineKeyboardButton>> keyboardRow = new ArrayList<>();
+                InlineKeyboardButton keyboardButton = new InlineKeyboardButton();
+                keyboardButton.setText(COMMAND_GO);
+                keyboardRowList.add(keyboardButton);
+                keyboardRow.add(keyboardRowList);
+                inlineKeyboardMarkup.setKeyboard(keyboardRow);
+                return getSendMessageForBot(ouputMessageText, message, inlineKeyboardMarkup);
+            } else {
+                ouputMessageText = HelloGoodbyeMessages.GOODBYE_MESSAGE.text;
+            }
+            return getSendMessageForBot(ouputMessageText, message, inlineKeyboardMarkup);
         }
         return messagesPackage;
     }
@@ -135,7 +133,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         }
     }
 
-    private MessagesPackage getSendMessageForBot(String ouputMessageText, Message message, ReplyKeyboardMarkup replyKeyboardMarkup) {
+    private MessagesPackage getSendMessageForBot(String ouputMessageText, Message message, InlineKeyboardMarkup replyKeyboardMarkup) {
         SendMessage sendMessage = null;
         MessagesPackage messagesPackage = new MessagesPackage(new ArrayList<>());
         if (Objects.nonNull(ouputMessageText)) {
@@ -169,17 +167,16 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         return userService.setNextQuestionToUser(user);
     }
 
-    private ReplyKeyboardMarkup getQuestionWithMultipleOptions(List<Option> options) {
-        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-        replyKeyboardMarkup.setOneTimeKeyboard(true);
-        List<KeyboardRow> keyboardRowList = new ArrayList<>();
-        KeyboardRow keyboardRow = new KeyboardRow();
+    private InlineKeyboardMarkup getQuestionWithMultipleOptions(List<Option> options) {
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboardRowList = new ArrayList<>();
+        List<InlineKeyboardButton> keyboardRow = new ArrayList<>();
         for (Option option : options) {
-            keyboardRow.add(option.getContent());
+            keyboardRow.add(new InlineKeyboardButton(option.getContent()));
         }
         keyboardRowList.add(keyboardRow);
-        replyKeyboardMarkup.setKeyboard(keyboardRowList);
-        return replyKeyboardMarkup;
+        inlineKeyboardMarkup.setKeyboard(keyboardRowList);
+        return inlineKeyboardMarkup;
     }
 
     private boolean checkAnswer(String userAnswer, String answer) {
