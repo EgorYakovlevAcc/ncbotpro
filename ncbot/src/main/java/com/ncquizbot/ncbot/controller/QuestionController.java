@@ -13,8 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -90,10 +92,17 @@ public class QuestionController {
     }
 
     @PostMapping("/attachment/upload/{questionId}")
-    public ResponseEntity postAttachment(@RequestParam Object image, @PathVariable("questionId") Integer questionId){
-        byte[] imageByte = image.toString().getBytes();
-        Question question = questionService.findQuestionById(questionId);
-        questionService.saveQuestionWithImageContent(question, imageByte);
-        return ResponseEntity.ok(null);
+    public ResponseEntity postAttachment(@RequestParam("image") MultipartFile imageFile, @PathVariable("questionId") Integer questionId){
+        byte[] imageByte = new byte[0];
+        try {
+            imageByte = imageFile.getBytes();
+            Question question = questionService.findQuestionById(questionId);
+            questionService.saveQuestionWithImageContent(question, imageByte);
+            return ResponseEntity.ok(null);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.ok("IMPOSSIBLE TO SAVE IMAGE");
+        }
+
     }
 }

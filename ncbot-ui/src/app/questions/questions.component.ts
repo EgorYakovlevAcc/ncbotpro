@@ -12,6 +12,7 @@ import {ImageFileService} from "../service/image-file.service";
 })
 export class QuestionsComponent implements OnInit {
   questions: Question[];
+  public selectedFile;
 
   constructor(private imageFileService: ImageFileService, private questionService: QuestionServiceService, private modalService: NgbModal) {
   }
@@ -40,15 +41,18 @@ export class QuestionsComponent implements OnInit {
     modalForm.componentInstance.editQuestion = q;
   }
 
-  processFile(questionId: number, inputImage: any) {
-    alert("process file");
-    const file: File = inputImage.files[0];
+  processFile(questionId: number) {
     alert("EGORKA!");
-    this.imageFileService.uploadImage(questionId, file).subscribe(result => {
+    this.imageFileService.uploadImage(questionId, this.selectedFile).subscribe(result => {
         alert("Success");
       },
       error => {
         alert("Something go wrong!..")
       });
+  }
+
+  onFileChanged(event) {
+    alert("EGORKA: ON FILE CHANGED");
+    this.selectedFile = event.target.files[0];
   }
 }

@@ -926,12 +926,14 @@ function QuestionsComponent_tbody_20_div_5_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", question_r14.attachment, " ");
 } }
 function QuestionsComponent_tbody_20_div_6_Template(rf, ctx) { if (rf & 1) {
-    const _r23 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    const _r21 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "input", 11, 12);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "button", 13);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function QuestionsComponent_tbody_20_div_6_Template_button_click_3_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r23); const _r20 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](2); const question_r14 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit; const ctx_r21 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r21.processFile(question_r14.id, _r20); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "add");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "input", 11);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function QuestionsComponent_tbody_20_div_6_Template_input_change_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r21); const ctx_r20 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r20.onFileChanged($event); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "button", 12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function QuestionsComponent_tbody_20_div_6_Template_button_click_2_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r21); const question_r14 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit; const ctx_r22 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r22.processFile(question_r14.id); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "add");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
@@ -955,7 +957,7 @@ function QuestionsComponent_tbody_20_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "td");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, QuestionsComponent_tbody_20_div_5_Template, 2, 1, "div", 5);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, QuestionsComponent_tbody_20_div_6_Template, 5, 0, "div", 5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, QuestionsComponent_tbody_20_div_6_Template, 4, 0, "div", 5);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "td");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8);
@@ -1034,19 +1036,21 @@ class QuestionsComponent {
         let modalForm = this.modalService.open(_modal_add_question_modal_add_question_component__WEBPACK_IMPORTED_MODULE_1__["ModalAddQuestionComponent"]);
         modalForm.componentInstance.editQuestion = q;
     }
-    processFile(questionId, inputImage) {
-        alert("process file");
-        const file = inputImage.files[0];
+    processFile(questionId) {
         alert("EGORKA!");
-        this.imageFileService.uploadImage(questionId, file).subscribe(result => {
+        this.imageFileService.uploadImage(questionId, this.selectedFile).subscribe(result => {
             alert("Success");
         }, error => {
             alert("Something go wrong!..");
         });
     }
+    onFileChanged(event) {
+        alert("EGORKA: ON FILE CHANGED");
+        this.selectedFile = event.target.files[0];
+    }
 }
 QuestionsComponent.ɵfac = function QuestionsComponent_Factory(t) { return new (t || QuestionsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_service_image_file_service__WEBPACK_IMPORTED_MODULE_2__["ImageFileService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_service_question_service_service__WEBPACK_IMPORTED_MODULE_3__["QuestionServiceService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_4__["NgbModal"])); };
-QuestionsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: QuestionsComponent, selectors: [["app-questions"]], decls: 21, vars: 1, consts: [[1, "container-fluid"], ["type", "button", 1, "btn", "btn-primary", "btn-lg", "btn-block", 2, "margin", "20px 0 20px 0", 3, "click"], [1, "table", "table-bordered"], [4, "ngFor", "ngForOf"], [3, "id"], [4, "ngIf"], [1, "container"], [1, "row", 2, "text-align", "center"], [1, "col"], [1, "btn", "btn-primary", 3, "click"], [1, "btn", "btn-danger", 3, "click"], ["type", "file"], ["inputImage", ""], [3, "click"]], template: function QuestionsComponent_Template(rf, ctx) { if (rf & 1) {
+QuestionsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: QuestionsComponent, selectors: [["app-questions"]], decls: 21, vars: 1, consts: [[1, "container-fluid"], ["type", "button", 1, "btn", "btn-primary", "btn-lg", "btn-block", 2, "margin", "20px 0 20px 0", 3, "click"], [1, "table", "table-bordered"], [4, "ngFor", "ngForOf"], [3, "id"], [4, "ngIf"], [1, "container"], [1, "row", 2, "text-align", "center"], [1, "col"], [1, "btn", "btn-primary", 3, "click"], [1, "btn", "btn-danger", 3, "click"], ["type", "file", 3, "change"], [3, "click"]], template: function QuestionsComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function QuestionsComponent_Template_button_click_1_listener($event) { return ctx.openCreationNewQuestionForm(); });
