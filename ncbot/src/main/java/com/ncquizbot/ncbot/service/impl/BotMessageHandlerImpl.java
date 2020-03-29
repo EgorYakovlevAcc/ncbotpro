@@ -73,15 +73,17 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
 
     private MessagesPackage handelCallbackQuery(CallbackQuery callbackQuery) {
         User user = userService.findUserByTelegramId(callbackQuery.getFrom().getId());
-        MessagesPackage messagesPackage = new MessagesPackage();
+        MessagesPackage messagesPackage = null;
+        Long chatId = callbackQuery.getMessage().getChatId();
         switch (callbackQuery.getData()){
-            case "go": handleGoCommand(user);
+            case "go": messagesPackage = handleGoCommand(user, chatId);
         }
         return messagesPackage;
     }
 
-    private void handleGoCommand(User user) {
+    private MessagesPackage handleGoCommand(User user, Long chatId) {
         userService.setActiveStatusTrue(user);
+        return getNextQuestionForUser(user, chatId);
     }
 
     private MessagesPackage handleInputMessage(Message message) {
@@ -91,9 +93,6 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             String currentMessageText = message.getText();
             String ouputMessageText = "";
             User user = userService.createAndSaveUserByTelegramMessageIfCurrentDoesNotExist(message);
-            if (message.getText().equals(COMMAND_GO)) {
-                userService.setActiveStatusTrue(user);
-            }
             if (message.getText().equals(COMMAND_PRESENT)) {
                 if (user.isGameOver()) {
                     if (!user.isPresentGiven()) {
@@ -106,24 +105,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                 if (user.getQuestionNumber() > 0) {
                     updateUserScore(user, currentMessageText);
                 }
-                Question nextQuestion = getQuestionForUser(user);
-                if (user.getQuestionNumber() > 5 || Objects.isNull(nextQuestion)) {
-                    ouputMessageText = getGoodByeMessage(user);
-                    inlineKeyboardMarkup = new InlineKeyboardMarkup();
-                    List<InlineKeyboardButton> keyboardRowList = new ArrayList<>();
-                    List<List<InlineKeyboardButton>> keyboardRow = new ArrayList<>();
-                    InlineKeyboardButton keyboardButton = new InlineKeyboardButton();
-                    keyboardButton.setText(COMMAND_PRESENT);
-                    keyboardRowList.add(keyboardButton);
-                    keyboardRow.add(keyboardRowList);
-                    inlineKeyboardMarkup.setKeyboard(keyboardRow);
-                    return getSendMessageForBot(ouputMessageText, message, inlineKeyboardMarkup);
-                } else {
-                    if (nextQuestion.getOptions().size() > 1) {
-                        inlineKeyboardMarkup = getQuestionWithMultipleOptions(nextQuestion.getOptions());
-                    }
-                    ouputMessageText = nextQuestion.getContent();
-                }
+                return getNextQuestionForUser(user, message.getChatId());
             } else if (!user.isGameOver()) {
                 ouputMessageText = HelloGoodbyeMessages.HELLO_MESSAGE.text;
                 inlineKeyboardMarkup = new InlineKeyboardMarkup();
@@ -135,13 +117,35 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                 keyboardRow.add(keyboardButton);
                 keyboardRowList.add(keyboardRow);
                 inlineKeyboardMarkup.setKeyboard(keyboardRowList);
-                return getSendMessageForBot(ouputMessageText, message, inlineKeyboardMarkup);
+                return getSendMessageForBot(ouputMessageText, message.getChatId(), inlineKeyboardMarkup);
             } else {
                 ouputMessageText = HelloGoodbyeMessages.GOODBYE_MESSAGE.text;
+                return getSendMessageForBot(ouputMessageText, message.getChatId(), inlineKeyboardMarkup);
             }
-            return getSendMessageForBot(ouputMessageText, message, inlineKeyboardMarkup);
         }
         return messagesPackage;
+    }
+
+    private MessagesPackage getNextQuestionForUser(User user, Long chatId) {
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        Question nextQuestion = getQuestionForUser(user);
+        if (user.getQuestionNumber() > 5 || Objects.isNull(nextQuestion)) {
+            String ouputMessageText = getGoodByeMessage(user);
+            List<InlineKeyboardButton> keyboardRowList = new ArrayList<>();
+            List<List<InlineKeyboardButton>> keyboardRow = new ArrayList<>();
+            InlineKeyboardButton keyboardButton = new InlineKeyboardButton();
+            keyboardButton.setText(COMMAND_PRESENT);
+            keyboardRowList.add(keyboardButton);
+            keyboardRow.add(keyboardRowList);
+            inlineKeyboardMarkup.setKeyboard(keyboardRow);
+            return getSendMessageForBot(ouputMessageText, chatId, inlineKeyboardMarkup);
+        } else {
+            if (nextQuestion.getOptions().size() > 1) {
+                inlineKeyboardMarkup = getQuestionWithMultipleOptions(nextQuestion.getOptions());
+            }
+            String ouputMessageText = nextQuestion.getContent();
+            return getSendMessageForBot(ouputMessageText, chatId, inlineKeyboardMarkup);
+        }
     }
 
     private void updateUserScore(User user, String userAnswerText) {
@@ -154,13 +158,13 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         }
     }
 
-    private MessagesPackage getSendMessageForBot(String ouputMessageText, Message message, InlineKeyboardMarkup replyKeyboardMarkup) {
+    private MessagesPackage getSendMessageForBot(String ouputMessageText, Long chatId, InlineKeyboardMarkup replyKeyboardMarkup) {
         SendMessage sendMessage = null;
         MessagesPackage messagesPackage = new MessagesPackage(new ArrayList<>());
         if (Objects.nonNull(ouputMessageText)) {
             sendMessage = new SendMessage();
             sendMessage.setText(ouputMessageText)
-                    .setChatId(message.getChatId());
+                    .setChatId(chatId);
             sendMessage.setReplyMarkup(replyKeyboardMarkup);
             sendMessage.enableWebPagePreview();
         }
