@@ -121,7 +121,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
 //            }
 //            return getSendMessageForBot(ouputMessageText, message, replyKeyboardMarkup);
         }
-        return null;
+        return messagesPackage;
     }
 
     private void updateUserScore(User user, String userAnswerText) {
