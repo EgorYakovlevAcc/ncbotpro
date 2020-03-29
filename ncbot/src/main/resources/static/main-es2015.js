@@ -935,15 +935,14 @@ class QuestionsComponent {
     processFile(questionId, inputImage) {
         alert("process file");
         const file = inputImage.files[0];
-        this.questions.filter(x => x.id == questionId).forEach(x => {
-            alert("EGORKA!");
-            x.attachment.pending = true;
-            x.attachment.file = file;
-            this.imageFileService.uploadImage(x.id, x.attachment.file).subscribe(result => {
-                alert("Success");
-            }, error => {
-                alert("Something go wrong!..");
-            });
+        let currentQuestion = this.questions.filter(x => x.id == questionId)[0];
+        alert("EGORKA!");
+        currentQuestion.attachment.pending = true;
+        currentQuestion.attachment.file = file;
+        this.imageFileService.uploadImage(currentQuestion.id, currentQuestion.attachment.file).subscribe(result => {
+            alert("Success");
+        }, error => {
+            alert("Something go wrong!..");
         });
     }
 }
