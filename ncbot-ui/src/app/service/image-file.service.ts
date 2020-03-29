@@ -10,6 +10,7 @@ export class ImageFileService {
   constructor(private httpClient: HttpClient) { }
 
   uploadImage(questionId: number, file: File):Observable<any> {
+    alert("UPLOAD IMAGE!");
     const formData = new FormData();
     formData.append("image", file);
     let url = "/attachment/upload/" + questionId;
