@@ -42,6 +42,7 @@ export class QuestionsComponent implements OnInit {
   }
 
   processFile(questionId:number, inputImage: any) {
+    alert("process file");
     const file:File = inputImage.files[0];
     const reader = new FileReader();
     reader.addEventListener('load', (event:any) => {
