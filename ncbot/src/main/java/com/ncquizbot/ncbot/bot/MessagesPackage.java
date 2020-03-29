@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.telegram.telegrambots.api.methods.PartialBotApiMethod;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -13,6 +14,10 @@ import java.util.List;
 @Setter
 public class MessagesPackage {
     private List<PartialBotApiMethod> messages;
+
+    public MessagesPackage() {
+        this.messages = new ArrayList<>();
+    }
 
     public MessagesPackage addMessageToPackage(PartialBotApiMethod message){
         this.messages.add(message);

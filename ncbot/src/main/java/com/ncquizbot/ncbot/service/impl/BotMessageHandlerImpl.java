@@ -22,6 +22,7 @@ import org.telegram.telegrambots.api.methods.ParseMode;
 import org.telegram.telegrambots.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.api.objects.CallbackQuery;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -60,8 +61,21 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     @Override
     public MessagesPackage handleMessage(Update update) {
         Message message = update.getMessage();
-        return handleInputMessage(message);
+        if (Objects.nonNull(message) && message.hasText()) {
+            return handleInputMessage(message);
+        }
+        if (update.hasCallbackQuery()){
+            return handelCallbackQuery(update.getCallbackQuery());
+        }
+        return null;
 
+    }
+
+    private MessagesPackage handelCallbackQuery(CallbackQuery callbackQuery) {
+        MessagesPackage messagesPackage = new MessagesPackage();
+        LOGGER.info("EGORKA DATA = {}", callbackQuery.getData());
+        LOGGER.info("EGORKA DATA = {}", callbackQuery.getMessage().getText());
+        return messagesPackage;
     }
 
     private MessagesPackage handleInputMessage(Message message) {
