@@ -90,7 +90,7 @@ public class QuestionController {
     }
 
     @PostMapping("/attachment/upload/{questionId}")
-    public ResponseEntity postAttachment(@RequestParam("image") byte[] image, @PathVariable("questionId") Integer questionId){
+    public ResponseEntity postAttachment(@RequestBody byte[] image, @PathVariable("questionId") Integer questionId){
         Question question = questionService.findQuestionById(questionId);
         question.setAttachement(image);
         questionService.save(question);
