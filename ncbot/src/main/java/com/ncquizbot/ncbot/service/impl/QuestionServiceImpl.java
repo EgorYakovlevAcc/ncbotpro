@@ -138,4 +138,11 @@ public class QuestionServiceImpl implements QuestionService {
         return questionRepository.findQuestionsByWeight(weight);
     }
 
+    @Override
+    @Transactional
+    public void saveQuestionWithImageContent(Question question, byte[] image) {
+        question.setAttachement(image);
+        questionRepository.save(question);
+    }
+
 }

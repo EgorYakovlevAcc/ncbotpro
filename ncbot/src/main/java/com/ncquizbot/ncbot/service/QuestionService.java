@@ -21,4 +21,5 @@ public interface QuestionService {
     Integer getCorrectIndexOfOptionByAnswer(Question question, Answer answer);
     void editQuestionWithOptions(QuestionOptionsAnswer questionOptionsAnswer);
     List<Question> findQuestionsByWeight(Integer weight);
+    void saveQuestionWithImageContent(Question question, byte[] image);
 }
