@@ -65,7 +65,8 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     private MessagesPackage handleInputMessage(Message message) {
         MessagesPackage messagesPackage = new MessagesPackage(new ArrayList<>());
         if (Objects.nonNull(message) && message.hasText()) {
-            messagesPackage.addMessageToPackage((new SendMessage()).setText("EGORKA").setChatId(message.getChatId()));
+            messagesPackage.addMessageToPackage((new SendMessage()).setText("EGORKA1").setChatId(message.getChatId()));
+            messagesPackage.addMessageToPackage((new SendMessage()).setText("EGORKA2").setChatId(message.getChatId()));
 //            ReplyKeyboardMarkup replyKeyboardMarkup = null;
 //            String currentMessageText = message.getText();
 //            String ouputMessageText = "";
