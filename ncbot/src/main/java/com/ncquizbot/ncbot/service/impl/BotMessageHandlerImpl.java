@@ -32,6 +32,7 @@ import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardButto
 import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardRow;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -117,10 +118,10 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                 keyboardRow.add(keyboardButton);
                 keyboardRowList.add(keyboardRow);
                 inlineKeyboardMarkup.setKeyboard(keyboardRowList);
-                return getSendMessageForBot(ouputMessageText, message.getChatId(), inlineKeyboardMarkup);
+                return getSendMessageForBot(ouputMessageText, message.getChatId(), inlineKeyboardMarkup, null);
             } else {
                 ouputMessageText = HelloGoodbyeMessages.GOODBYE_MESSAGE.text;
-                return getSendMessageForBot(ouputMessageText, message.getChatId(), inlineKeyboardMarkup);
+                return getSendMessageForBot(ouputMessageText, message.getChatId(), inlineKeyboardMarkup, null);
             }
         }
         return messagesPackage;
@@ -138,13 +139,12 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             keyboardRowList.add(keyboardButton);
             keyboardRow.add(keyboardRowList);
             inlineKeyboardMarkup.setKeyboard(keyboardRow);
-            return getSendMessageForBot(ouputMessageText, chatId, inlineKeyboardMarkup);
+            return getSendMessageForBot(nextQuestion.getContent(), chatId, inlineKeyboardMarkup, nextQuestion.getAttachement());
         } else {
             if (nextQuestion.getOptions().size() > 1) {
                 inlineKeyboardMarkup = getQuestionWithMultipleOptions(nextQuestion.getOptions());
             }
-            String ouputMessageText = nextQuestion.getContent();
-            return getSendMessageForBot(ouputMessageText, chatId, inlineKeyboardMarkup);
+            return getSendMessageForBot(nextQuestion.getContent(), chatId, inlineKeyboardMarkup, nextQuestion.getAttachement());
         }
     }
 
@@ -158,15 +158,22 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         }
     }
 
-    private MessagesPackage getSendMessageForBot(String ouputMessageText, Long chatId, InlineKeyboardMarkup replyKeyboardMarkup) {
+    private MessagesPackage getSendMessageForBot(String content, Long chatId, InlineKeyboardMarkup replyKeyboardMarkup, byte[] attachment) {
+        MessagesPackage messagesPackage = new MessagesPackage();
         SendMessage sendMessage = null;
-        MessagesPackage messagesPackage = new MessagesPackage(new ArrayList<>());
-        if (Objects.nonNull(ouputMessageText)) {
+        if (Objects.nonNull(content)) {
             sendMessage = new SendMessage();
-            sendMessage.setText(ouputMessageText)
+            sendMessage.setText(content)
                     .setChatId(chatId);
             sendMessage.setReplyMarkup(replyKeyboardMarkup);
-            sendMessage.enableWebPagePreview();
+        }
+        if (attachment != null) {
+            InputStream photoInputStream = new ByteArrayInputStream(attachment);
+            SendPhoto sendPhoto = new SendPhoto();
+            sendPhoto
+                    .setChatId(chatId)
+                    .setNewPhoto("", photoInputStream);
+            messagesPackage.addMessageToPackage(sendPhoto);
         }
         return messagesPackage.addMessageToPackage(sendMessage);
     }
