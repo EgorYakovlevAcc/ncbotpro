@@ -1,10 +1,12 @@
 package com.ncquizbot.ncbot.service.impl;
 
 import com.ncquizbot.ncbot.bot.Bot;
+import com.ncquizbot.ncbot.bot.MessagesPackage;
 import com.ncquizbot.ncbot.model.Answer;
 import com.ncquizbot.ncbot.model.Option;
 import com.ncquizbot.ncbot.model.Question;
 import com.ncquizbot.ncbot.model.User;
+import com.ncquizbot.ncbot.pojo.HelloGoodbyeMessages;
 import com.ncquizbot.ncbot.qrcode.QrCodeGenerator;
 import com.ncquizbot.ncbot.qrcode.QrCodeGeneratorImpl;
 import com.ncquizbot.ncbot.service.BotMessageHandler;
@@ -54,13 +56,14 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     private QuestionService questionService;
 
     @Override
-    public PartialBotApiMethod handleMessage(Update update) {
+    public MessagesPackage handleMessage(Update update) {
         Message message = update.getMessage();
         return handleInputMessage(message);
 
     }
 
-    private PartialBotApiMethod handleInputMessage(Message message) {
+    private MessagesPackage handleInputMessage(Message message) {
+        MessagesPackage messagesPackage = new MessagesPackage();
         if (Objects.nonNull(message) && message.hasText()) {
             ReplyKeyboardMarkup replyKeyboardMarkup = null;
             String currentMessageText = message.getText();
@@ -72,7 +75,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             if (message.getText().equals(COMMAND_PRESENT)) {
                 if (user.isGameOver()) {
                     if (!user.isPresentGiven()) {
-                        return getQrCodeImageForPresent(user);
+                        return messagesPackage.addMessageToPackage(getQrCodeImageForPresent(user));
                     }
                 }
             }
@@ -101,7 +104,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                     ouputMessageText = nextQuestion.getContent();
                 }
             } else if (!user.isGameOver()) {
-                ouputMessageText = HELLO_MESSAGE;
+                ouputMessageText = HelloGoodbyeMessages.HELLO_MESSAGE.text;
                 replyKeyboardMarkup = new ReplyKeyboardMarkup();
                 replyKeyboardMarkup.setOneTimeKeyboard(true);
                 List<KeyboardRow> keyboardRowList = new ArrayList<>();
@@ -111,9 +114,9 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                 keyboardRow.add(keyboardButton);
                 keyboardRowList.add(keyboardRow);
                 replyKeyboardMarkup.setKeyboard(keyboardRowList);
-                return getSendMessageForBot(ouputMessageText, message, replyKeyboardMarkup).setParseMode(ParseMode.HTML);
+                return getSendMessageForBot(ouputMessageText, message, replyKeyboardMarkup);
             } else {
-                ouputMessageText = FINISH_GAME;
+                ouputMessageText = HelloGoodbyeMessages.GOODBYE_MESSAGE.text;
             }
             return getSendMessageForBot(ouputMessageText, message, replyKeyboardMarkup);
         }
@@ -130,8 +133,9 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         }
     }
 
-    private SendMessage getSendMessageForBot(String ouputMessageText, Message message, ReplyKeyboardMarkup replyKeyboardMarkup) {
+    private MessagesPackage getSendMessageForBot(String ouputMessageText, Message message, ReplyKeyboardMarkup replyKeyboardMarkup) {
         SendMessage sendMessage = null;
+        MessagesPackage messagesPackage = new MessagesPackage();
         if (Objects.nonNull(ouputMessageText)) {
             sendMessage = new SendMessage();
             sendMessage.setText(ouputMessageText)
@@ -139,7 +143,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             sendMessage.setReplyMarkup(replyKeyboardMarkup);
             sendMessage.enableWebPagePreview();
         }
-        return sendMessage;
+        return messagesPackage.addMessageToPackage(sendMessage);
     }
 
     private SendPhoto getQrCodeImageForPresent(User user) {

@@ -13,6 +13,9 @@ import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
 @Component
 public class Bot extends TelegramLongPollingBot {
     private boolean isBotActive = true;
@@ -25,17 +28,17 @@ public class Bot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         LOGGER.info("UPDATE = {}", update);
         if (getIsBotActive()) {
-            PartialBotApiMethod answer = botMessageHandler.handleMessage(update);
+            MessagesPackage answersPackage = botMessageHandler.handleMessage(update);
             try {
-                if (answer instanceof SendMessage) {
-                    SendMessage sendAnswer = (SendMessage) answer;
-                    execute(sendAnswer); // Call method to send the message
+                for (PartialBotApiMethod answer: answersPackage.getMessages()) {
+                    if (answer instanceof SendMessage) {
+                        SendMessage sendAnswer = (SendMessage) answer;
+                        execute(sendAnswer); // Call method to send the message
+                    } else {
+                        SendPhoto sendPhoto = (SendPhoto) answer;
+                        sendPhoto(sendPhoto); // Call method to send the message
+                    }
                 }
-                else {
-                    SendPhoto sendPhoto = (SendPhoto) answer;
-                    sendPhoto(sendPhoto); // Call method to send the message
-                }
-
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
@@ -51,6 +54,30 @@ public class Bot extends TelegramLongPollingBot {
         }
     }
 
+    public void executeSendMessage(Long chatId, String text){
+        SendMessage sendMessage = new SendMessage();
+        sendMessage
+                .setText(text)
+                .setChatId(chatId);
+        try {
+            execute(sendMessage);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void executeSendPhoto(Long chatId, byte[] image){
+        SendPhoto sendPhoto = new SendPhoto();
+        InputStream inputStream = new ByteArrayInputStream(image);
+        sendPhoto
+                .setChatId(chatId)
+                .setNewPhoto("", inputStream);
+        try {
+            sendPhoto(sendPhoto);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public String getBotUsername() {
         return "netcracker_quiz_bot";

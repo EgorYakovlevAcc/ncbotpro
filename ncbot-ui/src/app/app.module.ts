@@ -14,6 +14,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { QuestionComponent } from './question/question.component';
 import { ModalAddQuestionComponent } from './modal-add-question/modal-add-question.component';
 import { MessageFormComponent } from './message-form/message-form.component';
+import { AboutComponent } from './about/about.component';
+import { FirstAndLastMessagesEditorComponent } from './first-and-last-messages-editor/first-and-last-messages-editor.component';
 
 const appRoutes: Routes = [
   {
@@ -53,7 +55,9 @@ const appRoutes: Routes = [
     MainpageComponent,
     QuestionComponent,
     ModalAddQuestionComponent,
-    MessageFormComponent
+    MessageFormComponent,
+    AboutComponent,
+    FirstAndLastMessagesEditorComponent
   ],
   imports: [
     BrowserModule,
