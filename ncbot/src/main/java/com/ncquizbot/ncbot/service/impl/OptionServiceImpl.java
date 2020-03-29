@@ -33,12 +33,13 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
-    public void createOptionsByQuestionAndContents(Integer questionId, List<String> contents) {
+    public void createOptionsByQuestionAndContents(Integer questionId, List<com.ncquizbot.ncbot.pojo.Option> options) {
         Question question = questionService.findQuestionById(questionId);
-        for (String content : contents) {
+        for (com.ncquizbot.ncbot.pojo.Option o : options) {
             Option option = new Option();
             option.setQuestion(question);
-            option.setContent(content);
+            option.setContent(o.getContent());
+            option.setReaction(o.getReaction());
             optionRepository.save(option);
         }
     }
@@ -54,9 +55,9 @@ public class OptionServiceImpl implements OptionService {
         for (com.ncquizbot.ncbot.model.Option option: previousOptions) {
             optionRepository.delete(option);
         }
-        createOptionsByQuestionAndContents(questionId, options.stream()
-                .map(x -> x.getContent())
-                .collect(Collectors.toList()));
+//        createOptionsByQuestionAndContents(questionId, options.stream()
+//                .map(x -> x.getContent())
+//                .collect(Collectors.toList()));
     }
 
     @Override

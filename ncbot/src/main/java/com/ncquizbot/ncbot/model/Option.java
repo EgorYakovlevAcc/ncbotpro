@@ -11,6 +11,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "options")
+@Getter
+@Setter
 @AllArgsConstructor
 public class Option {
     @Id
