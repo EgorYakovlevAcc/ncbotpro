@@ -34,6 +34,7 @@ public class User {
     private Integer questionNumber;
     private boolean isGameOver;
     private boolean isPresentGiven;
+    private boolean isUserInterrupted;
     @OneToMany
     private List<QuestionAndUserAnswerNote> questionAndUserAnswerNoteList;
 

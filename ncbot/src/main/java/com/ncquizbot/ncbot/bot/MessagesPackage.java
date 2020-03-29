@@ -16,7 +16,7 @@ public class MessagesPackage {
     private List<PartialBotApiMethod> messages;
 
     public MessagesPackage addMessageToPackage(PartialBotApiMethod message){
-        this.messages.set(this.messages.size() - 1, message);
+        this.messages.add(message);
         return this;
     }
 }
