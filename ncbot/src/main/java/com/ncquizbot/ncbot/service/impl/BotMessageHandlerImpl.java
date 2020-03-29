@@ -72,10 +72,16 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     }
 
     private MessagesPackage handelCallbackQuery(CallbackQuery callbackQuery) {
+        User user = userService.findUserByTelegramId(callbackQuery.getFrom().getId());
         MessagesPackage messagesPackage = new MessagesPackage();
-        LOGGER.info("EGORKA DATA = {}", callbackQuery.getData());
-        LOGGER.info("EGORKA DATA = {}", callbackQuery.getMessage().getText());
+        switch (callbackQuery.getData()){
+            case "go": handleGoCommand(user);
+        }
         return messagesPackage;
+    }
+
+    private void handleGoCommand(User user) {
+        userService.setActiveStatusTrue(user);
     }
 
     private MessagesPackage handleInputMessage(Message message) {
