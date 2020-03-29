@@ -1,4 +1,5 @@
 import {Option} from "../option/option";
+import {ImageFile} from "../image-file";
 
 export class Question {
   id:number;
@@ -6,4 +7,5 @@ export class Question {
   options:Option[];
   answer:string;
   weight:number;
+  attachment?:ImageFile;
 }

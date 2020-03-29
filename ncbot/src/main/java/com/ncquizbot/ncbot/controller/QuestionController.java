@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -85,6 +86,14 @@ public class QuestionController {
     @GetMapping(value = "/remove")
     public ResponseEntity editQuestion(Model model, @RequestParam("id") Integer questionId) {
         questionService.deleteQuestionById(questionId);
+        return ResponseEntity.ok(null);
+    }
+
+    @PostMapping("/attach/upload/{questionId")
+    public ResponseEntity postAttachment(@RequestParam("image") byte[] image, @PathVariable("questionId") Integer questionId){
+        Question question = questionService.findQuestionById(questionId);
+        question.setAttachement(image);
+        questionService.save(question);
         return ResponseEntity.ok(null);
     }
 }

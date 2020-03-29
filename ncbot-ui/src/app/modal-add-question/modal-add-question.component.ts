@@ -3,6 +3,7 @@ import {NgbModal, NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {Question} from "../model/question/question";
 import {Option} from "../model/option/option";
 import {QuestionServiceService} from "../service/question-service.service";
+import {ImageFile} from "../model/image-file";
 
 
 @Component({
@@ -64,5 +65,4 @@ export class ModalAddQuestionComponent implements OnInit {
   removeOptionToQuestion() {
 
   }
-
 }

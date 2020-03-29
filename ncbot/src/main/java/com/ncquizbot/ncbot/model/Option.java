@@ -20,6 +20,7 @@ public class Option {
     @JoinColumn(name = "question_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Question question;
+    private String reaction;
     private String content;
 
     public Option() {

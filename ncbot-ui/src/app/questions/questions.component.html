@@ -9,6 +9,9 @@
         №
       </th>
       <th>
+        attachment
+      </th>
+      <th>
         content
       </th>
       <th>
@@ -28,7 +31,15 @@
     <tbody *ngFor="let question of questions; let i = index">
     <tr id="'tr__' + {{i}}">
       <td>
-        {{i}}
+        {{i + 1}}
+      </td>
+      <td>
+        <div *ngIf="question.attachment != null">
+          {{question.attachment}}
+        </div>
+        <div *ngIf="question.attachment == null">
+          <input type="file" #inputImage (change)="processFile(question.id, inputImage)"/>
+        </div>
       </td>
       <td>
         {{question.content}}

@@ -4,11 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 @Table(name="questions")
 @AllArgsConstructor
 public class Question {
@@ -19,6 +22,8 @@ public class Question {
     private String content;
     @OneToOne(mappedBy="question", cascade = CascadeType.ALL)
     private Answer answer;
+    @Lob
+    private byte[] attachement;
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Option> options;
     private Integer weight;
