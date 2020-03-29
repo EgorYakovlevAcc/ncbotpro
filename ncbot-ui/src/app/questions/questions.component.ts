@@ -3,7 +3,6 @@ import {Question} from "../model/question/question";
 import {QuestionServiceService} from "../service/question-service.service";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalAddQuestionComponent} from "../modal-add-question/modal-add-question.component";
-import {ImageFile} from "../model/image-file";
 import {ImageFileService} from "../service/image-file.service";
 
 @Component({
@@ -44,7 +43,6 @@ export class QuestionsComponent implements OnInit {
   processFile(questionId: number, inputImage: any) {
     alert("process file");
     const file: File = inputImage.files[0];
-    const reader = new FileReader();
     this.questions.filter(x => x.id == questionId).forEach(x => {
       alert("EGORKA!");
       x.attachment.pending = true;
@@ -56,6 +54,5 @@ export class QuestionsComponent implements OnInit {
           alert("Something go wrong!..")
         });
     });
-    reader.readAsDataURL(file);
   }
 }

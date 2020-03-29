@@ -1702,7 +1702,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           alert("process file");
           var file = inputImage.files[0];
-          var reader = new FileReader();
           this.questions.filter(function (x) {
             return x.id == questionId;
           }).forEach(function (x) {
@@ -1716,7 +1715,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               alert("Something go wrong!..");
             });
           });
-          reader.readAsDataURL(file);
         }
       }]);
 

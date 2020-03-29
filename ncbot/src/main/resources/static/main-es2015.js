@@ -935,7 +935,6 @@ class QuestionsComponent {
     processFile(questionId, inputImage) {
         alert("process file");
         const file = inputImage.files[0];
-        const reader = new FileReader();
         this.questions.filter(x => x.id == questionId).forEach(x => {
             alert("EGORKA!");
             x.attachment.pending = true;
@@ -946,7 +945,6 @@ class QuestionsComponent {
                 alert("Something go wrong!..");
             });
         });
-        reader.readAsDataURL(file);
     }
 }
 QuestionsComponent.ɵfac = function QuestionsComponent_Factory(t) { return new (t || QuestionsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_service_image_file_service__WEBPACK_IMPORTED_MODULE_2__["ImageFileService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_service_question_service_service__WEBPACK_IMPORTED_MODULE_3__["QuestionServiceService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_4__["NgbModal"])); };
