@@ -2,6 +2,7 @@ package com.ncquizbot.ncbot.pojo;
 
 public class Option {
     private String content;
+    private String reaction;
 
     public Option() {
     }
