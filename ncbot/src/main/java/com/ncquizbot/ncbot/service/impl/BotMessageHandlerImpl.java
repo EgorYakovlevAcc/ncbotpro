@@ -79,12 +79,12 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         Long chatId = callbackQuery.getMessage().getChatId();
         String outputText = callbackQuery.getData();
         switch (outputText){
-            case "/start": {
-                messagesPackage = handleStartCommand(user);
+            case COMMAND_GO: {
+                messagesPackage = handleGoCommand(user);
                 break;
             }
-            case "go": {
-                messagesPackage = handleGoCommand(user);
+            case COMMAND_PRESENT: {
+                messagesPackage = handlePresentCommand(user);
                 break;
             }
             default: {
@@ -117,20 +117,22 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     private MessagesPackage handleInputMessage(Message message) {
         MessagesPackage messagesPackage = new MessagesPackage();
         if (Objects.nonNull(message) && message.hasText()) {
-            InlineKeyboardMarkup inlineKeyboardMarkup = null;
-            String currentMessageText = message.getText();
-            String ouputMessageText = "";
             User user = userService.createAndSaveUserByTelegramMessageIfCurrentDoesNotExist(message);
-            if (message.getText().equals(COMMAND_PRESENT)) {
-                if (user.isGameOver()) {
-                    if (!user.isPresentGiven()) {
-                        return messagesPackage.addMessageToPackage(getQrCodeImageForPresent(user));
-                    }
-                }
+            handleStartCommand(user);
+        }
+        return messagesPackage;
+    }
+
+    private MessagesPackage handlePresentCommand(User user){
+        MessagesPackage messagesPackage = new MessagesPackage();
+        if (user.isGameOver()) {
+            if (!user.isPresentGiven()) {
+                return messagesPackage.addMessageToPackage(getQrCodeImageForPresent(user));
             }
         }
         return messagesPackage;
     }
+
     private MessagesPackage handleAnswerAndGenerateAnswer(User user, String currentMessageText){
         MessagesPackage messagesPackage = new MessagesPackage();
         String ouputMessageText = "";
@@ -162,6 +164,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             List<List<InlineKeyboardButton>> keyboardRow = new ArrayList<>();
             InlineKeyboardButton keyboardButton = new InlineKeyboardButton();
             keyboardButton.setText(COMMAND_PRESENT);
+            keyboardButton.setCallbackData(COMMAND_PRESENT);
             keyboardRowList.add(keyboardButton);
             keyboardRow.add(keyboardRowList);
             inlineKeyboardMarkup.setKeyboard(keyboardRow);
