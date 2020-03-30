@@ -162,6 +162,15 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                             .setText(outputTextMessage);
                     messagesPackage.addMessageToPackage(sendMessage);
                 }
+                inlineKeyboardMarkup = new InlineKeyboardMarkup();
+                InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton();
+                inlineKeyboardButton.setText("next");
+                inlineKeyboardButton.setCallbackData("next");
+                List<InlineKeyboardButton> keyboardButtons = new ArrayList<>();
+                keyboardButtons.add(inlineKeyboardButton);
+                List<List<InlineKeyboardButton>> keyboardRowsList = new ArrayList<>();
+                keyboardRowsList.add(keyboardButtons);
+                inlineKeyboardMarkup.setKeyboard(keyboardRowsList);
             }
             return messagesPackage.addMessagesToPackage(getNextQuestionForUser(user).getMessages());
         } else {
