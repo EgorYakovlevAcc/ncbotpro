@@ -66,7 +66,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         if (Objects.nonNull(message) && message.hasText()) {
             return handleInputMessage(message);
         }
-        if (update.hasCallbackQuery()){
+        if (update.hasCallbackQuery()) {
             return handelCallbackQuery(update.getCallbackQuery());
         }
         return null;
@@ -78,7 +78,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         MessagesPackage messagesPackage = null;
         Long chatId = callbackQuery.getMessage().getChatId();
         String outputText = callbackQuery.getData();
-        switch (outputText){
+        switch (outputText) {
             case COMMAND_GO: {
                 messagesPackage = handleGoCommand(user);
                 break;
@@ -118,12 +118,14 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         MessagesPackage messagesPackage = new MessagesPackage();
         if (Objects.nonNull(message) && message.hasText()) {
             User user = userService.createAndSaveUserByTelegramMessageIfCurrentDoesNotExist(message);
-            messagesPackage.addMessagesToPackage(handleStartCommand(user).getMessages());
+            if (!user.isActiveNow()) {
+                messagesPackage.addMessagesToPackage(handleStartCommand(user).getMessages());
+            }
         }
         return messagesPackage;
     }
 
-    private MessagesPackage handlePresentCommand(User user){
+    private MessagesPackage handlePresentCommand(User user) {
         MessagesPackage messagesPackage = new MessagesPackage();
         if (user.isGameOver()) {
             if (!user.isPresentGiven()) {
@@ -133,27 +135,28 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         return messagesPackage;
     }
 
-    private MessagesPackage handleAnswerAndGenerateAnswer(User user, String currentMessageText){
+    private MessagesPackage handleAnswerAndGenerateAnswer(User user, String currentMessageText) {
         MessagesPackage messagesPackage = new MessagesPackage();
         String ouputMessageText = "";
         InlineKeyboardMarkup inlineKeyboardMarkup = null;
         if (user.isActiveNow()) {
-                userService.updateLastUserSessionDate(user);
-                if (user.getQuestionNumber() > 0) {
-                    String outputTextMessage = updateUserScore(user, currentMessageText);
-                    if (Objects.nonNull(outputTextMessage)) {
-                        SendMessage sendMessage = new SendMessage();
-                        sendMessage.setChatId(user.getChatId())
-                                .setText(outputTextMessage);
-                        messagesPackage.addMessageToPackage(sendMessage);
-                    }
+            userService.updateLastUserSessionDate(user);
+            if (user.getQuestionNumber() > 0) {
+                String outputTextMessage = updateUserScore(user, currentMessageText);
+                if (Objects.nonNull(outputTextMessage)) {
+                    SendMessage sendMessage = new SendMessage();
+                    sendMessage.setChatId(user.getChatId())
+                            .setText(outputTextMessage);
+                    messagesPackage.addMessageToPackage(sendMessage);
                 }
-                return messagesPackage.addMessagesToPackage(getNextQuestionForUser(user).getMessages());
-            } else {
-                ouputMessageText = HelloGoodbyeMessages.GOODBYE_MESSAGE.text;
-                return getSendMessageForBot(ouputMessageText, user.getChatId(), inlineKeyboardMarkup, null);
             }
+            return messagesPackage.addMessagesToPackage(getNextQuestionForUser(user).getMessages());
+        } else {
+            ouputMessageText = HelloGoodbyeMessages.GOODBYE_MESSAGE.text;
+            return getSendMessageForBot(ouputMessageText, user.getChatId(), inlineKeyboardMarkup, null);
         }
+    }
+
     private MessagesPackage getNextQuestionForUser(User user) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         Question nextQuestion = getQuestionForUser(user);

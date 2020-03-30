@@ -54,30 +54,6 @@ public class Bot extends TelegramLongPollingBot {
         }
     }
 
-    public void executeSendMessage(Long chatId, String text){
-        SendMessage sendMessage = new SendMessage();
-        sendMessage
-                .setText(text)
-                .setChatId(chatId);
-        try {
-            execute(sendMessage);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void executeSendPhoto(Long chatId, byte[] image){
-        SendPhoto sendPhoto = new SendPhoto();
-        InputStream inputStream = new ByteArrayInputStream(image);
-        sendPhoto
-                .setChatId(chatId)
-                .setNewPhoto("photo_" + chatId, inputStream);
-        try {
-            sendPhoto(sendPhoto);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
-    }
     @Override
     public String getBotUsername() {
         return "netcracker_quiz_bot";
