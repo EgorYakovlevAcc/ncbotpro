@@ -62,6 +62,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
 
     @Override
     public MessagesPackage handleMessage(Update update) {
+        LOGGER.info("handleMessage [START]");
         Message message = update.getMessage();
         if (Objects.nonNull(message) && message.hasText()) {
             return handleInputMessage(message);
@@ -70,10 +71,10 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             return handelCallbackQuery(update.getCallbackQuery());
         }
         return null;
-
     }
 
     private MessagesPackage handelCallbackQuery(CallbackQuery callbackQuery) {
+        LOGGER.info("handelCallbackQuery [START]");
         User user = userService.findUserByTelegramId(callbackQuery.getFrom().getId());
         MessagesPackage messagesPackage = null;
         Long chatId = callbackQuery.getMessage().getChatId();
@@ -96,6 +97,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     }
 
     private MessagesPackage handleStartCommand(User user) {
+        LOGGER.info("handleStartCommand [START]");
         String ouputMessageText = HelloGoodbyeMessages.HELLO_MESSAGE.text;
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<InlineKeyboardButton> keyboardRow = new ArrayList<>();
@@ -110,11 +112,13 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     }
 
     private MessagesPackage handleGoCommand(User user) {
+        LOGGER.info("handleGoCommand [START]");
         userService.setActiveStatusTrue(user);
         return getNextQuestionForUser(user);
     }
 
     private MessagesPackage handleInputMessage(Message message) {
+        LOGGER.info("handleInputMessage [START]");
         MessagesPackage messagesPackage = new MessagesPackage();
         if (Objects.nonNull(message) && message.hasText()) {
             User user = userService.createAndSaveUserByTelegramMessageIfCurrentDoesNotExist(message);
@@ -126,6 +130,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     }
 
     private MessagesPackage handlePresentCommand(User user) {
+        LOGGER.info("handlePresentCommand [START]");
         MessagesPackage messagesPackage = new MessagesPackage();
         if (user.isGameOver()) {
             if (!user.isPresentGiven()) {
@@ -136,6 +141,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     }
 
     private MessagesPackage handleAnswerAndGenerateAnswer(User user, String currentMessageText) {
+        LOGGER.info("handleAnswerAndGenerateAnswer [START]");
         MessagesPackage messagesPackage = new MessagesPackage();
         String ouputMessageText = "";
         InlineKeyboardMarkup inlineKeyboardMarkup = null;
@@ -158,6 +164,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     }
 
     private MessagesPackage getNextQuestionForUser(User user) {
+        LOGGER.info("getNextQuestionForUser [START]");
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         Question nextQuestion = getQuestionForUser(user);
         //end [START]
@@ -175,6 +182,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     }
 
     private String updateUserScore(User user, String userAnswerText) {
+        LOGGER.info("updateUserScore [START]");
         Question lastQuestion = questionService.findQuestionById(user.getCurrentQuestionId());
         Integer questionWeight = lastQuestion.getWeight();
         Answer answer = lastQuestion.getAnswer();
@@ -190,6 +198,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     }
 
     private MessagesPackage getSendMessageForBot(String content, Long chatId, InlineKeyboardMarkup replyKeyboardMarkup, byte[] attachment) {
+        LOGGER.info("getSendMessageForBot [START]");
         MessagesPackage messagesPackage = new MessagesPackage();
         SendMessage sendMessage = null;
         if (Objects.nonNull(content)) {
@@ -198,6 +207,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                     .setChatId(chatId);
             sendMessage.setReplyMarkup(replyKeyboardMarkup);
         }
+        messagesPackage.addMessageToPackage(sendMessage);
         if (attachment != null) {
             InputStream photoInputStream = new ByteArrayInputStream(attachment);
             SendPhoto sendPhoto = new SendPhoto();
@@ -206,7 +216,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                     .setNewPhoto("photo_" + chatId, photoInputStream);
             messagesPackage.addMessageToPackage(sendPhoto);
         }
-        return messagesPackage.addMessageToPackage(sendMessage);
+        return messagesPackage;
     }
 
     private SendPhoto getQrCodeImageForPresent(User user) {
@@ -220,6 +230,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     }
 
     private String getGoodByeMessage(User user) {
+        LOGGER.info("getGoodByeMessage [START]");
         userService.turnOffUserActivityStatus(user);
         userService.updateUserSessionEndDate(user);
         userService.setGameOverForUser(user);
@@ -227,10 +238,12 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     }
 
     private Question getQuestionForUser(User user) {
+        LOGGER.info("getQuestionForUser [START]");
         return userService.setNextQuestionToUser(user);
     }
 
     private InlineKeyboardMarkup getQuestionWithMultipleOptions(List<Option> options) {
+        LOGGER.info("getQuestionWithMultipleOptions [START]");
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboardRowList = new ArrayList<>();
         List<InlineKeyboardButton> keyboardRow = new ArrayList<>();
