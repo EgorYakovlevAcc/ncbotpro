@@ -5,6 +5,8 @@ import com.ncquizbot.ncbot.model.ScoreRangesMessenger;
 import com.ncquizbot.ncbot.model.User;
 import com.ncquizbot.ncbot.pojo.BotState;
 import com.ncquizbot.ncbot.pojo.MessageToUsers;
+import com.ncquizbot.ncbot.pojo.ScoreRangesResultArrayPojo;
+import com.ncquizbot.ncbot.pojo.ScoreRangesResultPojo;
 import com.ncquizbot.ncbot.service.GlobalTelegramMessageSender;
 import com.ncquizbot.ncbot.service.ScoreRangesMessengerService;
 import com.ncquizbot.ncbot.service.UserService;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -65,5 +68,15 @@ public class MainController {
     @GetMapping(value = "/score/ranges")
     public List<ScoreRangesMessenger> getAllScoreRangesMessenger(){
         return scoreRangesMessengerService.findAll();
+    }
+
+    @PostMapping(value = "/score/ranges")
+    public ResponseEntity postScoreRangesMessenger(@RequestBody ScoreRangesResultArrayPojo scoreRangesResultArrayPojo){
+        try {
+            scoreRangesMessengerService.createScoreRangeResultByPojo(scoreRangesResultArrayPojo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok(null);
     }
 }

@@ -20,6 +20,7 @@ public class ScoreRangesMessenger {
     private Integer id;
     private Integer maxBorder;
     private Integer minBorder;
+    private String text;
     @Lob
     private byte[] picture;
 }
