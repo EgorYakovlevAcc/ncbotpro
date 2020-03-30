@@ -16,6 +16,7 @@ import { ModalAddQuestionComponent } from './modal-add-question/modal-add-questi
 import { MessageFormComponent } from './message-form/message-form.component';
 import { AboutComponent } from './about/about.component';
 import { FirstAndLastMessagesEditorComponent } from './first-and-last-messages-editor/first-and-last-messages-editor.component';
+import { ScoreRangeMessageComponent } from './score-range-message/score-range-message.component';
 
 const appRoutes: Routes = [
   {
@@ -57,7 +58,8 @@ const appRoutes: Routes = [
     ModalAddQuestionComponent,
     MessageFormComponent,
     AboutComponent,
-    FirstAndLastMessagesEditorComponent
+    FirstAndLastMessagesEditorComponent,
+    ScoreRangeMessageComponent
   ],
   imports: [
     BrowserModule,

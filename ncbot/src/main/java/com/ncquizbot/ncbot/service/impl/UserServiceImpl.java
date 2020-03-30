@@ -81,7 +81,14 @@ public class UserServiceImpl implements UserService {
     }
 
     public Question getNextQuestionForUser(User user) {
-        return questionService.getNextQuestionByWeight(user.getQuestionNumber());
+        Integer questionNumber = user.getQuestionNumber();
+        if (questionNumber == 0) {
+            return questionService.getNextQuestionByNumber(questionNumber);
+        }
+        else {
+            return questionService.getNextQuestionByNumber(questionNumber + 1);
+        }
+
     }
 
     @Override
@@ -102,7 +109,7 @@ public class UserServiceImpl implements UserService {
         Question question = getNextQuestionForUser(user);
         if (Objects.nonNull(question)) {
             user.setCurrentQuestionId(question.getId());
-            user.setQuestionNumber(question.getWeight());
+            user.setQuestionNumber(user.getQuestionNumber() + 1);
             userRepository.save(user);
         }
         return question;

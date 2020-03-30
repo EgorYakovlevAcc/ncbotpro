@@ -172,6 +172,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _message_form_message_form_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./message-form/message-form.component */ "./src/app/message-form/message-form.component.ts");
 /* harmony import */ var _about_about_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./about/about.component */ "./src/app/about/about.component.ts");
 /* harmony import */ var _first_and_last_messages_editor_first_and_last_messages_editor_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./first-and-last-messages-editor/first-and-last-messages-editor.component */ "./src/app/first-and-last-messages-editor/first-and-last-messages-editor.component.ts");
+/* harmony import */ var _score_range_message_score_range_message_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./score-range-message/score-range-message.component */ "./src/app/score-range-message/score-range-message.component.ts");
+
 
 
 
@@ -239,7 +241,8 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
         _modal_add_question_modal_add_question_component__WEBPACK_IMPORTED_MODULE_13__["ModalAddQuestionComponent"],
         _message_form_message_form_component__WEBPACK_IMPORTED_MODULE_14__["MessageFormComponent"],
         _about_about_component__WEBPACK_IMPORTED_MODULE_15__["AboutComponent"],
-        _first_and_last_messages_editor_first_and_last_messages_editor_component__WEBPACK_IMPORTED_MODULE_16__["FirstAndLastMessagesEditorComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
+        _first_and_last_messages_editor_first_and_last_messages_editor_component__WEBPACK_IMPORTED_MODULE_16__["FirstAndLastMessagesEditorComponent"],
+        _score_range_message_score_range_message_component__WEBPACK_IMPORTED_MODULE_17__["ScoreRangeMessageComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
         _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"],
         _angular_forms__WEBPACK_IMPORTED_MODULE_10__["FormsModule"],
         _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpClientModule"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"]], exports: [_angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"]] }); })();
@@ -257,7 +260,8 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
                     _modal_add_question_modal_add_question_component__WEBPACK_IMPORTED_MODULE_13__["ModalAddQuestionComponent"],
                     _message_form_message_form_component__WEBPACK_IMPORTED_MODULE_14__["MessageFormComponent"],
                     _about_about_component__WEBPACK_IMPORTED_MODULE_15__["AboutComponent"],
-                    _first_and_last_messages_editor_first_and_last_messages_editor_component__WEBPACK_IMPORTED_MODULE_16__["FirstAndLastMessagesEditorComponent"]
+                    _first_and_last_messages_editor_first_and_last_messages_editor_component__WEBPACK_IMPORTED_MODULE_16__["FirstAndLastMessagesEditorComponent"],
+                    _score_range_message_score_range_message_component__WEBPACK_IMPORTED_MODULE_17__["ScoreRangeMessageComponent"]
                 ],
                 imports: [
                     _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -1097,6 +1101,43 @@ QuestionsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefin
                 styleUrls: ['./questions.component.css']
             }]
     }], function () { return [{ type: _service_image_file_service__WEBPACK_IMPORTED_MODULE_2__["ImageFileService"] }, { type: _service_question_service_service__WEBPACK_IMPORTED_MODULE_3__["QuestionServiceService"] }, { type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_4__["NgbModal"] }]; }, null); })();
+
+
+/***/ }),
+
+/***/ "./src/app/score-range-message/score-range-message.component.ts":
+/*!**********************************************************************!*\
+  !*** ./src/app/score-range-message/score-range-message.component.ts ***!
+  \**********************************************************************/
+/*! exports provided: ScoreRangeMessageComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ScoreRangeMessageComponent", function() { return ScoreRangeMessageComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+
+
+class ScoreRangeMessageComponent {
+    constructor() {
+    }
+    ngOnInit() {
+    }
+}
+ScoreRangeMessageComponent.ɵfac = function ScoreRangeMessageComponent_Factory(t) { return new (t || ScoreRangeMessageComponent)(); };
+ScoreRangeMessageComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ScoreRangeMessageComponent, selectors: [["app-score-range-message"]], decls: 2, vars: 0, template: function ScoreRangeMessageComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "score-range-message works!");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Njb3JlLXJhbmdlLW1lc3NhZ2Uvc2NvcmUtcmFuZ2UtbWVzc2FnZS5jb21wb25lbnQuY3NzIn0= */"] });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ScoreRangeMessageComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'app-score-range-message',
+                templateUrl: './score-range-message.component.html',
+                styleUrls: ['./score-range-message.component.css']
+            }]
+    }], function () { return []; }, null); })();
 
 
 /***/ }),

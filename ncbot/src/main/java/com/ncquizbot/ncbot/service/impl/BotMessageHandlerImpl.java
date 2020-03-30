@@ -159,16 +159,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         Question nextQuestion = getQuestionForUser(user);
         //end [START]
         if (Objects.isNull(nextQuestion)) {
-            LOGGER.info("EGORKA = COMMAND_PRESENT");
             String ouputMessageText = getGoodByeMessage(user);
-            List<InlineKeyboardButton> keyboardRowList = new ArrayList<>();
-            List<List<InlineKeyboardButton>> keyboardRow = new ArrayList<>();
-            InlineKeyboardButton keyboardButton = new InlineKeyboardButton();
-            keyboardButton.setText(COMMAND_PRESENT);
-            keyboardButton.setCallbackData(COMMAND_PRESENT);
-            keyboardRowList.add(keyboardButton);
-            keyboardRow.add(keyboardRowList);
-            inlineKeyboardMarkup.setKeyboard(keyboardRow);
             return getSendMessageForBot(ouputMessageText, user.getChatId(), inlineKeyboardMarkup, null);
         }
         //end [FINISH]

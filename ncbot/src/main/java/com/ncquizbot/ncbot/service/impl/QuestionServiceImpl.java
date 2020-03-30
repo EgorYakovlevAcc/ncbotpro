@@ -142,4 +142,10 @@ public class QuestionServiceImpl implements QuestionService {
         questionRepository.save(question);
     }
 
+    @Override
+    public Question getNextQuestionByNumber(Integer number) {
+        List<Question> questions = questionRepository.findAll();
+        return questions.get(number);
+    }
+
 }
