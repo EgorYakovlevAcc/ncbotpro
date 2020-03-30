@@ -79,8 +79,12 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         Long chatId = callbackQuery.getMessage().getChatId();
         String outputText = callbackQuery.getData();
         switch (outputText){
+            case "/start": {
+                messagesPackage = handleStartCommand(user);
+                break;
+            }
             case "go": {
-                messagesPackage = handleGoCommand(user, chatId);
+                messagesPackage = handleGoCommand(user);
                 break;
             }
             default: {
@@ -91,9 +95,23 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         return messagesPackage;
     }
 
-    private MessagesPackage handleGoCommand(User user, Long chatId) {
+    private MessagesPackage handleStartCommand(User user) {
+        String ouputMessageText = HelloGoodbyeMessages.HELLO_MESSAGE.text;
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<InlineKeyboardButton> keyboardRow = new ArrayList<>();
+        List<List<InlineKeyboardButton>> keyboardRowList = new ArrayList<>();
+        InlineKeyboardButton keyboardButton = new InlineKeyboardButton();
+        keyboardButton.setText(COMMAND_GO);
+        keyboardButton.setCallbackData(COMMAND_GO);
+        keyboardRow.add(keyboardButton);
+        keyboardRowList.add(keyboardRow);
+        inlineKeyboardMarkup.setKeyboard(keyboardRowList);
+        return getSendMessageForBot(ouputMessageText, user.getChatId(), inlineKeyboardMarkup, null);
+    }
+
+    private MessagesPackage handleGoCommand(User user) {
         userService.setActiveStatusTrue(user);
-        return getNextQuestionForUser(user, chatId);
+        return getNextQuestionForUser(user);
     }
 
     private MessagesPackage handleInputMessage(Message message) {
@@ -128,25 +146,13 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                         messagesPackage.addMessageToPackage(sendMessage);
                     }
                 }
-                return messagesPackage.addMessagesToPackage(getNextQuestionForUser(user, user.getChatId()).getMessages());
-            } else if (!user.isGameOver()) {
-                ouputMessageText = HelloGoodbyeMessages.HELLO_MESSAGE.text;
-                inlineKeyboardMarkup = new InlineKeyboardMarkup();
-                List<InlineKeyboardButton> keyboardRow = new ArrayList<>();
-                List<List<InlineKeyboardButton>> keyboardRowList = new ArrayList<>();
-                InlineKeyboardButton keyboardButton = new InlineKeyboardButton();
-                keyboardButton.setText(COMMAND_GO);
-                keyboardButton.setCallbackData(COMMAND_GO);
-                keyboardRow.add(keyboardButton);
-                keyboardRowList.add(keyboardRow);
-                inlineKeyboardMarkup.setKeyboard(keyboardRowList);
-                return getSendMessageForBot(ouputMessageText, user.getChatId(), inlineKeyboardMarkup, null);
+                return messagesPackage.addMessagesToPackage(getNextQuestionForUser(user).getMessages());
             } else {
                 ouputMessageText = HelloGoodbyeMessages.GOODBYE_MESSAGE.text;
                 return getSendMessageForBot(ouputMessageText, user.getChatId(), inlineKeyboardMarkup, null);
             }
         }
-    private MessagesPackage getNextQuestionForUser(User user, Long chatId) {
+    private MessagesPackage getNextQuestionForUser(User user) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         Question nextQuestion = getQuestionForUser(user);
         //end [START]
@@ -159,14 +165,14 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             keyboardRowList.add(keyboardButton);
             keyboardRow.add(keyboardRowList);
             inlineKeyboardMarkup.setKeyboard(keyboardRow);
-            return getSendMessageForBot(ouputMessageText, chatId, inlineKeyboardMarkup, nextQuestion.getAttachement());
+            return getSendMessageForBot(ouputMessageText, user.getChatId(), inlineKeyboardMarkup, nextQuestion.getAttachement());
         }
         //end [FINISH]
         else {
             if (nextQuestion.getOptions().size() > 1) {
                 inlineKeyboardMarkup = getQuestionWithMultipleOptions(nextQuestion.getOptions());
             }
-            return getSendMessageForBot(nextQuestion.getContent(), chatId, inlineKeyboardMarkup, nextQuestion.getAttachement());
+            return getSendMessageForBot(nextQuestion.getContent(), user.getChatId(), inlineKeyboardMarkup, nextQuestion.getAttachement());
         }
     }
 
