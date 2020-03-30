@@ -188,7 +188,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         Answer answer = lastQuestion.getAnswer();
         String answerText = Objects.isNull(answer) ? "" : answer.getContent();
         if (checkAnswer(userAnswerText, answerText)) {
-            userService.increaseUserScore(user, questionWeight);
+            userService.increaseUserScore(user, 1);
         }
         return lastQuestion.getOptions().stream()
                 .filter(option -> option.getContent().equals(userAnswerText))
@@ -248,7 +248,10 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         List<List<InlineKeyboardButton>> keyboardRowList = new ArrayList<>();
         List<InlineKeyboardButton> keyboardRow = new ArrayList<>();
         for (Option option : options) {
-            keyboardRow.add((new InlineKeyboardButton()).setCallbackData(option.getContent()).setText(option.getContent()));
+            InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton();
+            inlineKeyboardButton.setCallbackData(option.getContent());
+            inlineKeyboardButton.setText(option.getContent());
+            keyboardRow.add(inlineKeyboardButton);
         }
         keyboardRowList.add(keyboardRow);
         inlineKeyboardMarkup.setKeyboard(keyboardRowList);
