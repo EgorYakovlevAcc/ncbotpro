@@ -86,6 +86,9 @@ public class UserServiceImpl implements UserService {
             return questionService.getNextQuestionByNumber(questionNumber);
         }
         else {
+            if (user.getQuestionNumber() >= questionService.findAll().size() - 1){
+                return null;
+            }
             return questionService.getNextQuestionByNumber(questionNumber + 1);
         }
 
