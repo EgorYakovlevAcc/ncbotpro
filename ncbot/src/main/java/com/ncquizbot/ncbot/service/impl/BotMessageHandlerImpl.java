@@ -56,6 +56,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     public static final String COMMAND_PRESENT = "present";
     public static final String COMMAND_GO = "go";
     public static final String COMMAND_NEXT = "next";
+    public static final String COMMAND_FINISH = "finish";
     public static final String FINISH_GAME = "You have finished your game! We will happy to meet you at another time";
     @Autowired
     private UserService userService;
@@ -91,12 +92,21 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                 messagesPackage = handleNextCommand(user);
                 break;
             }
+            case COMMAND_FINISH: {
+                messagesPackage = handleFinishCommand(user);
+                break;
+            }
             default: {
                 messagesPackage = handleAnswerAndGenerateAnswer(user, callbackQuery.getData());
                 break;
             }
         }
         return messagesPackage;
+    }
+
+    private MessagesPackage handleFinishCommand(User user) {
+        String ouputMessageText = getGoodByeMessage(user);
+        return getSendMessageForBot(ouputMessageText, user.getChatId(), null, null);
     }
 
     private MessagesPackage handleNextCommand(User user) {
@@ -160,14 +170,23 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                 if (Objects.nonNull(outputTextMessage)) {
                     inlineKeyboardMarkup = new InlineKeyboardMarkup();
                     InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton();
-                    inlineKeyboardButton.setText("next");
-                    inlineKeyboardButton.setCallbackData("next");
-                    List<InlineKeyboardButton> keyboardButtons = new ArrayList<>();
-                    keyboardButtons.add(inlineKeyboardButton);
-                    List<List<InlineKeyboardButton>> keyboardRowsList = new ArrayList<>();
-                    keyboardRowsList.add(keyboardButtons);
-                    inlineKeyboardMarkup.setKeyboard(keyboardRowsList);
-
+                    if (Objects.nonNull(getNextQuestionForUser(user))) {
+                        inlineKeyboardButton.setText("next");
+                        inlineKeyboardButton.setCallbackData("next");
+                        List<InlineKeyboardButton> keyboardButtons = new ArrayList<>();
+                        keyboardButtons.add(inlineKeyboardButton);
+                        List<List<InlineKeyboardButton>> keyboardRowsList = new ArrayList<>();
+                        keyboardRowsList.add(keyboardButtons);
+                        inlineKeyboardMarkup.setKeyboard(keyboardRowsList);
+                    } else {
+                        inlineKeyboardButton.setText("finish");
+                        inlineKeyboardButton.setCallbackData("finish");
+                        List<InlineKeyboardButton> keyboardButtons = new ArrayList<>();
+                        keyboardButtons.add(inlineKeyboardButton);
+                        List<List<InlineKeyboardButton>> keyboardRowsList = new ArrayList<>();
+                        keyboardRowsList.add(keyboardButtons);
+                        inlineKeyboardMarkup.setKeyboard(keyboardRowsList);
+                    }
                     SendMessage sendMessage = new SendMessage();
                     sendMessage.setChatId(user.getChatId())
                             .setText(outputTextMessage);
@@ -186,18 +205,13 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         LOGGER.info("getNextQuestionForUser [START]");
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         Question nextQuestion = getQuestionForUser(user);
-        //end [START]
-        if (Objects.isNull(nextQuestion)) {
-            String ouputMessageText = getGoodByeMessage(user);
-            return getSendMessageForBot(ouputMessageText, user.getChatId(), inlineKeyboardMarkup, null);
-        }
-        //end [FINISH]
-        else {
+        if (Objects.nonNull(nextQuestion)) {
             if (nextQuestion.getOptions().size() > 1) {
                 inlineKeyboardMarkup = getQuestionWithMultipleOptions(nextQuestion.getOptions());
             }
-            return getSendMessageForBot(nextQuestion.getContent(), user.getChatId(), inlineKeyboardMarkup, nextQuestion.getAttachement());
         }
+        return getSendMessageForBot(nextQuestion.getContent(), user.getChatId(), inlineKeyboardMarkup, nextQuestion.getAttachement());
+
     }
 
     private String updateUserScore(User user, String userAnswerText) {
