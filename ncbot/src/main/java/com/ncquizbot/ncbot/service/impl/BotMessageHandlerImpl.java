@@ -67,10 +67,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         if (Objects.nonNull(message) && message.hasText()) {
             return handleInputMessage(message);
         }
-        if (update.hasCallbackQuery()) {
-            return handelCallbackQuery(update.getCallbackQuery());
-        }
-        return null;
+        return handelCallbackQuery(update.getCallbackQuery());
     }
 
     private MessagesPackage handelCallbackQuery(CallbackQuery callbackQuery) {
