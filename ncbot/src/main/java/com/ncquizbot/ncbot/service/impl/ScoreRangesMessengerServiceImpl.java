@@ -39,18 +39,17 @@ public class ScoreRangesMessengerServiceImpl implements ScoreRangesMessengerServ
     }
 
     @Override
-    public void createScoreRangeResultByPojo(ScoreRangesResultArrayPojo scoreRangesResultArrayPojo) throws IOException {
-        List<ScoreRangesResultPojo> scoreRangesResultPojos = scoreRangesResultArrayPojo.getScoreRangesResultPojoList();
-        for (int i = 0; i < scoreRangesResultPojos.size(); i++) {
+    public void createScoreRangeResultByPojo(List<ScoreRangesResultPojo> scoreRangesResultArrayPojo) throws IOException {
+        for (int i = 0; i < scoreRangesResultArrayPojo.size(); i++) {
             ScoreRangesMessenger scoreRangesMessenger = new ScoreRangesMessenger();
-            scoreRangesMessenger.setPicture(scoreRangesResultPojos.get(i).getImageFile().getBytes());
+            scoreRangesMessenger.setPicture(scoreRangesResultArrayPojo.get(i).getImageFile().getBytes());
             if (i == 0) {
                 scoreRangesMessenger.setMinBorder(0);
             } else {
-                scoreRangesMessenger.setMinBorder(scoreRangesResultPojos.get(i - 1).getMaxRange());
+                scoreRangesMessenger.setMinBorder(scoreRangesResultArrayPojo.get(i - 1).getMaxRange());
             }
-            scoreRangesMessenger.setMaxBorder(scoreRangesResultPojos.get(i).getMaxRange());
-            scoreRangesMessenger.setText(scoreRangesResultPojos.get(i).getText());
+            scoreRangesMessenger.setMaxBorder(scoreRangesResultArrayPojo.get(i).getMaxRange());
+            scoreRangesMessenger.setText(scoreRangesResultArrayPojo.get(i).getText());
             scoreRangesMessengerRepository.save(scoreRangesMessenger);
         }
     }

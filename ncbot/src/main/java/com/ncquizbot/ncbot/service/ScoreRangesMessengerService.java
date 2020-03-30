@@ -2,6 +2,7 @@ package com.ncquizbot.ncbot.service;
 
 import com.ncquizbot.ncbot.model.ScoreRangesMessenger;
 import com.ncquizbot.ncbot.pojo.ScoreRangesResultArrayPojo;
+import com.ncquizbot.ncbot.pojo.ScoreRangesResultPojo;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,5 +13,5 @@ public interface ScoreRangesMessengerService {
     void save(ScoreRangesMessenger scoreRangesMessenger);
     void delete(ScoreRangesMessenger scoreRangesMessenger);
 
-    void createScoreRangeResultByPojo(ScoreRangesResultArrayPojo scoreRangesResultArrayPojo) throws IOException;
+    void createScoreRangeResultByPojo(List<ScoreRangesResultPojo> scoreRangesResultArrayPojo) throws IOException;
 }
