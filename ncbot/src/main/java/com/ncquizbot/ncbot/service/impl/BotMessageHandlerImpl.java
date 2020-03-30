@@ -54,6 +54,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     public static final String USER_SCORE = "Thank you it was last question. Your score is ";
     public static final String COMMAND_PRESENT = "present";
     public static final String COMMAND_GO = "go";
+    public static final String COMMAND_NEXT = "next";
     public static final String FINISH_GAME = "You have finished your game! We will happy to meet you at another time";
     @Autowired
     private UserService userService;
@@ -85,12 +86,20 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                 messagesPackage = handlePresentCommand(user);
                 break;
             }
+            case COMMAND_NEXT: {
+                messagesPackage = handleNextCommand(user);
+                break;
+            }
             default: {
-                messagesPackage = handleAnswerAndGenerateAnswer(user, outputText);
+                messagesPackage = handleAnswerAndGenerateAnswer(user, callbackQuery.getData());
                 break;
             }
         }
         return messagesPackage;
+    }
+
+    private MessagesPackage handleNextCommand(User user) {
+        return getNextQuestionForUser(user);
     }
 
     private MessagesPackage handleStartCommand(User user) {
@@ -139,6 +148,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
 
     private MessagesPackage handleAnswerAndGenerateAnswer(User user, String currentMessageText) {
         LOGGER.info("handleAnswerAndGenerateAnswer [START]");
+        LOGGER.info("handleAnswerAndGenerateAnswer input data: ", currentMessageText);
         MessagesPackage messagesPackage = new MessagesPackage();
         String ouputMessageText = "";
         InlineKeyboardMarkup inlineKeyboardMarkup = null;
