@@ -216,7 +216,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         List<List<InlineKeyboardButton>> keyboardRowList = new ArrayList<>();
         List<InlineKeyboardButton> keyboardRow = new ArrayList<>();
         for (Option option : options) {
-            keyboardRow.add(new InlineKeyboardButton(option.getContent()));
+            keyboardRow.add((new InlineKeyboardButton()).setCallbackData(option.getContent()).setText(option.getContent()));
         }
         keyboardRowList.add(keyboardRow);
         inlineKeyboardMarkup.setKeyboard(keyboardRowList);
