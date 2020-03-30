@@ -36,6 +36,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
@@ -203,8 +204,13 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         Integer questionWeight = lastQuestion.getWeight();
         Answer answer = lastQuestion.getAnswer();
         String answerText = Objects.isNull(answer) ? "" : answer.getContent();
-        if (checkAnswer(userAnswerText, answerText)) {
-            userService.increaseUserScore(user, 1);
+        int answerIndex = lastQuestion.getOptions()
+                .stream()
+                .map(x -> x.getContent())
+                .collect(Collectors.toList())
+                .indexOf(answer.getContent());
+        if (checkAnswer(Integer.parseInt(userAnswerText), answerIndex)) {
+            userService.increaseUserScore(user, questionWeight);
         }
         return lastQuestion.getOptions().stream()
                 .filter(option -> option.getContent().equals(userAnswerText))
@@ -265,7 +271,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         for (Option option : options) {
             List<InlineKeyboardButton> keyboardRow = new ArrayList<>();
             InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton();
-            inlineKeyboardButton.setCallbackData(option.getContent());
+            inlineKeyboardButton.setCallbackData(String.valueOf(options.indexOf(option)));
             inlineKeyboardButton.setText(option.getContent());
             keyboardRow.add(inlineKeyboardButton);
             keyboardRowList.add(keyboardRow);
@@ -274,13 +280,8 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         return inlineKeyboardMarkup;
     }
 
-    private boolean checkAnswer(String userAnswer, String answer) {
-        userAnswer = userAnswer.toLowerCase();
-        answer = answer.toLowerCase();
-        if (userAnswer.equals(answer)) {
-            return true;
-        }
-        return false;
+    private boolean checkAnswer(int userAnswer, int answer) {
+        return userAnswer == answer;
     }
 
     private String getGoodbyeMessage(Integer userScore) {
