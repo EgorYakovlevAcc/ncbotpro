@@ -23,4 +23,9 @@ public class MessagesPackage {
         this.messages.add(message);
         return this;
     }
+
+    public MessagesPackage addMessagesToPackage(List<PartialBotApiMethod> messages){
+        this.messages.addAll(messages);
+        return this;
+    }
 }

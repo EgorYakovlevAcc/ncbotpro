@@ -77,8 +77,12 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         User user = userService.findUserByTelegramId(callbackQuery.getFrom().getId());
         MessagesPackage messagesPackage = null;
         Long chatId = callbackQuery.getMessage().getChatId();
-        switch (callbackQuery.getData()){
+        String outputText = callbackQuery.getData();
+        switch (outputText){
             case "go": messagesPackage = handleGoCommand(user, chatId);
+            default: {
+                messagesPackage = handleAnswerAndGenerateAnswer(user, outputText);
+            }
         }
         return messagesPackage;
     }
@@ -89,7 +93,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     }
 
     private MessagesPackage handleInputMessage(Message message) {
-        MessagesPackage messagesPackage = new MessagesPackage(new ArrayList<>());
+        MessagesPackage messagesPackage = new MessagesPackage();
         if (Objects.nonNull(message) && message.hasText()) {
             InlineKeyboardMarkup inlineKeyboardMarkup = null;
             String currentMessageText = message.getText();
@@ -102,7 +106,14 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                     }
                 }
             }
-            if (user.isActiveNow()) {
+        }
+        return messagesPackage;
+    }
+    private MessagesPackage handleAnswerAndGenerateAnswer(User user, String currentMessageText){
+        MessagesPackage messagesPackage = new MessagesPackage();
+        String ouputMessageText = "";
+        InlineKeyboardMarkup inlineKeyboardMarkup = null;
+        if (user.isActiveNow()) {
                 userService.updateLastUserSessionDate(user);
                 if (user.getQuestionNumber() > 0) {
                     String outputTextMessage = updateUserScore(user, currentMessageText);
@@ -113,7 +124,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                         messagesPackage.addMessageToPackage(sendMessage);
                     }
                 }
-                return getNextQuestionForUser(user, message.getChatId());
+                return messagesPackage.addMessagesToPackage(getNextQuestionForUser(user, user.getChatId()).getMessages());
             } else if (!user.isGameOver()) {
                 ouputMessageText = HelloGoodbyeMessages.HELLO_MESSAGE.text;
                 inlineKeyboardMarkup = new InlineKeyboardMarkup();
@@ -125,18 +136,16 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                 keyboardRow.add(keyboardButton);
                 keyboardRowList.add(keyboardRow);
                 inlineKeyboardMarkup.setKeyboard(keyboardRowList);
-                return getSendMessageForBot(ouputMessageText, message.getChatId(), inlineKeyboardMarkup, null);
+                return getSendMessageForBot(ouputMessageText, user.getChatId(), inlineKeyboardMarkup, null);
             } else {
                 ouputMessageText = HelloGoodbyeMessages.GOODBYE_MESSAGE.text;
-                return getSendMessageForBot(ouputMessageText, message.getChatId(), inlineKeyboardMarkup, null);
+                return getSendMessageForBot(ouputMessageText, user.getChatId(), inlineKeyboardMarkup, null);
             }
         }
-        return messagesPackage;
-    }
-
     private MessagesPackage getNextQuestionForUser(User user, Long chatId) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         Question nextQuestion = getQuestionForUser(user);
+        //end [START]
         if (user.getQuestionNumber() > 5 || Objects.isNull(nextQuestion)) {
             String ouputMessageText = getGoodByeMessage(user);
             List<InlineKeyboardButton> keyboardRowList = new ArrayList<>();
@@ -147,7 +156,9 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             keyboardRow.add(keyboardRowList);
             inlineKeyboardMarkup.setKeyboard(keyboardRow);
             return getSendMessageForBot(ouputMessageText, chatId, inlineKeyboardMarkup, nextQuestion.getAttachement());
-        } else {
+        }
+        //end [FINISH]
+        else {
             if (nextQuestion.getOptions().size() > 1) {
                 inlineKeyboardMarkup = getQuestionWithMultipleOptions(nextQuestion.getOptions());
             }
