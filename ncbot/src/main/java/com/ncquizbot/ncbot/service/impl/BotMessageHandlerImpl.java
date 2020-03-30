@@ -79,9 +79,13 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         Long chatId = callbackQuery.getMessage().getChatId();
         String outputText = callbackQuery.getData();
         switch (outputText){
-            case "go": messagesPackage = handleGoCommand(user, chatId);
+            case "go": {
+                messagesPackage = handleGoCommand(user, chatId);
+                break;
+            }
             default: {
                 messagesPackage = handleAnswerAndGenerateAnswer(user, outputText);
+                break;
             }
         }
         return messagesPackage;
