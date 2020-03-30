@@ -214,11 +214,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         if (checkAnswer(Integer.parseInt(userAnswerText), answerIndex)) {
             userService.increaseUserScore(user, questionWeight);
         }
-        return lastQuestion.getOptions().stream()
-                .filter(option -> option.getContent().equals(userAnswerText))
-                .map(option -> option.getReaction())
-                .findFirst()
-                .orElse(null);
+        return lastQuestion.getOptions().get(Integer.parseInt(userAnswerText)).getReaction();
     }
 
     private MessagesPackage getSendMessageForBot(String content, Long chatId, InlineKeyboardMarkup replyKeyboardMarkup, byte[] attachment) {
