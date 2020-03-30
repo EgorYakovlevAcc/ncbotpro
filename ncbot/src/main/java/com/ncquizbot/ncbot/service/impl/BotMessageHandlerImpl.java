@@ -118,7 +118,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         MessagesPackage messagesPackage = new MessagesPackage();
         if (Objects.nonNull(message) && message.hasText()) {
             User user = userService.createAndSaveUserByTelegramMessageIfCurrentDoesNotExist(message);
-            handleStartCommand(user);
+            messagesPackage.addMessagesToPackage(handleStartCommand(user).getMessages());
         }
         return messagesPackage;
     }
