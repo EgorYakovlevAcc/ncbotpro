@@ -1076,6 +1076,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   },
 
   /***/
+  "./src/app/model/score-range-result.ts":
+  /*!*********************************************!*\
+    !*** ./src/app/model/score-range-result.ts ***!
+    \*********************************************/
+
+  /*! exports provided: ScoreRangeResult */
+
+  /***/
+  function srcAppModelScoreRangeResultTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ScoreRangeResult", function () {
+      return ScoreRangeResult;
+    });
+
+    var ScoreRangeResult = function ScoreRangeResult() {
+      _classCallCheck(this, ScoreRangeResult);
+    };
+    /***/
+
+  },
+
+  /***/
   "./src/app/navigation/navigation.component.ts":
   /*!****************************************************!*\
     !*** ./src/app/navigation/navigation.component.ts ***!
@@ -1697,24 +1724,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }, {
         key: "processFile",
-        value: function processFile(questionId, inputImage) {
-          var _this4 = this;
-
-          alert("process file");
-          var file = inputImage.files[0];
-          this.questions.filter(function (x) {
-            return x.id == questionId;
-          }).forEach(function (x) {
-            alert("EGORKA!");
-            x.attachment.pending = true;
-            x.attachment.file = file;
-
-            _this4.imageFileService.uploadImage(x.id, x.attachment.file).subscribe(function (result) {
-              alert("Success");
-            }, function (error) {
-              alert("Something go wrong!..");
-            });
+        value: function processFile(questionId) {
+          this.imageFileService.uploadImage(questionId, this.selectedFile).subscribe(function (result) {
+            alert("Success");
+          }, function (error) {
+            alert("Something go wrong!..");
           });
+        }
+      }, {
+        key: "onFileChanged",
+        value: function onFileChanged(event) {
+          this.selectedFile = event.target.files[0];
         }
       }]);
 
@@ -1822,6 +1842,250 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           type: _service_question_service_service__WEBPACK_IMPORTED_MODULE_2__["QuestionServiceService"]
         }, {
           type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbModal"]
+        }];
+      }, null);
+    })();
+    /***/
+
+  },
+
+  /***/
+  "./src/app/score-range-message/score-range-message.component.ts":
+  /*!**********************************************************************!*\
+    !*** ./src/app/score-range-message/score-range-message.component.ts ***!
+    \**********************************************************************/
+
+  /*! exports provided: ScoreRangeMessageComponent */
+
+  /***/
+  function srcAppScoreRangeMessageScoreRangeMessageComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ScoreRangeMessageComponent", function () {
+      return ScoreRangeMessageComponent;
+    });
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _model_score_range_result__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ../model/score-range-result */
+    "./src/app/model/score-range-result.ts");
+    /* harmony import */
+
+
+    var _service_score_range_result_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ../service/score-range-result.service */
+    "./src/app/service/score-range-result.service.ts");
+    /* harmony import */
+
+
+    var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/common */
+    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    /* harmony import */
+
+
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @angular/forms */
+    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+
+    function ScoreRangeMessageComponent_div_3_Template(rf, ctx) {
+      if (rf & 1) {
+        var _r37 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 3);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 4);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 5);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "label");
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "max range");
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "input", 6);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function ScoreRangeMessageComponent_div_3_Template_input_ngModelChange_5_listener($event) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r37);
+
+          var scoreRange_r34 = ctx.$implicit;
+          return scoreRange_r34.max = $event;
+        });
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "input", 7);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function ScoreRangeMessageComponent_div_3_Template_input_ngModelChange_6_listener($event) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r37);
+
+          var scoreRange_r34 = ctx.$implicit;
+          return scoreRange_r34.text = $event;
+        });
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "input", 8);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function ScoreRangeMessageComponent_div_3_Template_input_ngModelChange_7_listener($event) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r37);
+
+          var scoreRange_r34 = ctx.$implicit;
+          return scoreRange_r34.image = $event;
+        })("change", function ScoreRangeMessageComponent_div_3_Template_input_change_7_listener($event) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r37);
+
+          var ctx_r40 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+
+          return ctx_r40.changeImageFile($event);
+        });
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "button", 9);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ScoreRangeMessageComponent_div_3_Template_button_click_8_listener($event) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r37);
+
+          var ctx_r41 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+
+          return ctx_r41.scoreRangeResultSend();
+        });
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9, "ok");
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      }
+
+      if (rf & 2) {
+        var scoreRange_r34 = ctx.$implicit;
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", scoreRange_r34.max);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", scoreRange_r34.text);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", scoreRange_r34.image);
+      }
+    }
+
+    var ScoreRangeMessageComponent =
+    /*#__PURE__*/
+    function () {
+      function ScoreRangeMessageComponent(scoreRangeResultService) {
+        _classCallCheck(this, ScoreRangeMessageComponent);
+
+        this.scoreRangeResultService = scoreRangeResultService;
+      }
+
+      _createClass(ScoreRangeMessageComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {
+          var _this4 = this;
+
+          this.scoreRangeResultService.getAllScoreRangeResults().subscribe(function (result) {
+            _this4.scoreRanges.push(result);
+          });
+        }
+      }, {
+        key: "addNewScoreRange",
+        value: function addNewScoreRange() {
+          var scoreRangeResult = new _model_score_range_result__WEBPACK_IMPORTED_MODULE_1__["ScoreRangeResult"]();
+          this.scoreRanges.push(scoreRangeResult);
+        }
+      }, {
+        key: "scoreRangeResultSend",
+        value: function scoreRangeResultSend() {
+          this.scoreRangeResultService.uploadImageForScoreRange(this.scoreRanges).subscribe(function (result) {
+            alert("SUCCESS");
+          }, function (error) {
+            alert("ERROR");
+          });
+        }
+      }, {
+        key: "changeImageFile",
+        value: function changeImageFile(event) {
+          this.imageFile = event.target.files[0];
+        }
+      }]);
+
+      return ScoreRangeMessageComponent;
+    }();
+
+    ScoreRangeMessageComponent.ɵfac = function ScoreRangeMessageComponent_Factory(t) {
+      return new (t || ScoreRangeMessageComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_service_score_range_result_service__WEBPACK_IMPORTED_MODULE_2__["ScoreRangeResultService"]));
+    };
+
+    ScoreRangeMessageComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
+      type: ScoreRangeMessageComponent,
+      selectors: [["app-score-range-message"]],
+      decls: 4,
+      vars: 1,
+      consts: [[1, "container-fluid"], [1, "btn-primary", 3, "click"], ["class", "row", 4, "ngFor", "ngForOf"], [1, "row"], [1, "col"], [1, "form-group"], ["type", "number", 3, "ngModel", "ngModelChange"], ["type", "text", 3, "ngModel", "ngModelChange"], ["type", "file", 3, "ngModel", "ngModelChange", "change"], [1, "btn-dark", 3, "click"]],
+      template: function ScoreRangeMessageComponent_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ScoreRangeMessageComponent_Template_button_click_1_listener($event) {
+            return ctx.addNewScoreRange();
+          });
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "new score range");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, ScoreRangeMessageComponent_div_3_Template, 10, 3, "div", 2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+
+        if (rf & 2) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.scoreRanges);
+        }
+      },
+      directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgForOf"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NumberValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgModel"]],
+      styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Njb3JlLXJhbmdlLW1lc3NhZ2Uvc2NvcmUtcmFuZ2UtbWVzc2FnZS5jb21wb25lbnQuY3NzIn0= */"]
+    });
+    /*@__PURE__*/
+
+    (function () {
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ScoreRangeMessageComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+          selector: 'app-score-range-message',
+          templateUrl: './score-range-message.component.html',
+          styleUrls: ['./score-range-message.component.css']
+        }]
+      }], function () {
+        return [{
+          type: _service_score_range_result_service__WEBPACK_IMPORTED_MODULE_2__["ScoreRangeResultService"]
         }];
       }, null);
     })();
@@ -2098,6 +2362,90 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   },
 
   /***/
+  "./src/app/service/score-range-result.service.ts":
+  /*!*******************************************************!*\
+    !*** ./src/app/service/score-range-result.service.ts ***!
+    \*******************************************************/
+
+  /*! exports provided: ScoreRangeResultService */
+
+  /***/
+  function srcAppServiceScoreRangeResultServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ScoreRangeResultService", function () {
+      return ScoreRangeResultService;
+    });
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+
+    var ScoreRangeResultService =
+    /*#__PURE__*/
+    function () {
+      function ScoreRangeResultService(httpClient) {
+        _classCallCheck(this, ScoreRangeResultService);
+
+        this.httpClient = httpClient;
+      }
+
+      _createClass(ScoreRangeResultService, [{
+        key: "getAllScoreRangeResults",
+        value: function getAllScoreRangeResults() {
+          return this.httpClient.get("/score/ranges");
+        }
+      }, {
+        key: "uploadImageForScoreRange",
+        value: function uploadImageForScoreRange(scoreRangeResults) {
+          var url = "score/ranges/";
+          return this.httpClient.post(url, scoreRangeResults);
+        }
+      }]);
+
+      return ScoreRangeResultService;
+    }();
+
+    ScoreRangeResultService.ɵfac = function ScoreRangeResultService_Factory(t) {
+      return new (t || ScoreRangeResultService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]));
+    };
+
+    ScoreRangeResultService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
+      token: ScoreRangeResultService,
+      factory: ScoreRangeResultService.ɵfac,
+      providedIn: 'root'
+    });
+    /*@__PURE__*/
+
+    (function () {
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ScoreRangeResultService, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
+        args: [{
+          providedIn: 'root'
+        }]
+      }], function () {
+        return [{
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]
+        }];
+      }, null);
+    })();
+    /***/
+
+  },
+
+  /***/
   "./src/app/service/user-service.service.ts":
   /*!*************************************************!*\
     !*** ./src/app/service/user-service.service.ts ***!
@@ -2350,12 +2698,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(UsersComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this4 = this;
+          var _this5 = this;
 
           this.userService.getAllUsers().subscribe(function (result) {
-            _this4.users = result;
+            _this5.users = result;
 
-            _this4.checkIsUserActiveNow(_this4.users);
+            _this5.checkIsUserActiveNow(_this5.users);
           });
         }
       }, {

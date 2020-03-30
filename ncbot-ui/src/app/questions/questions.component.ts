@@ -42,7 +42,6 @@ export class QuestionsComponent implements OnInit {
   }
 
   processFile(questionId: number) {
-    alert("EGORKA!");
     this.imageFileService.uploadImage(questionId, this.selectedFile).subscribe(result => {
         alert("Success");
       },
@@ -52,7 +51,6 @@ export class QuestionsComponent implements OnInit {
   }
 
   onFileChanged(event) {
-    alert("EGORKA: ON FILE CHANGED");
     this.selectedFile = event.target.files[0];
   }
 }

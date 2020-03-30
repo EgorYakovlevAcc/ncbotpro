@@ -1,15 +1,14 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col">
-      set score ranges for finish messages
-    </div>
+  <button class="btn-primary" (click)="addNewScoreRange()">new score range</button>
+  <div class="row" *ngFor="let scoreRange of this.scoreRanges; let i = index">
     <div class="col">
       <div class="form-group">
         <label>max range</label>
-        <input type="number"/>
-        <input type="text"/>
+        <input [(ngModel)]="scoreRange.max" type="number"/>
+        <input [(ngModel)]="scoreRange.text" type="text"/>
+        <input [(ngModel)]="scoreRange.image" (change)="changeImageFile($event)" type="file"/>
       </div>
-      <button (click)="addNewScoreRange()"></button>
     </div>
+    <button (click)="scoreRangeResultSend()" class="btn-dark">ok</button>
   </div>
 </div>
