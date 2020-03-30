@@ -36,6 +36,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -104,7 +105,13 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             if (user.isActiveNow()) {
                 userService.updateLastUserSessionDate(user);
                 if (user.getQuestionNumber() > 0) {
-                    updateUserScore(user, currentMessageText);
+                    String outputTextMessage = updateUserScore(user, currentMessageText);
+                    if (Objects.nonNull(outputTextMessage)) {
+                        SendMessage sendMessage = new SendMessage();
+                        sendMessage.setChatId(user.getChatId())
+                                .setText(outputTextMessage);
+                        messagesPackage.addMessageToPackage(sendMessage);
+                    }
                 }
                 return getNextQuestionForUser(user, message.getChatId());
             } else if (!user.isGameOver()) {
@@ -139,7 +146,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             keyboardRowList.add(keyboardButton);
             keyboardRow.add(keyboardRowList);
             inlineKeyboardMarkup.setKeyboard(keyboardRow);
-            return getSendMessageForBot(nextQuestion.getContent(), chatId, inlineKeyboardMarkup, nextQuestion.getAttachement());
+            return getSendMessageForBot(ouputMessageText, chatId, inlineKeyboardMarkup, nextQuestion.getAttachement());
         } else {
             if (nextQuestion.getOptions().size() > 1) {
                 inlineKeyboardMarkup = getQuestionWithMultipleOptions(nextQuestion.getOptions());
@@ -148,7 +155,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         }
     }
 
-    private void updateUserScore(User user, String userAnswerText) {
+    private String updateUserScore(User user, String userAnswerText) {
         Question lastQuestion = questionService.findQuestionById(user.getCurrentQuestionId());
         Integer questionWeight = lastQuestion.getWeight();
         Answer answer = lastQuestion.getAnswer();
@@ -156,6 +163,11 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         if (checkAnswer(userAnswerText, answerText)) {
             userService.increaseUserScore(user, questionWeight);
         }
+        return lastQuestion.getOptions().stream()
+                .filter(option -> option.getContent().equals(userAnswerText))
+                .map(option -> option.getReaction())
+                .findFirst()
+                .orElse(null);
     }
 
     private MessagesPackage getSendMessageForBot(String content, Long chatId, InlineKeyboardMarkup replyKeyboardMarkup, byte[] attachment) {
