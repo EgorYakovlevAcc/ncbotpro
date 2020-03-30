@@ -14,6 +14,7 @@ export class ScoreRangeMessageComponent implements OnInit {
   constructor(private scoreRangeResultService: ScoreRangeResultService) { }
 
   ngOnInit(): void {
+    this.scoreRanges = [];
     this.scoreRangeResultService.getAllScoreRangeResults().subscribe((result:ScoreRangeResult) => {
       this.scoreRanges.push(result);
     });

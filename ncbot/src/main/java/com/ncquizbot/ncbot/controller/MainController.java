@@ -1,10 +1,12 @@
 package com.ncquizbot.ncbot.controller;
 
 import com.ncquizbot.ncbot.bot.Bot;
+import com.ncquizbot.ncbot.model.ScoreRangesMessenger;
 import com.ncquizbot.ncbot.model.User;
 import com.ncquizbot.ncbot.pojo.BotState;
 import com.ncquizbot.ncbot.pojo.MessageToUsers;
 import com.ncquizbot.ncbot.service.GlobalTelegramMessageSender;
+import com.ncquizbot.ncbot.service.ScoreRangesMessengerService;
 import com.ncquizbot.ncbot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +23,9 @@ public class MainController {
     @Autowired
     private UserService userService;
     @Autowired
-    private Bot bot;
-    @Autowired
     private GlobalTelegramMessageSender globalTelegramMessageSender;
+    @Autowired
+    private ScoreRangesMessengerService scoreRangesMessengerService;
 
     @GetMapping("all/users")
     @ResponseBody
@@ -58,5 +60,10 @@ public class MainController {
             }
         }
         return ResponseEntity.ok("PRESENT HAS BEEN GIVEN TO USER!");
+    }
+
+    @GetMapping(value = "/score/ranges")
+    public List<ScoreRangesMessenger> getAllScoreRangesMessenger(){
+        return scoreRangesMessengerService.findAll();
     }
 }

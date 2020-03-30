@@ -1185,6 +1185,7 @@ class ScoreRangeMessageComponent {
         this.scoreRangeResultService = scoreRangeResultService;
     }
     ngOnInit() {
+        this.scoreRanges = [];
         this.scoreRangeResultService.getAllScoreRangeResults().subscribe((result) => {
             this.scoreRanges.push(result);
         });
