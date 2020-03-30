@@ -158,7 +158,8 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         Question nextQuestion = getQuestionForUser(user);
         //end [START]
-        if (user.getQuestionNumber() > 5 || Objects.isNull(nextQuestion)) {
+        if (Objects.isNull(nextQuestion)) {
+            LOGGER.info("EGORKA = COMMAND_PRESENT");
             String ouputMessageText = getGoodByeMessage(user);
             List<InlineKeyboardButton> keyboardRowList = new ArrayList<>();
             List<List<InlineKeyboardButton>> keyboardRow = new ArrayList<>();
