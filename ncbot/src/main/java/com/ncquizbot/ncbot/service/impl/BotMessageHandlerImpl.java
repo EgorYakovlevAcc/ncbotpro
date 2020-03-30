@@ -243,14 +243,14 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         LOGGER.info("getQuestionWithMultipleOptions [START]");
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboardRowList = new ArrayList<>();
-        List<InlineKeyboardButton> keyboardRow = new ArrayList<>();
         for (Option option : options) {
+            List<InlineKeyboardButton> keyboardRow = new ArrayList<>();
             InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton();
             inlineKeyboardButton.setCallbackData(option.getContent());
             inlineKeyboardButton.setText(option.getContent());
             keyboardRow.add(inlineKeyboardButton);
+            keyboardRowList.add(keyboardRow);
         }
-        keyboardRowList.add(keyboardRow);
         inlineKeyboardMarkup.setKeyboard(keyboardRowList);
         return inlineKeyboardMarkup;
     }
