@@ -43,12 +43,6 @@ import java.util.stream.Collectors;
 @Transactional
 public class BotMessageHandlerImpl implements BotMessageHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(Bot.class);
-    private static final String HELLO_MESSAGE = "Привет! \n" +
-            "Давай знакомиться &#128512; \n" +
-            "Я – телеграм бот компании Netcracker. \n" +
-            "И сегодня у тебя есть шанс проверить свои знания и логику, а также получить призы от нас. \n" +
-            "После прохождения всех заданий обязательно подходи к стенду Netcracker за призом. \n" +
-            "Обращаем внимание, что приятные подарочки получат самые быстрые из вас! &#128521;";
     public static final String GOODBYE_MESSAGE = "\nОбменять полученные баллы на призы можно у стенда Netcracker на Найти ИТ уже сейчас. \n" +
             "Если ты хочешь начать карьеру в IT-сфере, то подавай заявку до 31 марта на бесплатное обучение у нас: http://msk.edu-netcracker.com. \n" +
             "Учебный Центр Netcracker проводит курсы по таким направлениям как Enterprise Development, Business Analysis, Technical Sales, Devops и т.д.";
@@ -170,7 +164,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                 if (Objects.nonNull(outputTextMessage)) {
                     inlineKeyboardMarkup = new InlineKeyboardMarkup();
                     InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton();
-                    if (user.getQuestionNumber() < 10) {
+                    if (user.getQuestionNumber() < 9) {
                         inlineKeyboardButton.setText("next");
                         inlineKeyboardButton.setCallbackData("next");
                         List<InlineKeyboardButton> keyboardButtons = new ArrayList<>();
