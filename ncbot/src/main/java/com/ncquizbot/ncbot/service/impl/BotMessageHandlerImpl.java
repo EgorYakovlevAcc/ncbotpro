@@ -170,7 +170,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                 if (Objects.nonNull(outputTextMessage)) {
                     inlineKeyboardMarkup = new InlineKeyboardMarkup();
                     InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton();
-                    if (user.getQuestionNumber() < 9) {
+                    if (user.getQuestionNumber() < 10) {
                         inlineKeyboardButton.setText("next");
                         inlineKeyboardButton.setCallbackData("next");
                         List<InlineKeyboardButton> keyboardButtons = new ArrayList<>();
