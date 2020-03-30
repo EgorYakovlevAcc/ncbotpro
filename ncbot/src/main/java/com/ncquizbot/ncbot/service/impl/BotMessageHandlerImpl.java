@@ -207,7 +207,6 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                     .setChatId(chatId);
             sendMessage.setReplyMarkup(replyKeyboardMarkup);
         }
-        messagesPackage.addMessageToPackage(sendMessage);
         if (attachment != null) {
             InputStream photoInputStream = new ByteArrayInputStream(attachment);
             SendPhoto sendPhoto = new SendPhoto();
@@ -216,6 +215,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                     .setNewPhoto("photo_" + chatId, photoInputStream);
             messagesPackage.addMessageToPackage(sendPhoto);
         }
+        messagesPackage.addMessageToPackage(sendMessage);
         return messagesPackage;
     }
 
