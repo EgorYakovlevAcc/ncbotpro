@@ -169,7 +169,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             keyboardRowList.add(keyboardButton);
             keyboardRow.add(keyboardRowList);
             inlineKeyboardMarkup.setKeyboard(keyboardRow);
-            return getSendMessageForBot(ouputMessageText, user.getChatId(), inlineKeyboardMarkup, nextQuestion.getAttachement());
+            return getSendMessageForBot(ouputMessageText, user.getChatId(), inlineKeyboardMarkup, null);
         }
         //end [FINISH]
         else {
