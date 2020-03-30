@@ -12,4 +12,7 @@ export class ScoreRangeMessageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  addNewScoreRange() {
+
+  }
 }

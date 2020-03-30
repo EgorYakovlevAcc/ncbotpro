@@ -41,6 +41,10 @@ const appRoutes: Routes = [
     component: MessageFormComponent
   },
   {
+    path: 'range/message',
+    component: ScoreRangeMessageComponent
+  },
+  {
     path: '**',
     component: NotFoundComponent
   }
