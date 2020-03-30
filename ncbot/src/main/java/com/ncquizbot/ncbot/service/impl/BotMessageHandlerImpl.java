@@ -158,22 +158,24 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
             if (user.getQuestionNumber() > 0) {
                 String outputTextMessage = updateUserScore(user, currentMessageText);
                 if (Objects.nonNull(outputTextMessage)) {
+                    inlineKeyboardMarkup = new InlineKeyboardMarkup();
+                    InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton();
+                    inlineKeyboardButton.setText("next");
+                    inlineKeyboardButton.setCallbackData("next");
+                    List<InlineKeyboardButton> keyboardButtons = new ArrayList<>();
+                    keyboardButtons.add(inlineKeyboardButton);
+                    List<List<InlineKeyboardButton>> keyboardRowsList = new ArrayList<>();
+                    keyboardRowsList.add(keyboardButtons);
+                    inlineKeyboardMarkup.setKeyboard(keyboardRowsList);
+
                     SendMessage sendMessage = new SendMessage();
                     sendMessage.setChatId(user.getChatId())
                             .setText(outputTextMessage);
                     messagesPackage.addMessageToPackage(sendMessage);
+                    sendMessage.setReplyMarkup(inlineKeyboardMarkup);
                 }
-                inlineKeyboardMarkup = new InlineKeyboardMarkup();
-                InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton();
-                inlineKeyboardButton.setText("next");
-                inlineKeyboardButton.setCallbackData("next");
-                List<InlineKeyboardButton> keyboardButtons = new ArrayList<>();
-                keyboardButtons.add(inlineKeyboardButton);
-                List<List<InlineKeyboardButton>> keyboardRowsList = new ArrayList<>();
-                keyboardRowsList.add(keyboardButtons);
-                inlineKeyboardMarkup.setKeyboard(keyboardRowsList);
             }
-            return messagesPackage.addMessagesToPackage(getNextQuestionForUser(user).getMessages());
+            return messagesPackage;
         } else {
             ouputMessageText = HelloGoodbyeMessages.GOODBYE_MESSAGE.text;
             return getSendMessageForBot(ouputMessageText, user.getChatId(), inlineKeyboardMarkup, null);
