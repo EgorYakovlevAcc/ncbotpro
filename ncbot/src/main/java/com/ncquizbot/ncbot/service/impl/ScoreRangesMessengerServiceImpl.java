@@ -1,7 +1,6 @@
 package com.ncquizbot.ncbot.service.impl;
 
 import com.ncquizbot.ncbot.model.ScoreRangesMessenger;
-import com.ncquizbot.ncbot.pojo.ScoreRangesResultArrayPojo;
 import com.ncquizbot.ncbot.pojo.ScoreRangesResultPojo;
 import com.ncquizbot.ncbot.repo.ScoreRangesMessengerRepository;
 import com.ncquizbot.ncbot.service.ScoreRangesMessengerService;
@@ -42,13 +41,13 @@ public class ScoreRangesMessengerServiceImpl implements ScoreRangesMessengerServ
     public void createScoreRangeResultByPojo(List<ScoreRangesResultPojo> scoreRangesResultArrayPojo) throws IOException {
         for (int i = 0; i < scoreRangesResultArrayPojo.size(); i++) {
             ScoreRangesMessenger scoreRangesMessenger = new ScoreRangesMessenger();
-            scoreRangesMessenger.setPicture(scoreRangesResultArrayPojo.get(i).getImageFile().getBytes());
+            scoreRangesMessenger.setPicture(scoreRangesResultArrayPojo.get(i).getImage().getBytes());
             if (i == 0) {
                 scoreRangesMessenger.setMinBorder(0);
             } else {
-                scoreRangesMessenger.setMinBorder(scoreRangesResultArrayPojo.get(i - 1).getMaxRange());
+                scoreRangesMessenger.setMinBorder(scoreRangesResultArrayPojo.get(i - 1).getMax());
             }
-            scoreRangesMessenger.setMaxBorder(scoreRangesResultArrayPojo.get(i).getMaxRange());
+            scoreRangesMessenger.setMaxBorder(scoreRangesResultArrayPojo.get(i).getMax());
             scoreRangesMessenger.setText(scoreRangesResultArrayPojo.get(i).getText());
             scoreRangesMessengerRepository.save(scoreRangesMessenger);
         }
