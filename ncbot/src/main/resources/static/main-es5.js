@@ -2018,8 +2018,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }, {
         key: "scoreRangeResultSend",
-        value: function scoreRangeResultSend() {
-          this.scoreRangeResultService.uploadImageForScoreRange(this.scoreRanges).subscribe(function (result) {
+        value: function scoreRangeResultSend(scoreRangeResult) {
+          this.scoreRangeResultService.uploadImageForScoreRange(scoreRangeResult).subscribe(function (result) {
             alert("SUCCESS");
           }, function (error) {
             alert("ERROR");

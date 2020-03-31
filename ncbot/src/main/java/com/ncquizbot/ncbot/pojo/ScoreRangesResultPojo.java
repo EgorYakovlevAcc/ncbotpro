@@ -12,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 @NoArgsConstructor
 public class ScoreRangesResultPojo {
     private Integer id;
-    private MultipartFile image;
     private String text;
     private Integer max;
 }

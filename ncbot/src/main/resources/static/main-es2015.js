@@ -1193,7 +1193,6 @@ class ScoreRangeMessageComponent {
         this.scoreRanges.push(scoreRangeResult);
     }
     scoreRangeResultSend(scoreRangeResult) {
-        scoreRangeResult.image = this.imageFile;
         this.scoreRangeResultService.uploadImageForScoreRange(scoreRangeResult).subscribe(result => {
             alert("SUCCESS");
         }, error => {
