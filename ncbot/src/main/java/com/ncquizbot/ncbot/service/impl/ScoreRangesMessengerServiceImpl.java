@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -38,18 +39,20 @@ public class ScoreRangesMessengerServiceImpl implements ScoreRangesMessengerServ
     }
 
     @Override
-    public void createScoreRangeResultByPojo(List<ScoreRangesResultPojo> scoreRangesResultArrayPojo) throws IOException {
-        for (int i = 0; i < scoreRangesResultArrayPojo.size(); i++) {
-            ScoreRangesMessenger scoreRangesMessenger = new ScoreRangesMessenger();
-            scoreRangesMessenger.setPicture(scoreRangesResultArrayPojo.get(i).getImage().getBytes());
-            if (i == 0) {
-                scoreRangesMessenger.setMinBorder(0);
-            } else {
-                scoreRangesMessenger.setMinBorder(scoreRangesResultArrayPojo.get(i - 1).getMax());
-            }
-            scoreRangesMessenger.setMaxBorder(scoreRangesResultArrayPojo.get(i).getMax());
-            scoreRangesMessenger.setText(scoreRangesResultArrayPojo.get(i).getText());
-            scoreRangesMessengerRepository.save(scoreRangesMessenger);
-        }
+    public void createScoreRangeResultByPojo(ScoreRangesResultPojo scoreRangesResultPojo) throws IOException {
+        ScoreRangesMessenger scoreRangesMessenger = new ScoreRangesMessenger();
+        scoreRangesMessenger.setPicture(scoreRangesResultPojo.getImage().getBytes());
+        scoreRangesMessenger.setMinBorder(getMinBorderForScoreRange(scoreRangesResultPojo.getMax()));
+        scoreRangesMessenger.setMaxBorder(scoreRangesResultPojo.getMax());
+        scoreRangesMessenger.setText(scoreRangesResultPojo.getText());
+        scoreRangesMessengerRepository.save(scoreRangesMessenger);
+    }
+
+    private Integer getMinBorderForScoreRange(Integer currentMax) {
+    List<ScoreRangesMessenger> scoreRangesMessengerList = scoreRangesMessengerRepository.findAll();
+    return scoreRangesMessengerList.stream()
+            .map(ScoreRangesMessenger::getMaxBorder)
+            .filter(x -> x < currentMax)
+            .max(Comparator.comparing(x -> x)).get();
     }
 }

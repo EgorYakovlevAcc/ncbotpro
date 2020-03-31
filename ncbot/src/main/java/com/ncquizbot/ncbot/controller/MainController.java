@@ -71,9 +71,9 @@ public class MainController {
     }
 
     @PostMapping(value = "/score/ranges")
-    public ResponseEntity postScoreRangesMessenger(@RequestBody List<ScoreRangesResultPojo> scoreRangesResultArrayPojo){
+    public ResponseEntity postScoreRangesMessenger(@RequestBody ScoreRangesResultPojo scoreRangesResultPojo){
         try {
-            scoreRangesMessengerService.createScoreRangeResultByPojo(scoreRangesResultArrayPojo);
+            scoreRangesMessengerService.createScoreRangeResultByPojo(scoreRangesResultPojo);
         } catch (IOException e) {
             e.printStackTrace();
         }

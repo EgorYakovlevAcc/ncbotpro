@@ -13,8 +13,8 @@ export class ScoreRangeResultService {
     return this.httpClient.get("/score/ranges");
   }
 
-  uploadImageForScoreRange(scoreRangeResults: ScoreRangeResult[]) {
+  uploadImageForScoreRange(scoreRangeResult: ScoreRangeResult) {
     let url = "score/ranges/";
-    return this.httpClient.post(url, scoreRangeResults);
+    return this.httpClient.post(url, scoreRangeResult);
   }
 }

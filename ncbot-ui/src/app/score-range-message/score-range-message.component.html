@@ -6,9 +6,9 @@
         <label>max range</label>
         <input [(ngModel)]="scoreRange.max" type="number"/>
         <input [(ngModel)]="scoreRange.text" type="text"/>
-        <input [(ngModel)]="scoreRange.image" (change)="changeImageFile($event)" type="file"/>
+        <input (change)="changeImageFile($event)" type="file"/>
       </div>
     </div>
-    <button (click)="scoreRangeResultSend()" class="btn-dark">ok</button>
+    <button (click)="scoreRangeResultSend(scoreRange)" class="btn-dark">ok</button>
   </div>
 </div>

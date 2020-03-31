@@ -1162,12 +1162,12 @@ function ScoreRangeMessageComponent_div_3_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function ScoreRangeMessageComponent_div_3_Template_input_ngModelChange_6_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r37); const scoreRange_r34 = ctx.$implicit; return scoreRange_r34.text = $event; });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "input", 8);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function ScoreRangeMessageComponent_div_3_Template_input_ngModelChange_7_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r37); const scoreRange_r34 = ctx.$implicit; return scoreRange_r34.image = $event; })("change", function ScoreRangeMessageComponent_div_3_Template_input_change_7_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r37); const ctx_r40 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r40.changeImageFile($event); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function ScoreRangeMessageComponent_div_3_Template_input_change_7_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r37); const ctx_r39 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r39.changeImageFile($event); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "button", 9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ScoreRangeMessageComponent_div_3_Template_button_click_8_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r37); const ctx_r41 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r41.scoreRangeResultSend(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ScoreRangeMessageComponent_div_3_Template_button_click_8_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r37); const scoreRange_r34 = ctx.$implicit; const ctx_r40 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r40.scoreRangeResultSend(scoreRange_r34); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9, "ok");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -1177,8 +1177,6 @@ function ScoreRangeMessageComponent_div_3_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", scoreRange_r34.max);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", scoreRange_r34.text);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", scoreRange_r34.image);
 } }
 class ScoreRangeMessageComponent {
     constructor(scoreRangeResultService) {
@@ -1194,8 +1192,9 @@ class ScoreRangeMessageComponent {
         let scoreRangeResult = new _model_score_range_result__WEBPACK_IMPORTED_MODULE_1__["ScoreRangeResult"]();
         this.scoreRanges.push(scoreRangeResult);
     }
-    scoreRangeResultSend() {
-        this.scoreRangeResultService.uploadImageForScoreRange(this.scoreRanges).subscribe(result => {
+    scoreRangeResultSend(scoreRangeResult) {
+        scoreRangeResult.image = this.imageFile;
+        this.scoreRangeResultService.uploadImageForScoreRange(scoreRangeResult).subscribe(result => {
             alert("SUCCESS");
         }, error => {
             alert("ERROR");
@@ -1206,13 +1205,13 @@ class ScoreRangeMessageComponent {
     }
 }
 ScoreRangeMessageComponent.ɵfac = function ScoreRangeMessageComponent_Factory(t) { return new (t || ScoreRangeMessageComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_service_score_range_result_service__WEBPACK_IMPORTED_MODULE_2__["ScoreRangeResultService"])); };
-ScoreRangeMessageComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ScoreRangeMessageComponent, selectors: [["app-score-range-message"]], decls: 4, vars: 1, consts: [[1, "container-fluid"], [1, "btn-primary", 3, "click"], ["class", "row", 4, "ngFor", "ngForOf"], [1, "row"], [1, "col"], [1, "form-group"], ["type", "number", 3, "ngModel", "ngModelChange"], ["type", "text", 3, "ngModel", "ngModelChange"], ["type", "file", 3, "ngModel", "ngModelChange", "change"], [1, "btn-dark", 3, "click"]], template: function ScoreRangeMessageComponent_Template(rf, ctx) { if (rf & 1) {
+ScoreRangeMessageComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ScoreRangeMessageComponent, selectors: [["app-score-range-message"]], decls: 4, vars: 1, consts: [[1, "container-fluid"], [1, "btn-primary", 3, "click"], ["class", "row", 4, "ngFor", "ngForOf"], [1, "row"], [1, "col"], [1, "form-group"], ["type", "number", 3, "ngModel", "ngModelChange"], ["type", "text", 3, "ngModel", "ngModelChange"], ["type", "file", 3, "change"], [1, "btn-dark", 3, "click"]], template: function ScoreRangeMessageComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ScoreRangeMessageComponent_Template_button_click_1_listener($event) { return ctx.addNewScoreRange(); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "new score range");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, ScoreRangeMessageComponent_div_3_Template, 10, 3, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, ScoreRangeMessageComponent_div_3_Template, 10, 2, "div", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
@@ -1421,9 +1420,9 @@ class ScoreRangeResultService {
     getAllScoreRangeResults() {
         return this.httpClient.get("/score/ranges");
     }
-    uploadImageForScoreRange(scoreRangeResults) {
+    uploadImageForScoreRange(scoreRangeResult) {
         let url = "score/ranges/";
-        return this.httpClient.post(url, scoreRangeResults);
+        return this.httpClient.post(url, scoreRangeResult);
     }
 }
 ScoreRangeResultService.ɵfac = function ScoreRangeResultService_Factory(t) { return new (t || ScoreRangeResultService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
