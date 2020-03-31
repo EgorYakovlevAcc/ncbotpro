@@ -99,7 +99,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
 
     private MessagesPackage handleFinishCommand(User user) {
         ScoreRangesMessenger scoreRangesMessenger = getScoreRangesMessengerByScore(user.getScore());
-        String ouputMessageText = scoreRangesMessenger.getText();
+        String ouputMessageText = "Результат: " + user.getScore() + "\n" + scoreRangesMessenger.getText();
         byte[] outputMessageAttachment = scoreRangesMessenger.getPicture();
         return getSendMessageForBot(ouputMessageText, user.getChatId(), null, outputMessageAttachment);
     }
@@ -209,12 +209,14 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                 inlineKeyboardMarkup = getQuestionWithMultipleOptions(nextQuestion.getOptions());
             }
         }
-        return getSendMessageForBot(nextQuestion.getContent(), user.getChatId(), inlineKeyboardMarkup, nextQuestion.getAttachement());
+        return getSendMessageForBot(nextQuestion.getContent(), user.getChatId(), inlineKeyboardMarkup,
+                nextQuestion.getAttachement());
 
     }
 
     private String updateUserScore(User user, String userAnswerText) {
         LOGGER.info("updateUserScore [START]");
+        String message = "";
         Question lastQuestion = questionService.findQuestionById(user.getCurrentQuestionId());
         Integer questionWeight = lastQuestion.getWeight();
         Answer answer = lastQuestion.getAnswer();
@@ -226,8 +228,12 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
                 .indexOf(answer.getContent());
         if (checkAnswer(Integer.parseInt(userAnswerText), answerIndex)) {
             userService.increaseUserScore(user, questionWeight);
+            message = "[ВЕРНО]\n";
         }
-        return lastQuestion.getOptions().get(Integer.parseInt(userAnswerText)).getReaction();
+        else {
+            message = "[НЕВЕРНО]\n";
+        }
+        return message + lastQuestion.getOptions().get(Integer.parseInt(userAnswerText)).getReaction();
     }
 
     private MessagesPackage getSendMessageForBot(String content, Long chatId, InlineKeyboardMarkup replyKeyboardMarkup, byte[] attachment) {
@@ -262,14 +268,6 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         return sendPhoto;
     }
 
-    private String getGoodByeMessage(User user) {
-        LOGGER.info("getGoodByeMessage [START]");
-        userService.turnOffUserActivityStatus(user);
-        userService.updateUserSessionEndDate(user);
-        userService.setGameOverForUser(user);
-        return getGoodbyeMessage(user.getScore());
-    }
-
     private Question getQuestionForUser(User user) {
         LOGGER.info("getQuestionForUser [START]");
         return userService.setNextQuestionToUser(user);
@@ -293,9 +291,5 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
 
     private boolean checkAnswer(int userAnswer, int answer) {
         return userAnswer == answer;
-    }
-
-    private String getGoodbyeMessage(Integer userScore) {
-        return USER_SCORE + userScore + GOODBYE_MESSAGE;
     }
 }
