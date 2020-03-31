@@ -13,5 +13,5 @@ public interface ScoreRangesMessengerService {
     void save(ScoreRangesMessenger scoreRangesMessenger);
     void delete(ScoreRangesMessenger scoreRangesMessenger);
 
-    void createScoreRangeResultByPojo(ScoreRangesResultPojo scoreRangesResultPojo) throws IOException;
+    void createScoreRangeResultByPojo(Integer max, String text) throws IOException;
 }

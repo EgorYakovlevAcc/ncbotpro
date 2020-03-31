@@ -11,6 +11,7 @@ import com.ncquizbot.ncbot.qrcode.QrCodeGenerator;
 import com.ncquizbot.ncbot.qrcode.QrCodeGeneratorImpl;
 import com.ncquizbot.ncbot.service.BotMessageHandler;
 import com.ncquizbot.ncbot.service.QuestionService;
+import com.ncquizbot.ncbot.service.ScoreRangesMessengerService;
 import com.ncquizbot.ncbot.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,11 +52,12 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     public static final String COMMAND_GO = "go";
     public static final String COMMAND_NEXT = "next";
     public static final String COMMAND_FINISH = "finish";
-    public static final String FINISH_GAME = "You have finished your game! We will happy to meet you at another time";
     @Autowired
     private UserService userService;
     @Autowired
     private QuestionService questionService;
+    @Autowired
+    private ScoreRangesMessengerService scoreRangesMessengerService;
 
     @Override
     public MessagesPackage handleMessage(Update update) {

@@ -39,12 +39,12 @@ public class ScoreRangesMessengerServiceImpl implements ScoreRangesMessengerServ
     }
 
     @Override
-    public void createScoreRangeResultByPojo(ScoreRangesResultPojo scoreRangesResultPojo) throws IOException {
+    public void createScoreRangeResultByPojo(Integer max, String text) throws IOException {
         ScoreRangesMessenger scoreRangesMessenger = new ScoreRangesMessenger();
         //scoreRangesMessenger.setPicture(scoreRangesResultPojo.getImage().getBytes());
-        scoreRangesMessenger.setMinBorder(getMinBorderForScoreRange(scoreRangesResultPojo.getMax()));
-        scoreRangesMessenger.setMaxBorder(scoreRangesResultPojo.getMax());
-        scoreRangesMessenger.setText(scoreRangesResultPojo.getText());
+        scoreRangesMessenger.setMinBorder(getMinBorderForScoreRange(max));
+        scoreRangesMessenger.setMaxBorder(max);
+        scoreRangesMessenger.setText(text);
         scoreRangesMessengerRepository.save(scoreRangesMessenger);
     }
 
