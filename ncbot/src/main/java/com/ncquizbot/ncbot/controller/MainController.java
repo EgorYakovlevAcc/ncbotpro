@@ -10,6 +10,8 @@ import com.ncquizbot.ncbot.pojo.ScoreRangesResultPojo;
 import com.ncquizbot.ncbot.service.GlobalTelegramMessageSender;
 import com.ncquizbot.ncbot.service.ScoreRangesMessengerService;
 import com.ncquizbot.ncbot.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,7 @@ import java.util.Objects;
 @Controller
 @CrossOrigin()
 public class MainController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
     @Autowired
     private UserService userService;
     @Autowired
@@ -72,6 +75,7 @@ public class MainController {
 
     @PostMapping(value = "/score/ranges")
     public ResponseEntity postScoreRangesMessenger(@RequestParam("max") String max, @RequestParam("text") String text){
+        LOGGER.info("EGORKA: max = {} text = {}", max, text);
         try {
             scoreRangesMessengerService.createScoreRangeResultByPojo(Integer.valueOf(max), text);
         } catch (IOException e) {
