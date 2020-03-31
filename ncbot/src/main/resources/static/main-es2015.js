@@ -1421,7 +1421,10 @@ class ScoreRangeResultService {
     }
     uploadImageForScoreRange(scoreRangeResult) {
         let url = "score/ranges/";
-        return this.httpClient.post(url, scoreRangeResult);
+        let formData = new FormData();
+        formData.append("max", scoreRangeResult.max.toString());
+        formData.append("text", scoreRangeResult.text);
+        return this.httpClient.post(url, formData);
     }
 }
 ScoreRangeResultService.ɵfac = function ScoreRangeResultService_Factory(t) { return new (t || ScoreRangeResultService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };

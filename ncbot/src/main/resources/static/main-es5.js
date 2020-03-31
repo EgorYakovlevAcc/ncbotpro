@@ -2411,7 +2411,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "uploadImageForScoreRange",
         value: function uploadImageForScoreRange(scoreRangeResults) {
           var url = "score/ranges/";
-          return this.httpClient.post(url, scoreRangeResults);
+          var formData = new FormData();
+          formData.append("max", scoreRangeResult.max.toString());
+          formData.append("text", scoreRangeResult.text);
+          return this.httpClient.post(url, formData);
         }
       }]);
 

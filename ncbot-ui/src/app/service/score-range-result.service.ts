@@ -15,6 +15,9 @@ export class ScoreRangeResultService {
 
   uploadImageForScoreRange(scoreRangeResult: ScoreRangeResult) {
     let url = "score/ranges/";
-    return this.httpClient.post(url, scoreRangeResult);
+    let formData = new FormData();
+    formData.append("max", scoreRangeResult.max.toString());
+    formData.append("text", scoreRangeResult.text);
+    return this.httpClient.post(url, formData);
   }
 }
