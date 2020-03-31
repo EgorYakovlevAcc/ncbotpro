@@ -2019,6 +2019,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "scoreRangeResultSend",
         value: function scoreRangeResultSend(scoreRangeResult) {
+          scoreRangeResult.image = this.imageFile;
           this.scoreRangeResultService.uploadImageForScoreRange(scoreRangeResult).subscribe(function (result) {
             alert("SUCCESS");
           }, function (error) {
@@ -2414,6 +2415,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var formData = new FormData();
           formData.append("max", scoreRangeResult.max.toString());
           formData.append("text", scoreRangeResult.text);
+          formData.append("image", scoreRangeResult.image);
           return this.httpClient.post(url, formData);
         }
       }]);

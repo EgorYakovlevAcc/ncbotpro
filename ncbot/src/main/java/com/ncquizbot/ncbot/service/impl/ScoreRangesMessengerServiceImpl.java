@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -39,21 +40,29 @@ public class ScoreRangesMessengerServiceImpl implements ScoreRangesMessengerServ
     }
 
     @Override
-    public void createScoreRangeResultByPojo(Integer max, String text) throws IOException {
+    public void createScoreRangeResultByPojo(Integer max, String text, byte[] imageByte) throws IOException {
         ScoreRangesMessenger scoreRangesMessenger = new ScoreRangesMessenger();
-        //scoreRangesMessenger.setPicture(scoreRangesResultPojo.getImage().getBytes());
+        scoreRangesMessenger.setPicture(imageByte);
         scoreRangesMessenger.setMinBorder(getMinBorderForScoreRange(max));
         scoreRangesMessenger.setMaxBorder(max);
         scoreRangesMessenger.setText(text);
         scoreRangesMessengerRepository.save(scoreRangesMessenger);
     }
 
+    @Override
+    public ScoreRangesMessenger findScoreRangesMessangerByScore(Integer score) {
+        return scoreRangesMessengerRepository.findAll().stream()
+                .filter(x -> score <= x.getMaxBorder() && score >= x.getMinBorder())
+                .findFirst()
+                .orElse(null);
+    }
+
     private Integer getMinBorderForScoreRange(Integer currentMax) {
-    List<ScoreRangesMessenger> scoreRangesMessengerList = scoreRangesMessengerRepository.findAll();
-    return scoreRangesMessengerList.stream()
-            .map(ScoreRangesMessenger::getMaxBorder)
-            .filter(x -> x < currentMax)
-            .max(Comparator.comparing(x -> x))
-            .orElse(0);
+        List<ScoreRangesMessenger> scoreRangesMessengerList = scoreRangesMessengerRepository.findAll();
+        return scoreRangesMessengerList.stream()
+                .map(ScoreRangesMessenger::getMaxBorder)
+                .filter(x -> x < currentMax)
+                .max(Comparator.comparing(x -> x))
+                .orElse(0);
     }
 }

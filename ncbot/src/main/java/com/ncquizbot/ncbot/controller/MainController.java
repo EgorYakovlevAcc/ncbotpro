@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -74,10 +75,10 @@ public class MainController {
     }
 
     @PostMapping(value = "/score/ranges")
-    public ResponseEntity postScoreRangesMessenger(@RequestParam("max") String max, @RequestParam("text") String text){
+    public ResponseEntity postScoreRangesMessenger(@RequestParam("max") String max, @RequestParam("text") String text, @RequestParam("image") MultipartFile image){
         LOGGER.info("EGORKA: max = {} text = {}", max, text);
         try {
-            scoreRangesMessengerService.createScoreRangeResultByPojo(Integer.valueOf(max), text);
+            scoreRangesMessengerService.createScoreRangeResultByPojo(Integer.valueOf(max), text, image.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -2,10 +2,7 @@ package com.ncquizbot.ncbot.service.impl;
 
 import com.ncquizbot.ncbot.bot.Bot;
 import com.ncquizbot.ncbot.bot.MessagesPackage;
-import com.ncquizbot.ncbot.model.Answer;
-import com.ncquizbot.ncbot.model.Option;
-import com.ncquizbot.ncbot.model.Question;
-import com.ncquizbot.ncbot.model.User;
+import com.ncquizbot.ncbot.model.*;
 import com.ncquizbot.ncbot.pojo.HelloGoodbyeMessages;
 import com.ncquizbot.ncbot.qrcode.QrCodeGenerator;
 import com.ncquizbot.ncbot.qrcode.QrCodeGeneratorImpl;
@@ -101,8 +98,14 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
     }
 
     private MessagesPackage handleFinishCommand(User user) {
-        String ouputMessageText = getGoodByeMessage(user);
-        return getSendMessageForBot(ouputMessageText, user.getChatId(), null, null);
+        ScoreRangesMessenger scoreRangesMessenger = getScoreRangesMessengerByScore(user.getScore());
+        String ouputMessageText = scoreRangesMessenger.getText();
+        byte[] outputMessageAttachment = scoreRangesMessenger.getPicture();
+        return getSendMessageForBot(ouputMessageText, user.getChatId(), null, outputMessageAttachment);
+    }
+
+    private ScoreRangesMessenger getScoreRangesMessengerByScore(Integer score) {
+        return scoreRangesMessengerService.findScoreRangesMessangerByScore(score);
     }
 
     private MessagesPackage handleNextCommand(User user) {

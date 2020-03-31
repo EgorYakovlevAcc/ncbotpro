@@ -26,6 +26,7 @@ export class ScoreRangeMessageComponent implements OnInit {
   }
 
   scoreRangeResultSend(scoreRangeResult: ScoreRangeResult) {
+    scoreRangeResult.image = this.imageFile;
     this.scoreRangeResultService.uploadImageForScoreRange(scoreRangeResult).subscribe(result =>{
       alert("SUCCESS");
     },

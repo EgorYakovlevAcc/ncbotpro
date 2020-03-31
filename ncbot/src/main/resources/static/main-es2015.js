@@ -1193,6 +1193,7 @@ class ScoreRangeMessageComponent {
         this.scoreRanges.push(scoreRangeResult);
     }
     scoreRangeResultSend(scoreRangeResult) {
+        scoreRangeResult.image = this.imageFile;
         this.scoreRangeResultService.uploadImageForScoreRange(scoreRangeResult).subscribe(result => {
             alert("SUCCESS");
         }, error => {
@@ -1424,6 +1425,7 @@ class ScoreRangeResultService {
         const formData = new FormData();
         formData.append("max", scoreRangeResult.max.toString());
         formData.append("text", scoreRangeResult.text);
+        formData.append("image", scoreRangeResult.image);
         return this.httpClient.post(url, formData);
     }
 }
