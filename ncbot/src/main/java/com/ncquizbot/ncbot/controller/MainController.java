@@ -71,9 +71,9 @@ public class MainController {
     }
 
     @PostMapping(value = "/score/ranges")
-    public ResponseEntity postScoreRangesMessenger(@RequestParam("max") Integer max, @RequestParam("text") String text){
+    public ResponseEntity postScoreRangesMessenger(@RequestParam("max") String max, @RequestParam("text") String text){
         try {
-            scoreRangesMessengerService.createScoreRangeResultByPojo(max, text);
+            scoreRangesMessengerService.createScoreRangeResultByPojo(Integer.valueOf(max), text);
         } catch (IOException e) {
             e.printStackTrace();
         }

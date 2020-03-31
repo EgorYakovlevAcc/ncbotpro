@@ -1421,7 +1421,7 @@ class ScoreRangeResultService {
     }
     uploadImageForScoreRange(scoreRangeResult) {
         let url = "score/ranges/";
-        let formData = new FormData();
+        const formData = new FormData();
         formData.append("max", scoreRangeResult.max.toString());
         formData.append("text", scoreRangeResult.text);
         return this.httpClient.post(url, formData);
