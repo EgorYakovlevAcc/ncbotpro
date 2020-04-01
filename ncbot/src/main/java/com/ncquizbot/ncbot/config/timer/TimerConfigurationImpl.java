@@ -18,15 +18,15 @@ public class TimerConfigurationImpl implements TimerConfiguration {
     @Override
     @Scheduled(fixedRate = 60000)
     public void sheduleUsersSessions() {
-        userService.findAll().stream().forEach(user -> {
-            Date currentDate = new Date();
-            Date date = user.getLastSessionDate();
-            if (Objects.nonNull(date) && user.isActiveNow()){
-                if (checkIsTimeCameOut(currentDate, date, TIME_GAP)) {
-                    userService.delete(user);
-                }
-            }
-        });
+//        userService.findAll().stream().forEach(user -> {
+//            Date currentDate = new Date();
+//            Date date = user.getLastSessionDate();
+//            if (Objects.nonNull(date) && user.isActiveNow()){
+//                if (checkIsTimeCameOut(currentDate, date, TIME_GAP)) {
+//                    userService.delete(user);
+//                }
+//            }
+//        });
     }
 
     private boolean checkIsTimeCameOut(Date d1, Date d2, Long gap){
