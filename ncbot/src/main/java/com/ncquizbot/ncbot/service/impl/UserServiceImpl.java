@@ -159,7 +159,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findUsersByScoreBetweenAndIsPresentGiven(Integer startScore, Integer endScore, boolean isPresentGiven) {
-        List<User> users = userRepository.findUsersByIsPresentGiven(true);
+        //List<User> users = userRepository.findUsersByIsPresentGiven(true);
+        List<User> users = userRepository.findAll();
         return users.stream()
                 .filter(user -> (user.getScore() > startScore) && (user.getScore() < endScore))
                 .collect(Collectors.toList());
