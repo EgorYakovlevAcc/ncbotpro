@@ -79,7 +79,7 @@ public class MainController {
                                                    @RequestParam(name = "image", required = false) MultipartFile image){
         LOGGER.info("postScoreRangesMessenger: max = {} text = {}", max, text);
         try {
-            scoreRangesMessengerService.createScoreRangeResultByPojo(Integer.valueOf(max), text, image.getBytes());
+            scoreRangesMessengerService.createScoreRangeResultByPojo(Integer.valueOf(max), text, Objects.nonNull(image)? image.getBytes(): null);
         } catch (IOException e) {
             e.printStackTrace();
         }
