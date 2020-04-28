@@ -75,8 +75,9 @@ public class MainController {
     }
 
     @PostMapping(value = "/score/ranges")
-    public ResponseEntity postScoreRangesMessenger(@RequestParam("max") String max, @RequestParam("text") String text, @RequestParam("image") MultipartFile image){
-        LOGGER.info("EGORKA: max = {} text = {}", max, text);
+    public ResponseEntity postScoreRangesMessenger(@RequestParam("max") String max, @RequestParam("text") String text,
+                                                   @RequestParam(name = "image", required = false) MultipartFile image){
+        LOGGER.info("postScoreRangesMessenger: max = {} text = {}", max, text);
         try {
             scoreRangesMessengerService.createScoreRangeResultByPojo(Integer.valueOf(max), text, image.getBytes());
         } catch (IOException e) {

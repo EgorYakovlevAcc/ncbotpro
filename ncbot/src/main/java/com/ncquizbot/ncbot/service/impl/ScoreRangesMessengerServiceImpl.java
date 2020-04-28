@@ -42,7 +42,9 @@ public class ScoreRangesMessengerServiceImpl implements ScoreRangesMessengerServ
     @Override
     public void createScoreRangeResultByPojo(Integer max, String text, byte[] imageByte) throws IOException {
         ScoreRangesMessenger scoreRangesMessenger = new ScoreRangesMessenger();
-        scoreRangesMessenger.setPicture(imageByte);
+        if (Objects.nonNull(imageByte)) {
+            scoreRangesMessenger.setPicture(imageByte);
+        }
         scoreRangesMessenger.setMinBorder(getMinBorderForScoreRange(max));
         scoreRangesMessenger.setMaxBorder(max);
         scoreRangesMessenger.setText(text);
