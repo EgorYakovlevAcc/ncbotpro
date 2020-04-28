@@ -64,7 +64,7 @@ public class ScoreRangesMessengerServiceImpl implements ScoreRangesMessengerServ
         return scoreRangesMessengerList.stream()
                 .map(ScoreRangesMessenger::getMaxBorder)
                 .filter(x -> x < currentMax)
-                .max(Comparator.comparing(x -> x))
+                .max(Comparator.comparing(x -> x + 1))
                 .orElse(0) + 1;
     }
 }
