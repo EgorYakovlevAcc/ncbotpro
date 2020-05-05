@@ -1,7 +1,6 @@
 package com.ncquizbot.ncbot.service.impl;
 
 import com.ncquizbot.ncbot.model.ScoreRangesMessenger;
-import com.ncquizbot.ncbot.pojo.ScoreRangesResultPojo;
 import com.ncquizbot.ncbot.repo.ScoreRangesMessengerRepository;
 import com.ncquizbot.ncbot.service.ScoreRangesMessengerService;
 import org.springframework.beans.factory.annotation.Autowired;
