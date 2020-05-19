@@ -1,8 +1,8 @@
 package com.ncquizbot.ncbot.pojo;
 
 public enum HelloGoodbyeMessages {
-    HELLO_MESSAGE("Привет! Как много книг ты успел прочитать на самоизоляции и майских праздниках? Сегодня мы" +
-            " проводим викторину по литературе, которая покажет самых начитанных!"),
+    HELLO_MESSAGE("Этот квиз специально для фанатов истории о мальчике, который выжил! " +
+            "Надеемся ты помнишь, кто такие маглы и что такое патронус?"),
     GOODBYE_MESSAGE("Goodbye, Dear user!");
     public String text;
 
