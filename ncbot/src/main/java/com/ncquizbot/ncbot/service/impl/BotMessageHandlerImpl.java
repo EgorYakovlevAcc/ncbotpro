@@ -101,12 +101,7 @@ public class BotMessageHandlerImpl implements BotMessageHandler {
         ScoreRangesMessenger scoreRangesMessenger = getScoreRangesMessengerByScore(user.getScore());
         String ouputMessageText = "Результат: " + user.getScore() + "\n" + scoreRangesMessenger.getText();
         byte[] outputMessageAttachment = scoreRangesMessenger.getPicture();
-        MessagesPackage messagesPackage = getSendMessageForBot(ouputMessageText, user.getChatId(), null, outputMessageAttachment);
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setText(GOODBYE_MESSAGE);
-        sendMessage.setChatId(user.getChatId());
-        messagesPackage.addMessageToPackage(sendMessage);
-        return messagesPackage;
+        return getSendMessageForBot(ouputMessageText, user.getChatId(), null, outputMessageAttachment);
     }
 
     private ScoreRangesMessenger getScoreRangesMessengerByScore(Integer score) {
